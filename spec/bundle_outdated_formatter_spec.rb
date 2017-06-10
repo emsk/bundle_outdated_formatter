@@ -1,11 +1,6 @@
-require "spec_helper"
-
 RSpec.describe BundleOutdatedFormatter do
-  it "has a version number" do
-    expect(BundleOutdatedFormatter::VERSION).not_to be nil
-  end
-
-  it "does something useful" do
-    expect(false).to eq(true)
+  describe 'VERSION' do
+    subject { described_class::VERSION }
+    it { is_expected.not_to be_nil }
   end
 end

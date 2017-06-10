@@ -1,3 +1,5 @@
 #!/usr/bin/env ruby
 
 require "bundle_outdated_formatter"
+
+BundleOutdatedFormatter::CLI.start
