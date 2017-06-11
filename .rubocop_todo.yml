@@ -83,21 +83,6 @@ Style/RedundantFreeze:
   Exclude:
     - 'lib/bundle_outdated_formatter/cli.rb'
 
-# Offense count: 35
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles, ConsistentQuotesInMultiline.
-# SupportedStyles: single_quotes, double_quotes
-Style/StringLiterals:
-  Exclude:
-    - 'Gemfile'
-    - 'Rakefile'
-    - 'bin/console'
-    - 'bundle_outdated_formatter.gemspec'
-    - 'exe/bundle_outdated_formatter'
-    - 'lib/bundle_outdated_formatter.rb'
-    - 'lib/bundle_outdated_formatter/version.rb'
-    - 'spec/spec_helper.rb'
-
 # Offense count: 2
 # Cop supports --auto-correct.
 Style/UnneededPercentQ:
