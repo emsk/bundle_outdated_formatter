@@ -24,6 +24,13 @@ module BundleOutdatedFormatter
       puts format_markdown(outdated_gems_in_stdin) if options[:format] == 'markdown'
     end
 
+    desc 'version, -v, --version', 'Print the version'
+    map %w[-v --version] => :version
+
+    def version
+      puts "bundle_outdated_formatter #{BundleOutdatedFormatter::VERSION}"
+    end
+
     private
 
     def outdated_gems_in_stdin

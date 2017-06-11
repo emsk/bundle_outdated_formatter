@@ -26,8 +26,9 @@ Outdated gems included in the bundle:
   let(:help) do
     <<-EOS
 Commands:
-  #{command} help [COMMAND]  # Describe available commands or one specific command
-  #{command} output          # Format output of `bundle outdated`
+  #{command} help [COMMAND]          # Describe available commands or one specific command
+  #{command} output                  # Format output of `bundle outdated`
+  #{command} version, -v, --version  # Print the version
 
     EOS
   end
@@ -90,6 +91,21 @@ Commands:
       it_behaves_like 'unknown format'
     end
 
+    context 'given `version`' do
+      let(:thor_args) { %w[version] }
+      it { is_expected.to output("#{command} #{BundleOutdatedFormatter::VERSION}\n").to_stdout }
+    end
+
+    context 'given `--version`' do
+      let(:thor_args) { %w[--version] }
+      it { is_expected.to output("#{command} #{BundleOutdatedFormatter::VERSION}\n").to_stdout }
+    end
+
+    context 'given `-v`' do
+      let(:thor_args) { %w[-v] }
+      it { is_expected.to output("#{command} #{BundleOutdatedFormatter::VERSION}\n").to_stdout }
+    end
+
     context 'given `help`' do
       let(:thor_args) { %w[help] }
       it_behaves_like 'a `help` command'
@@ -132,6 +148,19 @@ Options:
                          # Default: markdown
 
 Format output of `bundle outdated`
+        EOS
+      end
+      it_behaves_like 'a `help` command'
+    end
+
+    context 'given `help version`' do
+      let(:thor_args) { %w[help version] }
+      let(:help) do
+        <<-EOS
+Usage:
+  #{command} version, -v, --version
+
+Print the version
         EOS
       end
       it_behaves_like 'a `help` command'
