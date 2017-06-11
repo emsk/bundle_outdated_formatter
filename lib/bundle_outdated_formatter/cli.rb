@@ -6,7 +6,7 @@ module BundleOutdatedFormatter
     NEWEST_REGEXP    = /newest (?<newest>[\d\.]+)/.freeze
     INSTALLED_REGEXP = /installed (?<installed>[\d\.]+)/.freeze
     REQUESTED_REGEXP = /requested (?<requested>.+)\)/.freeze
-    GROUPS_REGEXP    = /in groups "(?<groups>\w+)"/.freeze
+    GROUPS_REGEXP    = /in groups "(?<groups>.+)"/.freeze
 
     MARKDOWN_HEADER = <<-EOS.freeze
 | gem | newest | installed | requested | groups |
