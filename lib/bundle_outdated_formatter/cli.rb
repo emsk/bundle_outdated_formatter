@@ -2,7 +2,7 @@ require 'thor'
 
 module BundleOutdatedFormatter
   class CLI < Thor
-    NAME_REGEXP      = /(\* )*(?<name>.+) \(/.freeze
+    NAME_REGEXP      = /\A(\* )*(?<name>.+) \(/.freeze
     NEWEST_REGEXP    = /newest (?<newest>[\d\.]+)/.freeze
     INSTALLED_REGEXP = /installed (?<installed>[\d\.]+)/.freeze
     REQUESTED_REGEXP = /requested (?<requested>.+)\)/.freeze
