@@ -16,7 +16,7 @@ WIP
 ## Usage
 
 ```sh
-$ bundle outdated | bundle_outdated_formatter
+$ bundle outdated | bof
 ```
 
 ## Supported Ruby Versions
