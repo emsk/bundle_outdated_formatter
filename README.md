@@ -1,5 +1,7 @@
 # BundleOutdatedFormatter
 
+[![Build Status](https://travis-ci.org/emsk/bundle_outdated_formatter.svg?branch=master)](https://travis-ci.org/emsk/bundle_outdated_formatter)
+
 Formatter for `bundle outdated` command
 
 ## Installation
