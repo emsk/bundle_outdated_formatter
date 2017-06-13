@@ -15,8 +15,36 @@ WIP
 
 ## Usage
 
+### Convert to Markdown
+
 ```sh
 $ bundle outdated | bof
+```
+
+## Examples
+
+Output of `bundle outdated`:
+
+```
+Fetching gem metadata from https://rubygems.org/..........
+Fetching version metadata from https://rubygems.org/...
+Fetching dependency metadata from https://rubygems.org/..
+Resolving dependencies...
+
+Outdated gems included in the bundle:
+* faker (newest 1.6.6, installed 1.6.5, requested ~> 1.4) in groups "development, test"
+* hashie (newest 3.4.6, installed 1.2.0, requested = 1.2.0) in groups "default"
+* headless (newest 2.3.1, installed 2.2.3)
+```
+
+### Convert to Markdown
+
+```
+| gem | newest | installed | requested | groups |
+| --- | --- | --- | --- | --- |
+| faker | 1.6.6 | 1.6.5 | ~> 1.4 | development, test |
+| hashie | 3.4.6 | 1.2.0 | = 1.2.0 | default |
+| headless | 2.3.1 | 2.2.3 | | |
 ```
 
 ## Supported Ruby Versions
