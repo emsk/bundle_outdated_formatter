@@ -5,3 +5,7 @@ AllCops:
 
 Layout/IndentHeredoc:
   Enabled: false
+
+Layout/TrailingWhitespace:
+  Exclude:
+    - 'spec/**/*.rb'
