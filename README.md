@@ -7,7 +7,7 @@
 [![Inline docs](http://inch-ci.org/github/emsk/bundle_outdated_formatter.svg?branch=master)](http://inch-ci.org/github/emsk/bundle_outdated_formatter)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.txt)
 
-Formatter for `bundle outdated` command
+BundleOutdatedFormatter is a command-line tool to format output of `bundle outdated`.
 
 ## Installation
 

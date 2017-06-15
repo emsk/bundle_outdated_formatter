@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['emsk1987@gmail.com']
 
   spec.summary       = %q{Formatter for `bundle outdated`}
-  spec.description   = %q{Formatter for `bundle outdated`}
+  spec.description   = %q{BundleOutdatedFormatter is a command-line tool to format output of `bundle outdated`}
   spec.homepage      = 'https://github.com/emsk/bundle_outdated_formatter'
   spec.license       = 'MIT'
 
