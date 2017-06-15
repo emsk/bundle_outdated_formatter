@@ -1,5 +1,6 @@
 # BundleOutdatedFormatter
 
+[![Gem Version](https://badge.fury.io/rb/bundle_outdated_formatter.svg)](https://badge.fury.io/rb/bundle_outdated_formatter)
 [![Build Status](https://travis-ci.org/emsk/bundle_outdated_formatter.svg?branch=master)](https://travis-ci.org/emsk/bundle_outdated_formatter)
 [![Coverage Status](https://coveralls.io/repos/github/emsk/bundle_outdated_formatter/badge.svg?branch=master)](https://coveralls.io/github/emsk/bundle_outdated_formatter)
 [![Code Climate](https://codeclimate.com/github/emsk/bundle_outdated_formatter/badges/gpa.svg)](https://codeclimate.com/github/emsk/bundle_outdated_formatter)
