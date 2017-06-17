@@ -29,6 +29,15 @@ Outdated gems included in the bundle:
     EOS
   end
 
+  let(:stdout_csv) do
+    <<-EOS
+"gem","newest","installed","requested","groups"
+"faker","1.6.6","1.6.5","~> 1.4","development, test"
+"hashie","3.4.6","1.2.0","= 1.2.0","default"
+"headless","2.3.1","2.2.3","",""
+    EOS
+  end
+
   let(:help) do
     <<-EOS
 Commands:
@@ -53,6 +62,14 @@ Commands:
     end
 
     it { is_expected.to output(stdout_json).to_stdout }
+  end
+
+  shared_examples_for 'csv format' do
+    before do
+      stub_const('STDIN', StringIO.new(stdin))
+    end
+
+    it { is_expected.to output(stdout_csv).to_stdout }
   end
 
   shared_examples_for 'unknown format' do
@@ -112,6 +129,20 @@ Commands:
     context 'given `output -f json`' do
       let(:thor_args) { %w[output -f json] }
       it_behaves_like 'json format'
+    end
+
+    context 'given `output --format csv`' do
+      let(:thor_args) { %w[output --format csv] }
+      it_behaves_like 'csv format'
+
+      context 'without STDIN' do
+        it { is_expected.not_to output.to_stdout }
+      end
+    end
+
+    context 'given `output -f csv`' do
+      let(:thor_args) { %w[output -f csv] }
+      it_behaves_like 'csv format'
     end
 
     context 'given `output` --format aaa' do
