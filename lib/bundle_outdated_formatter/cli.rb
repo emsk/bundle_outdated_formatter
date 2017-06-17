@@ -1,4 +1,5 @@
 require 'thor'
+require 'json'
 
 module BundleOutdatedFormatter
   class CLI < Thor
@@ -21,7 +22,12 @@ module BundleOutdatedFormatter
     def output
       return if STDIN.tty?
 
-      puts format_markdown(outdated_gems_in_stdin) if options[:format] == 'markdown'
+      case options[:format]
+      when 'markdown'
+        puts format_markdown(outdated_gems_in_stdin)
+      when 'json'
+        puts format_json(outdated_gems_in_stdin)
+      end
     end
 
     desc 'version, -v, --version', 'Print the version'
@@ -47,7 +53,7 @@ module BundleOutdatedFormatter
           nil
         else
           {
-            name:      gem_text(matched_name, :name),
+            gem:       gem_text(matched_name, :name),
             newest:    gem_text(matched_newest, :newest),
             installed: gem_text(matched_installed, :installed),
             requested: gem_text(matched_requested, :requested),
@@ -65,10 +71,14 @@ module BundleOutdatedFormatter
 
     def format_markdown(outdated_gems)
       outdated_gems.map! do |gem|
-        "| #{[gem[:name], gem[:newest], gem[:installed], gem[:requested], gem[:groups]].join(' | ')} |".gsub(/  /, ' ')
+        "| #{[gem[:gem], gem[:newest], gem[:installed], gem[:requested], gem[:groups]].join(' | ')} |".gsub(/  /, ' ')
       end
 
       MARKDOWN_HEADER + outdated_gems.join("\n")
+    end
+
+    def format_json(outdated_gems)
+      outdated_gems.to_json
     end
   end
 end
