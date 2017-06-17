@@ -38,6 +38,12 @@ Outdated gems included in the bundle:
     EOS
   end
 
+  let(:stdout_xml) do
+    <<-EOS
+<?xml version='1.0' encoding='UTF-8'?><gems><outdated><gem>faker</gem><newest>1.6.6</newest><installed>1.6.5</installed><requested>~> 1.4</requested><groups>development, test</groups></outdated><outdated><gem>hashie</gem><newest>3.4.6</newest><installed>1.2.0</installed><requested>= 1.2.0</requested><groups>default</groups></outdated><outdated><gem>headless</gem><newest>2.3.1</newest><installed>2.2.3</installed><requested></requested><groups></groups></outdated></gems>
+    EOS
+  end
+
   let(:help) do
     <<-EOS
 Commands:
@@ -70,6 +76,14 @@ Commands:
     end
 
     it { is_expected.to output(stdout_csv).to_stdout }
+  end
+
+  shared_examples_for 'xml format' do
+    before do
+      stub_const('STDIN', StringIO.new(stdin))
+    end
+
+    it { is_expected.to output(stdout_xml).to_stdout }
   end
 
   shared_examples_for 'unknown format' do
@@ -143,6 +157,20 @@ Commands:
     context 'given `output -f csv`' do
       let(:thor_args) { %w[output -f csv] }
       it_behaves_like 'csv format'
+    end
+
+    context 'given `output --format xml`' do
+      let(:thor_args) { %w[output --format xml] }
+      it_behaves_like 'xml format'
+
+      context 'without STDIN' do
+        it { is_expected.not_to output.to_stdout }
+      end
+    end
+
+    context 'given `output -f xml`' do
+      let(:thor_args) { %w[output -f xml] }
+      it_behaves_like 'xml format'
     end
 
     context 'given `output` --format aaa' do

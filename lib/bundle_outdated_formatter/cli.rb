@@ -1,6 +1,7 @@
 require 'thor'
 require 'json'
 require 'csv'
+require 'rexml/document'
 
 module BundleOutdatedFormatter
   class CLI < Thor
@@ -14,7 +15,7 @@ module BundleOutdatedFormatter
 | gem | newest | installed | requested | groups |
 | --- | --- | --- | --- | --- |
     EOS
-    CSV_HEADER = %w[gem newest installed requested groups].freeze
+    COLUMNS = %w[gem newest installed requested groups].freeze
 
     default_command :output
 
@@ -31,6 +32,8 @@ module BundleOutdatedFormatter
         puts format_json(outdated_gems_in_stdin)
       when 'csv'
         puts format_csv(outdated_gems_in_stdin)
+      when 'xml'
+        puts format_xml(outdated_gems_in_stdin)
       end
     end
 
@@ -87,11 +90,29 @@ module BundleOutdatedFormatter
 
     def format_csv(outdated_gems)
       CSV.generate(force_quotes: true) do |csv|
-        csv << CSV_HEADER
+        csv << COLUMNS
         outdated_gems.each do |gem|
           csv << gem.values
         end
       end
+    end
+
+    def format_xml(outdated_gems)
+      xml = REXML::Document.new(nil, raw: :all)
+      xml << REXML::XMLDecl.new('1.0', 'UTF-8')
+
+      root = REXML::Element.new('gems')
+      xml.add_element(root)
+
+      outdated_gems.each do |gem|
+        elements = root.add_element(REXML::Element.new('outdated'))
+
+        COLUMNS.each do |column|
+          elements.add_element(column).add_text(gem[column.to_sym])
+        end
+      end
+
+      xml
     end
   end
 end
