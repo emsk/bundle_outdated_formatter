@@ -80,7 +80,7 @@ module BundleOutdatedFormatter
 
     def format_markdown(outdated_gems)
       outdated_gems.map! do |gem|
-        "| #{[gem[:gem], gem[:newest], gem[:installed], gem[:requested], gem[:groups]].join(' | ')} |".gsub(/  /, ' ')
+        "| #{gem.values.join(' | ')} |".gsub(/  /, ' ')
       end
 
       MARKDOWN_HEADER + outdated_gems.join("\n")
