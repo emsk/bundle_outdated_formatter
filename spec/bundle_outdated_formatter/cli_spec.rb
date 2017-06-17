@@ -29,6 +29,27 @@ Outdated gems included in the bundle:
     EOS
   end
 
+  let(:stdout_yaml) do
+    <<-EOS
+---
+- gem: faker
+  newest: 1.6.6
+  installed: 1.6.5
+  requested: "~> 1.4"
+  groups: development, test
+- gem: hashie
+  newest: 3.4.6
+  installed: 1.2.0
+  requested: "= 1.2.0"
+  groups: default
+- gem: headless
+  newest: 2.3.1
+  installed: 2.2.3
+  requested: ''
+  groups: ''
+    EOS
+  end
+
   let(:stdout_csv) do
     <<-EOS
 "gem","newest","installed","requested","groups"
@@ -74,6 +95,14 @@ Commands:
     end
 
     it { is_expected.to output(stdout_json).to_stdout }
+  end
+
+  shared_examples_for 'yaml format' do
+    before do
+      stub_const('STDIN', StringIO.new(stdin))
+    end
+
+    it { is_expected.to output(stdout_yaml).to_stdout }
   end
 
   shared_examples_for 'csv format' do
@@ -157,6 +186,20 @@ Commands:
     context 'given `output -f json`' do
       let(:thor_args) { %w[output -f json] }
       it_behaves_like 'json format'
+    end
+
+    context 'given `output --format yaml`' do
+      let(:thor_args) { %w[output --format yaml] }
+      it_behaves_like 'yaml format'
+
+      context 'without STDIN' do
+        it { is_expected.not_to output.to_stdout }
+      end
+    end
+
+    context 'given `output -f yaml`' do
+      let(:thor_args) { %w[output -f yaml] }
+      it_behaves_like 'yaml format'
     end
 
     context 'given `output --format csv`' do

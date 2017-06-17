@@ -1,5 +1,6 @@
 require 'thor'
 require 'json'
+require 'yaml'
 require 'csv'
 require 'rexml/document'
 
@@ -30,6 +31,8 @@ module BundleOutdatedFormatter
         puts format_markdown(outdated_gems_in_stdin)
       when 'json'
         puts format_json(outdated_gems_in_stdin)
+      when 'yaml'
+        puts format_yaml(outdated_gems_in_stdin)
       when 'csv'
         puts format_csv(outdated_gems_in_stdin)
       when 'xml'
@@ -62,11 +65,11 @@ module BundleOutdatedFormatter
           nil
         else
           {
-            gem:       gem_text(matched_name, :name),
-            newest:    gem_text(matched_newest, :newest),
-            installed: gem_text(matched_installed, :installed),
-            requested: gem_text(matched_requested, :requested),
-            groups:    gem_text(matched_groups, :groups)
+            'gem'       => gem_text(matched_name, :name),
+            'newest'    => gem_text(matched_newest, :newest),
+            'installed' => gem_text(matched_installed, :installed),
+            'requested' => gem_text(matched_requested, :requested),
+            'groups'    => gem_text(matched_groups, :groups)
           }
         end
       end
@@ -90,6 +93,10 @@ module BundleOutdatedFormatter
       outdated_gems.to_json
     end
 
+    def format_yaml(outdated_gems)
+      outdated_gems.to_yaml
+    end
+
     def format_csv(outdated_gems)
       CSV.generate(force_quotes: true) do |csv|
         csv << COLUMNS
@@ -110,7 +117,7 @@ module BundleOutdatedFormatter
         elements = root.add_element(REXML::Element.new('outdated'))
 
         COLUMNS.each do |column|
-          elements.add_element(column).add_text(gem[column.to_sym])
+          elements.add_element(column).add_text(gem[column])
         end
       end
 
@@ -132,7 +139,7 @@ module BundleOutdatedFormatter
         elements = root.add_element(REXML::Element.new('tr'))
 
         COLUMNS.each do |column|
-          elements.add_element('td').add_text(gem[column.to_sym])
+          elements.add_element('td').add_text(gem[column])
         end
       end
 
