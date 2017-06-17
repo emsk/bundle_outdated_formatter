@@ -5,11 +5,11 @@ require 'rexml/document'
 
 module BundleOutdatedFormatter
   class Formatter
-    NAME_REGEXP      = /\A(\* )*(?<name>.+) \(/.freeze
-    NEWEST_REGEXP    = /newest (?<newest>[\d\.]+)/.freeze
-    INSTALLED_REGEXP = /installed (?<installed>[\d\.]+)/.freeze
-    REQUESTED_REGEXP = /requested (?<requested>.+)\)/.freeze
-    GROUPS_REGEXP    = /in groups "(?<groups>.+)"/.freeze
+    NAME_REGEXP      = /\A(\* )*(?<name>.+) \(/
+    NEWEST_REGEXP    = /newest (?<newest>[\d\.]+)/
+    INSTALLED_REGEXP = /installed (?<installed>[\d\.]+)/
+    REQUESTED_REGEXP = /requested (?<requested>.+)\)/
+    GROUPS_REGEXP    = /in groups "(?<groups>.+)"/
 
     MARKDOWN_HEADER = <<-EOS.freeze
 | gem | newest | installed | requested | groups |
