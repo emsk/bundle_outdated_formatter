@@ -44,6 +44,12 @@ Outdated gems included in the bundle:
     EOS
   end
 
+  let(:stdout_html) do
+    <<-EOS
+<table><tr><th>gem</th><th>newest</th><th>installed</th><th>requested</th><th>groups</th></tr><tr><td>faker</td><td>1.6.6</td><td>1.6.5</td><td>~> 1.4</td><td>development, test</td></tr><tr><td>hashie</td><td>3.4.6</td><td>1.2.0</td><td>= 1.2.0</td><td>default</td></tr><tr><td>headless</td><td>2.3.1</td><td>2.2.3</td><td></td><td></td></tr></table>
+    EOS
+  end
+
   let(:help) do
     <<-EOS
 Commands:
@@ -84,6 +90,14 @@ Commands:
     end
 
     it { is_expected.to output(stdout_xml).to_stdout }
+  end
+
+  shared_examples_for 'html format' do
+    before do
+      stub_const('STDIN', StringIO.new(stdin))
+    end
+
+    it { is_expected.to output(stdout_html).to_stdout }
   end
 
   shared_examples_for 'unknown format' do
@@ -171,6 +185,20 @@ Commands:
     context 'given `output -f xml`' do
       let(:thor_args) { %w[output -f xml] }
       it_behaves_like 'xml format'
+    end
+
+    context 'given `output --format html`' do
+      let(:thor_args) { %w[output --format html] }
+      it_behaves_like 'html format'
+
+      context 'without STDIN' do
+        it { is_expected.not_to output.to_stdout }
+      end
+    end
+
+    context 'given `output -f html`' do
+      let(:thor_args) { %w[output -f html] }
+      it_behaves_like 'html format'
     end
 
     context 'given `output` --format aaa' do

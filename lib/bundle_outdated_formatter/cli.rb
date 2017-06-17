@@ -34,6 +34,8 @@ module BundleOutdatedFormatter
         puts format_csv(outdated_gems_in_stdin)
       when 'xml'
         puts format_xml(outdated_gems_in_stdin)
+      when 'html'
+        puts format_html(outdated_gems_in_stdin)
       end
     end
 
@@ -113,6 +115,28 @@ module BundleOutdatedFormatter
       end
 
       xml
+    end
+
+    def format_html(outdated_gems)
+      html = REXML::Document.new(nil, raw: :all)
+
+      root = REXML::Element.new('table')
+      html.add_element(root)
+
+      elements = root.add_element(REXML::Element.new('tr'))
+      COLUMNS.each do |column|
+        elements.add_element('th').add_text(column)
+      end
+
+      outdated_gems.each do |gem|
+        elements = root.add_element(REXML::Element.new('tr'))
+
+        COLUMNS.each do |column|
+          elements.add_element('td').add_text(gem[column.to_sym])
+        end
+      end
+
+      html
     end
   end
 end
