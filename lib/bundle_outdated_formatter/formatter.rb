@@ -49,20 +49,17 @@ module BundleOutdatedFormatter
     end
 
     def convert
-      case @format
-      when 'markdown'
-        format_markdown
-      when 'json'
-        format_json
-      when 'yaml'
-        format_yaml
-      when 'csv'
-        format_csv
-      when 'xml'
-        format_xml
-      when 'html'
-        format_html
-      end
+      text =
+        case @format
+        when 'markdown' then format_markdown
+        when 'json'     then format_json
+        when 'yaml'     then format_yaml
+        when 'csv'      then format_csv
+        when 'xml'      then format_xml
+        when 'html'     then format_html
+        else                 ''
+        end
+      text.chomp
     end
 
     private
