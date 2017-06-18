@@ -1,5 +1,5 @@
 require 'json'
-require 'yaml'
+require 'psych'
 require 'csv'
 require 'rexml/document'
 
