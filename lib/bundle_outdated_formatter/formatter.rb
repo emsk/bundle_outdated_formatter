@@ -107,7 +107,7 @@ module BundleOutdatedFormatter
         end
       end
 
-      xml
+      xml.to_s
     end
 
     def format_html
@@ -129,7 +129,7 @@ module BundleOutdatedFormatter
         end
       end
 
-      html
+      html.to_s
     end
 
     def gem_text(text, name)
