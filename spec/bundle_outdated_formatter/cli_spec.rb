@@ -305,7 +305,7 @@ Usage:
   #{command} output
 
 Options:
-  -f, [--format=FORMAT]  
+  -f, [--format=FORMAT]  # Format. (markdown, json, yaml, csv, xml, html)
                          # Default: markdown
 
 Format output of `bundle outdated`

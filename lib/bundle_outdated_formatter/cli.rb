@@ -8,7 +8,7 @@ module BundleOutdatedFormatter
     default_command :output
 
     desc 'output', 'Format output of `bundle outdated`'
-    option :format, type: :string, aliases: '-f', default: 'markdown'
+    option :format, type: :string, aliases: '-f', default: 'markdown', desc: 'Format. (markdown, json, yaml, csv, xml, html)'
 
     def output
       return if STDIN.tty?
