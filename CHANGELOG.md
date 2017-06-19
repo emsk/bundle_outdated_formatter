@@ -1,5 +1,15 @@
 # Change Log
 
+## 0.2.0 (2017-06-19)
+
+### Features
+
+* Support JSON format
+* Support YAML format
+* Support CSV format
+* Support XML format
+* Support HTML format
+
 ## 0.1.0 (2017-06-15)
 
 ### Features
