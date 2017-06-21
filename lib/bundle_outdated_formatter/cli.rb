@@ -9,12 +9,13 @@ module BundleOutdatedFormatter
 
     desc 'output', 'Format output of `bundle outdated`'
     option :format, type: :string, aliases: '-f', default: 'markdown', desc: 'Format. (markdown, json, yaml, csv, xml, html)'
+    option :pretty, type: :boolean, aliases: '-p', desc: '`true` if pretty output.'
 
     def output
       return if STDIN.tty?
       return unless allow_format?
 
-      formatter = Formatter.new(options[:format])
+      formatter = Formatter.new(options)
       formatter.read_stdin
       puts formatter.convert
     end

@@ -1,5 +1,11 @@
 # Change Log
 
+## Unreleased
+
+### Features
+
+* Add `--pretty` option for `output` command
+
 ## 0.2.0 (2017-06-19)
 
 ### Features

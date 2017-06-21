@@ -1,6 +1,7 @@
 RSpec.describe BundleOutdatedFormatter::Formatter do
   let(:format) { 'markdown' }
-  let(:formatter) { described_class.new(format) }
+  let(:pretty) { false }
+  let(:formatter) { described_class.new(format: format, pretty: pretty) }
 
   let(:stdin) do
     <<-EOS
@@ -58,6 +59,34 @@ Outdated gems included in the bundle:
     EOS
   end
 
+  let(:text_json_pretty) do
+    <<-EOS.chomp
+[
+  {
+    "gem": "faker",
+    "newest": "1.6.6",
+    "installed": "1.6.5",
+    "requested": "~> 1.4",
+    "groups": "development, test"
+  },
+  {
+    "gem": "hashie",
+    "newest": "3.4.6",
+    "installed": "1.2.0",
+    "requested": "= 1.2.0",
+    "groups": "default"
+  },
+  {
+    "gem": "headless",
+    "newest": "2.3.1",
+    "installed": "2.2.3",
+    "requested": "",
+    "groups": ""
+  }
+]
+    EOS
+  end
+
   let(:text_yaml) do
     <<-EOS.chomp
 ---
@@ -94,9 +123,73 @@ Outdated gems included in the bundle:
     EOS
   end
 
+  let(:text_xml_pretty) do
+    <<-EOS.chomp
+<?xml version='1.0' encoding='UTF-8'?>
+<gems>
+  <outdated>
+    <gem>faker</gem>
+    <newest>1.6.6</newest>
+    <installed>1.6.5</installed>
+    <requested>~> 1.4</requested>
+    <groups>development, test</groups>
+  </outdated>
+  <outdated>
+    <gem>hashie</gem>
+    <newest>3.4.6</newest>
+    <installed>1.2.0</installed>
+    <requested>= 1.2.0</requested>
+    <groups>default</groups>
+  </outdated>
+  <outdated>
+    <gem>headless</gem>
+    <newest>2.3.1</newest>
+    <installed>2.2.3</installed>
+    <requested></requested>
+    <groups></groups>
+  </outdated>
+</gems>
+    EOS
+  end
+
   let(:text_html) do
     <<-EOS.chomp
 <table><tr><th>gem</th><th>newest</th><th>installed</th><th>requested</th><th>groups</th></tr><tr><td>faker</td><td>1.6.6</td><td>1.6.5</td><td>~> 1.4</td><td>development, test</td></tr><tr><td>hashie</td><td>3.4.6</td><td>1.2.0</td><td>= 1.2.0</td><td>default</td></tr><tr><td>headless</td><td>2.3.1</td><td>2.2.3</td><td></td><td></td></tr></table>
+    EOS
+  end
+
+  let(:text_html_pretty) do
+    <<-EOS.chomp
+<table>
+  <tr>
+    <th>gem</th>
+    <th>newest</th>
+    <th>installed</th>
+    <th>requested</th>
+    <th>groups</th>
+  </tr>
+  <tr>
+    <td>faker</td>
+    <td>1.6.6</td>
+    <td>1.6.5</td>
+    <td>~> 1.4</td>
+    <td>development, test</td>
+  </tr>
+  <tr>
+    <td>hashie</td>
+    <td>3.4.6</td>
+    <td>1.2.0</td>
+    <td>= 1.2.0</td>
+    <td>default</td>
+  </tr>
+  <tr>
+    <td>headless</td>
+    <td>2.3.1</td>
+    <td>2.2.3</td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
     EOS
   end
 
@@ -175,7 +268,17 @@ Outdated gems included in the bundle:
         formatter.instance_variable_set(:@format, 'markdown')
       end
 
-      it { is_expected.to eq text_markdown }
+      context 'when @pretty is false' do
+        it { is_expected.to eq text_markdown }
+      end
+
+      context 'when @pretty is true' do
+        before do
+          formatter.instance_variable_set(:@pretty, true)
+        end
+
+        it { is_expected.to eq text_markdown }
+      end
     end
 
     context "when @format is 'json'" do
@@ -183,7 +286,17 @@ Outdated gems included in the bundle:
         formatter.instance_variable_set(:@format, 'json')
       end
 
-      it { is_expected.to eq text_json }
+      context 'when @pretty is false' do
+        it { is_expected.to eq text_json }
+      end
+
+      context 'when @pretty is true' do
+        before do
+          formatter.instance_variable_set(:@pretty, true)
+        end
+
+        it { is_expected.to eq text_json_pretty }
+      end
     end
 
     context "when @format is 'yaml'" do
@@ -191,7 +304,17 @@ Outdated gems included in the bundle:
         formatter.instance_variable_set(:@format, 'yaml')
       end
 
-      it { is_expected.to eq text_yaml }
+      context 'when @pretty is false' do
+        it { is_expected.to eq text_yaml }
+      end
+
+      context 'when @pretty is true' do
+        before do
+          formatter.instance_variable_set(:@pretty, true)
+        end
+
+        it { is_expected.to eq text_yaml }
+      end
     end
 
     context "when @format is 'csv'" do
@@ -199,7 +322,17 @@ Outdated gems included in the bundle:
         formatter.instance_variable_set(:@format, 'csv')
       end
 
-      it { is_expected.to eq text_csv }
+      context 'when @pretty is false' do
+        it { is_expected.to eq text_csv }
+      end
+
+      context 'when @pretty is true' do
+        before do
+          formatter.instance_variable_set(:@pretty, true)
+        end
+
+        it { is_expected.to eq text_csv }
+      end
     end
 
     context "when @format is 'xml'" do
@@ -207,7 +340,17 @@ Outdated gems included in the bundle:
         formatter.instance_variable_set(:@format, 'xml')
       end
 
-      it { is_expected.to eq text_xml }
+      context 'when @pretty is false' do
+        it { is_expected.to eq text_xml }
+      end
+
+      context 'when @pretty is true' do
+        before do
+          formatter.instance_variable_set(:@pretty, true)
+        end
+
+        it { is_expected.to eq text_xml_pretty }
+      end
     end
 
     context "when @format is 'html'" do
@@ -215,7 +358,17 @@ Outdated gems included in the bundle:
         formatter.instance_variable_set(:@format, 'html')
       end
 
-      it { is_expected.to eq text_html }
+      context 'when @pretty is false' do
+        it { is_expected.to eq text_html }
+      end
+
+      context 'when @pretty is true' do
+        before do
+          formatter.instance_variable_set(:@pretty, true)
+        end
+
+        it { is_expected.to eq text_html_pretty }
+      end
     end
 
     context "when @format is 'aaa'" do

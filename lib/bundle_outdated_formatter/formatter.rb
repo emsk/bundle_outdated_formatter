@@ -17,8 +17,9 @@ module BundleOutdatedFormatter
     EOS
     COLUMNS = %w[gem newest installed requested groups].freeze
 
-    def initialize(format)
-      @format = format
+    def initialize(options)
+      @format = options[:format]
+      @pretty = options[:pretty]
       @outdated_gems = []
     end
 
@@ -73,6 +74,7 @@ module BundleOutdatedFormatter
     end
 
     def format_json
+      return JSON.pretty_generate(@outdated_gems) if @pretty
       @outdated_gems.to_json
     end
 
@@ -104,7 +106,9 @@ module BundleOutdatedFormatter
         end
       end
 
-      xml.to_s
+      io = StringIO.new
+      xml_formatter.write(xml, io)
+      io.string
     end
 
     def format_html
@@ -126,11 +130,21 @@ module BundleOutdatedFormatter
         end
       end
 
-      html.to_s
+      io = StringIO.new
+      xml_formatter.write(html, io)
+      io.string
     end
 
     def gem_text(text, name)
       text ? text[name] : ''
+    end
+
+    def xml_formatter
+      return REXML::Formatters::Default.new unless @pretty
+
+      formatter = REXML::Formatters::Pretty.new
+      formatter.compact = true
+      formatter
     end
   end
 end

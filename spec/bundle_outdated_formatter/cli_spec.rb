@@ -29,6 +29,34 @@ Outdated gems included in the bundle:
     EOS
   end
 
+  let(:stdout_json_pretty) do
+    <<-EOS
+[
+  {
+    "gem": "faker",
+    "newest": "1.6.6",
+    "installed": "1.6.5",
+    "requested": "~> 1.4",
+    "groups": "development, test"
+  },
+  {
+    "gem": "hashie",
+    "newest": "3.4.6",
+    "installed": "1.2.0",
+    "requested": "= 1.2.0",
+    "groups": "default"
+  },
+  {
+    "gem": "headless",
+    "newest": "2.3.1",
+    "installed": "2.2.3",
+    "requested": "",
+    "groups": ""
+  }
+]
+    EOS
+  end
+
   let(:stdout_yaml) do
     <<-EOS
 ---
@@ -65,9 +93,73 @@ Outdated gems included in the bundle:
     EOS
   end
 
+  let(:stdout_xml_pretty) do
+    <<-EOS
+<?xml version='1.0' encoding='UTF-8'?>
+<gems>
+  <outdated>
+    <gem>faker</gem>
+    <newest>1.6.6</newest>
+    <installed>1.6.5</installed>
+    <requested>~> 1.4</requested>
+    <groups>development, test</groups>
+  </outdated>
+  <outdated>
+    <gem>hashie</gem>
+    <newest>3.4.6</newest>
+    <installed>1.2.0</installed>
+    <requested>= 1.2.0</requested>
+    <groups>default</groups>
+  </outdated>
+  <outdated>
+    <gem>headless</gem>
+    <newest>2.3.1</newest>
+    <installed>2.2.3</installed>
+    <requested></requested>
+    <groups></groups>
+  </outdated>
+</gems>
+    EOS
+  end
+
   let(:stdout_html) do
     <<-EOS
 <table><tr><th>gem</th><th>newest</th><th>installed</th><th>requested</th><th>groups</th></tr><tr><td>faker</td><td>1.6.6</td><td>1.6.5</td><td>~> 1.4</td><td>development, test</td></tr><tr><td>hashie</td><td>3.4.6</td><td>1.2.0</td><td>= 1.2.0</td><td>default</td></tr><tr><td>headless</td><td>2.3.1</td><td>2.2.3</td><td></td><td></td></tr></table>
+    EOS
+  end
+
+  let(:stdout_html_pretty) do
+    <<-EOS
+<table>
+  <tr>
+    <th>gem</th>
+    <th>newest</th>
+    <th>installed</th>
+    <th>requested</th>
+    <th>groups</th>
+  </tr>
+  <tr>
+    <td>faker</td>
+    <td>1.6.6</td>
+    <td>1.6.5</td>
+    <td>~> 1.4</td>
+    <td>development, test</td>
+  </tr>
+  <tr>
+    <td>hashie</td>
+    <td>3.4.6</td>
+    <td>1.2.0</td>
+    <td>= 1.2.0</td>
+    <td>default</td>
+  </tr>
+  <tr>
+    <td>headless</td>
+    <td>2.3.1</td>
+    <td>2.2.3</td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
     EOS
   end
 
@@ -89,12 +181,16 @@ Commands:
     it { is_expected.to output(stdout_markdown).to_stdout }
   end
 
-  shared_examples_for 'json format' do
+  shared_examples_for 'json format' do |options|
     before do
       stub_const('STDIN', StringIO.new(stdin))
     end
 
-    it { is_expected.to output(stdout_json).to_stdout }
+    if options && options[:pretty]
+      it { is_expected.to output(stdout_json_pretty).to_stdout }
+    else
+      it { is_expected.to output(stdout_json).to_stdout }
+    end
   end
 
   shared_examples_for 'yaml format' do
@@ -113,20 +209,28 @@ Commands:
     it { is_expected.to output(stdout_csv).to_stdout }
   end
 
-  shared_examples_for 'xml format' do
+  shared_examples_for 'xml format' do |options|
     before do
       stub_const('STDIN', StringIO.new(stdin))
     end
 
-    it { is_expected.to output(stdout_xml).to_stdout }
+    if options && options[:pretty]
+      it { is_expected.to output(stdout_xml_pretty).to_stdout }
+    else
+      it { is_expected.to output(stdout_xml).to_stdout }
+    end
   end
 
-  shared_examples_for 'html format' do
+  shared_examples_for 'html format' do |options|
     before do
       stub_const('STDIN', StringIO.new(stdin))
     end
 
-    it { is_expected.to output(stdout_html).to_stdout }
+    if options && options[:pretty]
+      it { is_expected.to output(stdout_html_pretty).to_stdout }
+    else
+      it { is_expected.to output(stdout_html).to_stdout }
+    end
   end
 
   shared_examples_for 'unknown format' do
@@ -164,6 +268,16 @@ Commands:
       it_behaves_like 'markdown format'
     end
 
+    context 'given `output --format markdown --pretty`' do
+      let(:thor_args) { %w[output --format markdown --pretty] }
+      it_behaves_like 'markdown format'
+    end
+
+    context 'given `output -f markdown -p`' do
+      let(:thor_args) { %w[output -f markdown -p] }
+      it_behaves_like 'markdown format'
+    end
+
     context 'given `output`' do
       let(:thor_args) { %w[output] }
       it_behaves_like 'markdown format'
@@ -188,6 +302,16 @@ Commands:
       it_behaves_like 'json format'
     end
 
+    context 'given `output --format json --pretty`' do
+      let(:thor_args) { %w[output --format json --pretty] }
+      it_behaves_like 'json format', pretty: true
+    end
+
+    context 'given `output -f json -p`' do
+      let(:thor_args) { %w[output -f json -p] }
+      it_behaves_like 'json format', pretty: true
+    end
+
     context 'given `output --format yaml`' do
       let(:thor_args) { %w[output --format yaml] }
       it_behaves_like 'yaml format'
@@ -199,6 +323,16 @@ Commands:
 
     context 'given `output -f yaml`' do
       let(:thor_args) { %w[output -f yaml] }
+      it_behaves_like 'yaml format'
+    end
+
+    context 'given `output --format yaml --pretty`' do
+      let(:thor_args) { %w[output --format yaml --pretty] }
+      it_behaves_like 'yaml format'
+    end
+
+    context 'given `output -f yaml -p`' do
+      let(:thor_args) { %w[output -f yaml -p] }
       it_behaves_like 'yaml format'
     end
 
@@ -216,6 +350,16 @@ Commands:
       it_behaves_like 'csv format'
     end
 
+    context 'given `output --format csv --pretty`' do
+      let(:thor_args) { %w[output --format csv --pretty] }
+      it_behaves_like 'csv format'
+    end
+
+    context 'given `output -f csv -p`' do
+      let(:thor_args) { %w[output -f csv -p] }
+      it_behaves_like 'csv format'
+    end
+
     context 'given `output --format xml`' do
       let(:thor_args) { %w[output --format xml] }
       it_behaves_like 'xml format'
@@ -230,6 +374,16 @@ Commands:
       it_behaves_like 'xml format'
     end
 
+    context 'given `output --format xml --pretty`' do
+      let(:thor_args) { %w[output --format xml --pretty] }
+      it_behaves_like 'xml format', pretty: true
+    end
+
+    context 'given `output -f xml -p`' do
+      let(:thor_args) { %w[output -f xml -p] }
+      it_behaves_like 'xml format', pretty: true
+    end
+
     context 'given `output --format html`' do
       let(:thor_args) { %w[output --format html] }
       it_behaves_like 'html format'
@@ -242,6 +396,16 @@ Commands:
     context 'given `output -f html`' do
       let(:thor_args) { %w[output -f html] }
       it_behaves_like 'html format'
+    end
+
+    context 'given `output --format html --pretty`' do
+      let(:thor_args) { %w[output --format html --pretty] }
+      it_behaves_like 'html format', pretty: true
+    end
+
+    context 'given `output -f html -p`' do
+      let(:thor_args) { %w[output -f html -p] }
+      it_behaves_like 'html format', pretty: true
     end
 
     context 'given `output` --format aaa' do
@@ -305,8 +469,9 @@ Usage:
   #{command} output
 
 Options:
-  -f, [--format=FORMAT]  # Format. (markdown, json, yaml, csv, xml, html)
-                         # Default: markdown
+  -f, [--format=FORMAT]          # Format. (markdown, json, yaml, csv, xml, html)
+                                 # Default: markdown
+  -p, [--pretty], [--no-pretty]  # `true` if pretty output.
 
 Format output of `bundle outdated`
         EOS
