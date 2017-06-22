@@ -38,14 +38,6 @@ Style/Documentation:
     - 'lib/bundle_outdated_formatter/cli.rb'
     - 'lib/bundle_outdated_formatter/formatter.rb'
 
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles, UseHashRocketsWithSymbolValues, PreferHashRocketsForNonAlnumEndingSymbols.
-# SupportedStyles: ruby19, hash_rockets, no_mixed_keys, ruby19_no_mixed_keys
-Style/HashSyntax:
-  Exclude:
-    - 'Rakefile'
-
 # Offense count: 2
 # Cop supports --auto-correct.
 # Configuration parameters: PreferredDelimiters.
