@@ -238,7 +238,7 @@ Commands:
       stub_const('STDIN', StringIO.new(stdin))
     end
 
-    it { is_expected.not_to output.to_stdout }
+    it { is_expected.to raise_error(BundleOutdatedFormatter::UnknownFormatError, error_message) }
   end
 
   shared_examples_for 'a `help` command' do
@@ -410,6 +410,7 @@ Commands:
 
     context 'given `output` --format aaa' do
       let(:thor_args) { %w[output --format aaa] }
+      let(:error_message) { 'aaa' }
       it_behaves_like 'unknown format'
     end
 

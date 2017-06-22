@@ -1,4 +1,5 @@
 require 'thor'
+require 'bundle_outdated_formatter/error'
 require 'bundle_outdated_formatter/formatter'
 
 module BundleOutdatedFormatter
@@ -12,8 +13,8 @@ module BundleOutdatedFormatter
     option :pretty, type: :boolean, aliases: '-p', desc: '`true` if pretty output.'
 
     def output
+      raise BundleOutdatedFormatter::UnknownFormatError, options[:format] unless allow_format?
       return if STDIN.tty?
-      return unless allow_format?
 
       formatter = Formatter.new(options)
       formatter.read_stdin
