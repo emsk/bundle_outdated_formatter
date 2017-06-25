@@ -27,23 +27,7 @@ module BundleOutdatedFormatter
       @outdated_gems = STDIN.each.to_a.map(&:strip).reject(&:empty?)
 
       @outdated_gems.map! do |line|
-        matched_name      = NAME_REGEXP.match(line)
-        matched_newest    = NEWEST_REGEXP.match(line)
-        matched_installed = INSTALLED_REGEXP.match(line)
-        matched_requested = REQUESTED_REGEXP.match(line)
-        matched_groups    = GROUPS_REGEXP.match(line)
-
-        if matched_name.nil? && matched_newest.nil? && matched_installed.nil? && matched_requested.nil? && matched_groups.nil?
-          nil
-        else
-          {
-            'gem'       => gem_text(matched_name, :name),
-            'newest'    => gem_text(matched_newest, :newest),
-            'installed' => gem_text(matched_installed, :installed),
-            'requested' => gem_text(matched_requested, :requested),
-            'groups'    => gem_text(matched_groups, :groups)
-          }
-        end
+        find_gems(line)
       end
 
       @outdated_gems.compact!
@@ -64,6 +48,36 @@ module BundleOutdatedFormatter
     end
 
     private
+
+    def find_gems(line)
+      matched = {
+        name:      NAME_REGEXP.match(line),
+        newest:    NEWEST_REGEXP.match(line),
+        installed: INSTALLED_REGEXP.match(line),
+        requested: REQUESTED_REGEXP.match(line),
+        groups:    GROUPS_REGEXP.match(line)
+      }
+
+      return unless match_gem?(matched)
+
+      {
+        'gem'       => gem_text(matched[:name], :name),
+        'newest'    => gem_text(matched[:newest], :newest),
+        'installed' => gem_text(matched[:installed], :installed),
+        'requested' => gem_text(matched[:requested], :requested),
+        'groups'    => gem_text(matched[:groups], :groups)
+      }
+    end
+
+    def match_gem?(matched)
+      %i[name newest installed requested groups].any? do |kind|
+        !matched[kind].nil?
+      end
+    end
+
+    def gem_text(text, name)
+      text ? text[name] : ''
+    end
 
     def format_markdown
       @outdated_gems.map! do |gem|
@@ -133,10 +147,6 @@ module BundleOutdatedFormatter
       io = StringIO.new
       xml_formatter.write(html, io)
       io.string
-    end
-
-    def gem_text(text, name)
-      text ? text[name] : ''
     end
 
     def xml_formatter
