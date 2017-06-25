@@ -10,6 +10,9 @@ Layout/TrailingWhitespace:
   Exclude:
     - 'spec/**/*.rb'
 
+Metrics/AbcSize:
+  Max: 20
+
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*.rb'
