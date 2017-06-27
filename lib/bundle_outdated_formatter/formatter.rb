@@ -5,7 +5,7 @@ require 'rexml/document'
 
 module BundleOutdatedFormatter
   class Formatter
-    NAME_REGEXP      = /\A(\* )*(?<name>.+) \(/
+    GEM_REGEXP       = /\A(\* )*(?<gem>.+) \(/
     NEWEST_REGEXP    = /newest (?<newest>[\d\.]+)/
     INSTALLED_REGEXP = /installed (?<installed>[\d\.]+)/
     REQUESTED_REGEXP = /requested (?<requested>.+)\)/
@@ -51,7 +51,7 @@ module BundleOutdatedFormatter
 
     def find_gems(line)
       matched = {
-        name:      NAME_REGEXP.match(line),
+        gem:       GEM_REGEXP.match(line),
         newest:    NEWEST_REGEXP.match(line),
         installed: INSTALLED_REGEXP.match(line),
         requested: REQUESTED_REGEXP.match(line),
@@ -61,7 +61,7 @@ module BundleOutdatedFormatter
       return unless match_gem?(matched)
 
       {
-        'gem'       => gem_text(matched[:name], :name),
+        'gem'       => gem_text(matched[:gem], :gem),
         'newest'    => gem_text(matched[:newest], :newest),
         'installed' => gem_text(matched[:installed], :installed),
         'requested' => gem_text(matched[:requested], :requested),
@@ -70,8 +70,8 @@ module BundleOutdatedFormatter
     end
 
     def match_gem?(matched)
-      %i[name newest installed requested groups].any? do |kind|
-        !matched[kind].nil?
+      COLUMNS.any? do |column|
+        !matched[column.to_sym].nil?
       end
     end
 
