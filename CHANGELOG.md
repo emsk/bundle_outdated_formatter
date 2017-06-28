@@ -5,6 +5,7 @@
 ### Features
 
 * Add `--pretty` option for `output` command
+* Raise `UnknownFormatError` if format is not allowed
 
 ## 0.2.0 (2017-06-19)
 
