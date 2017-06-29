@@ -1,6 +1,3 @@
-require 'json'
-require 'psych'
-require 'csv'
 require 'rexml/document'
 
 module BundleOutdatedFormatter
@@ -18,7 +15,6 @@ module BundleOutdatedFormatter
     COLUMNS = %w[gem newest installed requested groups].freeze
 
     def initialize(options)
-      @format = options[:format]
       @pretty = options[:pretty]
       @outdated_gems = []
     end
@@ -31,20 +27,6 @@ module BundleOutdatedFormatter
       end
 
       @outdated_gems.compact!
-    end
-
-    def convert
-      text =
-        case @format
-        when 'markdown' then format_markdown
-        when 'json'     then format_json
-        when 'yaml'     then format_yaml
-        when 'csv'      then format_csv
-        when 'xml'      then format_xml
-        when 'html'     then format_html
-        else                 ''
-        end
-      text.chomp
     end
 
     private
@@ -77,76 +59,6 @@ module BundleOutdatedFormatter
 
     def gem_text(text, name)
       text ? text[name] : ''
-    end
-
-    def format_markdown
-      @outdated_gems.map! do |gem|
-        "| #{gem.values.join(' | ')} |".gsub(/  /, ' ')
-      end
-
-      MARKDOWN_HEADER + @outdated_gems.join("\n")
-    end
-
-    def format_json
-      return JSON.pretty_generate(@outdated_gems) if @pretty
-      @outdated_gems.to_json
-    end
-
-    def format_yaml
-      @outdated_gems.to_yaml
-    end
-
-    def format_csv
-      CSV.generate(force_quotes: true) do |csv|
-        csv << COLUMNS
-        @outdated_gems.each do |gem|
-          csv << gem.values
-        end
-      end
-    end
-
-    def format_xml
-      xml = REXML::Document.new(nil, raw: :all)
-      xml << REXML::XMLDecl.new('1.0', 'UTF-8')
-
-      root = REXML::Element.new('gems')
-      xml.add_element(root)
-
-      @outdated_gems.each do |gem|
-        elements = root.add_element(REXML::Element.new('outdated'))
-
-        COLUMNS.each do |column|
-          elements.add_element(column).add_text(gem[column])
-        end
-      end
-
-      io = StringIO.new
-      xml_formatter.write(xml, io)
-      io.string
-    end
-
-    def format_html
-      html = REXML::Document.new(nil, raw: :all)
-
-      root = REXML::Element.new('table')
-      html.add_element(root)
-
-      elements = root.add_element(REXML::Element.new('tr'))
-      COLUMNS.each do |column|
-        elements.add_element('th').add_text(column)
-      end
-
-      @outdated_gems.each do |gem|
-        elements = root.add_element(REXML::Element.new('tr'))
-
-        COLUMNS.each do |column|
-          elements.add_element('td').add_text(gem[column])
-        end
-      end
-
-      io = StringIO.new
-      xml_formatter.write(html, io)
-      io.string
     end
 
     def xml_formatter

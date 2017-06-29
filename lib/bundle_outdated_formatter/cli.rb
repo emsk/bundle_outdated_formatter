@@ -1,6 +1,11 @@
 require 'thor'
 require 'bundle_outdated_formatter/error'
-require 'bundle_outdated_formatter/formatter'
+require 'bundle_outdated_formatter/formatter/markdown_formatter'
+require 'bundle_outdated_formatter/formatter/json_formatter'
+require 'bundle_outdated_formatter/formatter/yaml_formatter'
+require 'bundle_outdated_formatter/formatter/csv_formatter'
+require 'bundle_outdated_formatter/formatter/xml_formatter'
+require 'bundle_outdated_formatter/formatter/html_formatter'
 
 module BundleOutdatedFormatter
   class CLI < Thor
@@ -16,7 +21,7 @@ module BundleOutdatedFormatter
       raise BundleOutdatedFormatter::UnknownFormatError, options[:format] unless allow_format?
       return if STDIN.tty?
 
-      formatter = Formatter.new(options)
+      formatter = create_formatter
       formatter.read_stdin
       puts formatter.convert
     end
@@ -32,6 +37,19 @@ module BundleOutdatedFormatter
 
     def allow_format?
       ALLOW_FORMAT.include?(options[:format])
+    end
+
+    def create_formatter
+      formatter =
+        case options[:format]
+        when 'markdown' then MarkdownFormatter
+        when 'json'     then JSONFormatter
+        when 'yaml'     then YAMLFormatter
+        when 'csv'      then CSVFormatter
+        when 'xml'      then XMLFormatter
+        when 'html'     then HTMLFormatter
+        end
+      formatter.new(options)
     end
   end
 end
