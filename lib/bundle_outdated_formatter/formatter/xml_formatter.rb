@@ -3,24 +3,33 @@ require 'bundle_outdated_formatter/formatter'
 
 module BundleOutdatedFormatter
   class XMLFormatter < Formatter
+    def initialize(options)
+      super(options)
+
+      @xml = REXML::Document.new(nil, raw: :all)
+      @xml << REXML::XMLDecl.new('1.0', 'UTF-8')
+      @root = REXML::Element.new('gems')
+      @xml.add_element(@root)
+    end
+
     def convert
-      xml = REXML::Document.new(nil, raw: :all)
-      xml << REXML::XMLDecl.new('1.0', 'UTF-8')
-
-      root = REXML::Element.new('gems')
-      xml.add_element(root)
-
       @outdated_gems.each do |gem|
-        elements = root.add_element(REXML::Element.new('outdated'))
-
-        COLUMNS.each do |column|
-          elements.add_element(column).add_text(gem[column])
-        end
+        add_outdated(gem)
       end
 
       io = StringIO.new
-      xml_formatter.write(xml, io)
+      xml_formatter.write(@xml, io)
       io.string.chomp
+    end
+
+    private
+
+    def add_outdated(gem)
+      elements = @root.add_element(REXML::Element.new('outdated'))
+
+      COLUMNS.each do |column|
+        elements.add_element(column).add_text(gem[column])
+      end
     end
   end
 end
