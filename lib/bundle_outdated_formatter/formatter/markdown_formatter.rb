@@ -2,7 +2,7 @@ require 'bundle_outdated_formatter/formatter'
 
 module BundleOutdatedFormatter
   class MarkdownFormatter < Formatter
-    MARKDOWN_HEADER = <<-EOS.freeze
+    HEADER = <<-EOS.freeze
 | gem | newest | installed | requested | groups |
 | --- | --- | --- | --- | --- |
     EOS
@@ -12,7 +12,7 @@ module BundleOutdatedFormatter
         "| #{gem.values.join(' | ')} |".gsub(/  /, ' ')
       end
 
-      (MARKDOWN_HEADER + @outdated_gems.join("\n")).chomp
+      (HEADER + @outdated_gems.join("\n")).chomp
     end
   end
 end
