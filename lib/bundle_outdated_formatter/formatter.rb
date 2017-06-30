@@ -8,10 +8,6 @@ module BundleOutdatedFormatter
     REQUESTED_REGEXP = /requested (?<requested>.+)\)/
     GROUPS_REGEXP    = /in groups "(?<groups>.+)"/
 
-    MARKDOWN_HEADER = <<-EOS.freeze
-| gem | newest | installed | requested | groups |
-| --- | --- | --- | --- | --- |
-    EOS
     COLUMNS = %w[gem newest installed requested groups].freeze
 
     def initialize(options)
