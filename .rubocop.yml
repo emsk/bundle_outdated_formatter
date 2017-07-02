@@ -17,3 +17,6 @@ Metrics/BlockLength:
   Exclude:
     - 'spec/**/*.rb'
     - '*.gemspec'
+
+Metrics/CyclomaticComplexity:
+  Max: 7
