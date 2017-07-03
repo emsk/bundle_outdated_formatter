@@ -20,3 +20,6 @@ Metrics/BlockLength:
 
 Metrics/CyclomaticComplexity:
   Max: 7
+
+Metrics/LineLength:
+  Enabled: false
