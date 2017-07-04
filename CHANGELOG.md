@@ -4,6 +4,7 @@
 
 ### Features
 
+* Support TSV format
 * Add `--pretty` option for `output` command
 * Raise `UnknownFormatError` if format is not allowed
 

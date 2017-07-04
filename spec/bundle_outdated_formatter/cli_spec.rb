@@ -87,6 +87,15 @@ Outdated gems included in the bundle:
     EOS
   end
 
+  let(:stdout_tsv) do
+    <<-EOS
+"gem"	"newest"	"installed"	"requested"	"groups"
+"faker"	"1.6.6"	"1.6.5"	"~> 1.4"	"development, test"
+"hashie"	"3.4.6"	"1.2.0"	"= 1.2.0"	"default"
+"headless"	"2.3.1"	"2.2.3"	""	""
+    EOS
+  end
+
   let(:stdout_xml) do
     <<-EOS
 <?xml version='1.0' encoding='UTF-8'?><gems><outdated><gem>faker</gem><newest>1.6.6</newest><installed>1.6.5</installed><requested>~> 1.4</requested><groups>development, test</groups></outdated><outdated><gem>hashie</gem><newest>3.4.6</newest><installed>1.2.0</installed><requested>= 1.2.0</requested><groups>default</groups></outdated><outdated><gem>headless</gem><newest>2.3.1</newest><installed>2.2.3</installed><requested></requested><groups></groups></outdated></gems>
@@ -207,6 +216,14 @@ Commands:
     end
 
     it { is_expected.to output(stdout_csv).to_stdout }
+  end
+
+  shared_examples_for 'tsv format' do
+    before do
+      stub_const('STDIN', StringIO.new(stdin))
+    end
+
+    it { is_expected.to output(stdout_tsv).to_stdout }
   end
 
   shared_examples_for 'xml format' do |options|
@@ -360,6 +377,30 @@ Commands:
       it_behaves_like 'csv format'
     end
 
+    context 'given `output --format tsv`' do
+      let(:thor_args) { %w[output --format tsv] }
+      it_behaves_like 'tsv format'
+
+      context 'without STDIN' do
+        it { is_expected.not_to output.to_stdout }
+      end
+    end
+
+    context 'given `output -f tsv`' do
+      let(:thor_args) { %w[output -f tsv] }
+      it_behaves_like 'tsv format'
+    end
+
+    context 'given `output --format tsv --pretty`' do
+      let(:thor_args) { %w[output --format tsv --pretty] }
+      it_behaves_like 'tsv format'
+    end
+
+    context 'given `output -f tsv -p`' do
+      let(:thor_args) { %w[output -f tsv -p] }
+      it_behaves_like 'tsv format'
+    end
+
     context 'given `output --format xml`' do
       let(:thor_args) { %w[output --format xml] }
       it_behaves_like 'xml format'
@@ -470,7 +511,7 @@ Usage:
   #{command} output
 
 Options:
-  -f, [--format=FORMAT]          # Format. (markdown, json, yaml, csv, xml, html)
+  -f, [--format=FORMAT]          # Format. (markdown, json, yaml, csv, tsv, xml, html)
                                  # Default: markdown
   -p, [--pretty], [--no-pretty]  # `true` if pretty output.
 

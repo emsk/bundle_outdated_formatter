@@ -4,17 +4,18 @@ require 'bundle_outdated_formatter/formatter/markdown_formatter'
 require 'bundle_outdated_formatter/formatter/json_formatter'
 require 'bundle_outdated_formatter/formatter/yaml_formatter'
 require 'bundle_outdated_formatter/formatter/csv_formatter'
+require 'bundle_outdated_formatter/formatter/tsv_formatter'
 require 'bundle_outdated_formatter/formatter/xml_formatter'
 require 'bundle_outdated_formatter/formatter/html_formatter'
 
 module BundleOutdatedFormatter
   class CLI < Thor
-    ALLOW_FORMAT = %w[markdown json yaml csv xml html].freeze
+    ALLOW_FORMAT = %w[markdown json yaml csv tsv xml html].freeze
 
     default_command :output
 
     desc 'output', 'Format output of `bundle outdated`'
-    option :format, type: :string, aliases: '-f', default: 'markdown', desc: 'Format. (markdown, json, yaml, csv, xml, html)'
+    option :format, type: :string, aliases: '-f', default: 'markdown', desc: 'Format. (markdown, json, yaml, csv, tsv, xml, html)'
     option :pretty, type: :boolean, aliases: '-p', desc: '`true` if pretty output.'
 
     def output
@@ -46,6 +47,7 @@ module BundleOutdatedFormatter
         when 'json'     then JSONFormatter
         when 'yaml'     then YAMLFormatter
         when 'csv'      then CSVFormatter
+        when 'tsv'      then TSVFormatter
         when 'xml'      then XMLFormatter
         when 'html'     then HTMLFormatter
         end
