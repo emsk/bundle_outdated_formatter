@@ -18,8 +18,5 @@ Metrics/BlockLength:
     - 'spec/**/*.rb'
     - '*.gemspec'
 
-Metrics/CyclomaticComplexity:
-  Max: 8
-
 Metrics/LineLength:
   Enabled: false

@@ -10,7 +10,15 @@ require 'bundle_outdated_formatter/formatter/html_formatter'
 
 module BundleOutdatedFormatter
   class CLI < Thor
-    ALLOW_FORMAT = %w[markdown json yaml csv tsv xml html].freeze
+    FORMATTERS = {
+      'markdown' => MarkdownFormatter,
+      'json'     => JSONFormatter,
+      'yaml'     => YAMLFormatter,
+      'csv'      => CSVFormatter,
+      'tsv'      => TSVFormatter,
+      'xml'      => XMLFormatter,
+      'html'     => HTMLFormatter
+    }.freeze
 
     default_command :output
 
@@ -37,21 +45,11 @@ module BundleOutdatedFormatter
     private
 
     def allow_format?
-      ALLOW_FORMAT.include?(options[:format])
+      FORMATTERS.keys.include?(options[:format])
     end
 
     def create_formatter
-      formatter =
-        case options[:format]
-        when 'markdown' then MarkdownFormatter
-        when 'json'     then JSONFormatter
-        when 'yaml'     then YAMLFormatter
-        when 'csv'      then CSVFormatter
-        when 'tsv'      then TSVFormatter
-        when 'xml'      then XMLFormatter
-        when 'html'     then HTMLFormatter
-        end
-      formatter.new(options)
+      FORMATTERS[options[:format]].new(options)
     end
   end
 end
