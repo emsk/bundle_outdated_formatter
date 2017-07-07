@@ -28,14 +28,7 @@ module BundleOutdatedFormatter
     private
 
     def find_gems(line)
-      matched = {
-        gem:       GEM_REGEXP.match(line),
-        newest:    NEWEST_REGEXP.match(line),
-        installed: INSTALLED_REGEXP.match(line),
-        requested: REQUESTED_REGEXP.match(line),
-        groups:    GROUPS_REGEXP.match(line)
-      }
-
+      matched = match_gem(line)
       return unless match_gem?(matched)
 
       {
@@ -44,6 +37,16 @@ module BundleOutdatedFormatter
         'installed' => gem_text(matched[:installed], :installed),
         'requested' => gem_text(matched[:requested], :requested),
         'groups'    => gem_text(matched[:groups], :groups)
+      }
+    end
+
+    def match_gem(line)
+      {
+        gem:       GEM_REGEXP.match(line),
+        newest:    NEWEST_REGEXP.match(line),
+        installed: INSTALLED_REGEXP.match(line),
+        requested: REQUESTED_REGEXP.match(line),
+        groups:    GROUPS_REGEXP.match(line)
       }
     end
 
