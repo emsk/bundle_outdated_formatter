@@ -1,6 +1,7 @@
 require 'rexml/document'
 
 module BundleOutdatedFormatter
+  # Formatter for all formats
   class Formatter
     GEM_REGEXP       = /\A(\* )*(?<gem>.+) \(/
     NEWEST_REGEXP    = /newest (?<newest>[\d\.]+)/

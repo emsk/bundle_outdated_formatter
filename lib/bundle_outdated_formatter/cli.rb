@@ -9,6 +9,7 @@ require 'bundle_outdated_formatter/formatter/xml_formatter'
 require 'bundle_outdated_formatter/formatter/html_formatter'
 
 module BundleOutdatedFormatter
+  # Command-line interface of {BundleOutdatedFormatter}
   class CLI < Thor
     FORMATTERS = {
       'markdown' => MarkdownFormatter,

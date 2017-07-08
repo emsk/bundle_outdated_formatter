@@ -2,6 +2,7 @@ require 'csv'
 require 'bundle_outdated_formatter/formatter'
 
 module BundleOutdatedFormatter
+  # Formatter for TSV
   class TSVFormatter < Formatter
     def convert
       text = CSV.generate(force_quotes: true, col_sep: "\t") do |tsv|

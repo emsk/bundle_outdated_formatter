@@ -2,6 +2,7 @@ require 'rexml/document'
 require 'bundle_outdated_formatter/formatter'
 
 module BundleOutdatedFormatter
+  # Formatter for HTML
   class HTMLFormatter < Formatter
     def initialize(options)
       super(options)

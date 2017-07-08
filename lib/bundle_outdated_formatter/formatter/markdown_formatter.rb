@@ -1,6 +1,7 @@
 require 'bundle_outdated_formatter/formatter'
 
 module BundleOutdatedFormatter
+  # Formatter for Markdown
   class MarkdownFormatter < Formatter
     HEADER = <<-EOS.freeze
 | gem | newest | installed | requested | groups |
