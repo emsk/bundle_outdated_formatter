@@ -19,7 +19,7 @@ module BundleOutdatedFormatter
       @outdated_gems = STDIN.each.to_a.map(&:strip).reject(&:empty?)
 
       @outdated_gems.map! do |line|
-        find_gems(line)
+        find_gem(line)
       end
 
       @outdated_gems.compact!
@@ -27,7 +27,7 @@ module BundleOutdatedFormatter
 
     private
 
-    def find_gems(line)
+    def find_gem(line)
       matched = match_gem(line)
       return unless match_gem?(matched)
 
