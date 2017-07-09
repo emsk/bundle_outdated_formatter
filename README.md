@@ -40,7 +40,7 @@ $ bundle outdated | bof
 
 | Option | Alias | Description | Default |
 | :----- | :---- | :---------- | :------ |
-| `--format` | `-f` | Format. `markdown`, `json`, `yaml`, `csv`, `xml`, or `html`. | `markdown` |
+| `--format` | `-f` | Format. `markdown`, `json`, `yaml`, `csv`, `tsv`, `xml`, or `html`. | `markdown` |
 | `--pretty` | `-p` | `true` if pretty output.<br>This option is available in `json`, `xml`, or `html` formats. | `false` |
 
 ## Examples
