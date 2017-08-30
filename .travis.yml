@@ -9,4 +9,4 @@ rvm:
   - ruby-head
 before_install:
   - stty cols 160
-  - gem install bundler -v 1.15.1
+  - gem install bundler -v 1.15.4
