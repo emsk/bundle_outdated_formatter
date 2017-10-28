@@ -21,9 +21,3 @@ Naming/HeredocDelimiterNaming:
     - 'spec/bundle_outdated_formatter/formatter/xml_formatter_spec.rb'
     - 'spec/bundle_outdated_formatter/formatter/yaml_formatter_spec.rb'
     - 'spec/bundle_outdated_formatter/formatter_spec.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/Encoding:
-  Exclude:
-    - 'bundle_outdated_formatter.gemspec'
