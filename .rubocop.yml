@@ -20,3 +20,6 @@ Metrics/BlockLength:
 
 Metrics/LineLength:
   Enabled: false
+
+Naming/HeredocDelimiterNaming:
+  Enabled: false

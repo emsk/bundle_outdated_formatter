@@ -5,19 +5,3 @@
 # one by one as the offenses are removed from the code base.
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
-
-# Offense count: 27
-# Configuration parameters: Blacklist.
-# Blacklist: END, (?-mix:EO[A-Z]{1})
-Naming/HeredocDelimiterNaming:
-  Exclude:
-    - 'lib/bundle_outdated_formatter/formatter/markdown_formatter.rb'
-    - 'spec/bundle_outdated_formatter/cli_spec.rb'
-    - 'spec/bundle_outdated_formatter/formatter/csv_formatter_spec.rb'
-    - 'spec/bundle_outdated_formatter/formatter/html_formatter_spec.rb'
-    - 'spec/bundle_outdated_formatter/formatter/json_formatter_spec.rb'
-    - 'spec/bundle_outdated_formatter/formatter/markdown_formatter_spec.rb'
-    - 'spec/bundle_outdated_formatter/formatter/tsv_formatter_spec.rb'
-    - 'spec/bundle_outdated_formatter/formatter/xml_formatter_spec.rb'
-    - 'spec/bundle_outdated_formatter/formatter/yaml_formatter_spec.rb'
-    - 'spec/bundle_outdated_formatter/formatter_spec.rb'
