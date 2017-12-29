@@ -1,5 +1,12 @@
 # Change Log
 
+## 0.4.0 (2017-12-29)
+
+### Features
+
+* Support Terminal (ASCII table) format
+* Change default format from Markdown to Terminal
+
 ## 0.3.0 (2017-07-08)
 
 ### Features

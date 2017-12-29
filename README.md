@@ -40,7 +40,7 @@ $ bundle outdated | bof
 
 | Option | Alias | Description | Default |
 | :----- | :---- | :---------- | :------ |
-| `--format` | `-f` | Format. `markdown`, `json`, `yaml`, `csv`, `tsv`, `xml`, or `html`. | `markdown` |
+| `--format` | `-f` | Format. `terminal`, `markdown`, `json`, `yaml`, `csv`, `tsv`, `xml`, or `html`. | `terminal` |
 | `--pretty` | `-p` | `true` if pretty output.<br>This option is available in `json`, `xml`, or `html` formats. | `false` |
 
 ## Examples
@@ -57,6 +57,18 @@ Outdated gems included in the bundle:
 * faker (newest 1.6.6, installed 1.6.5, requested ~> 1.4) in groups "development, test"
 * hashie (newest 3.4.6, installed 1.2.0, requested = 1.2.0) in groups "default"
 * headless (newest 2.3.1, installed 2.2.3)
+```
+
+### Convert to Terminal
+
+```
++----------+--------+-----------+-----------+-------------------+
+| gem      | newest | installed | requested | groups            |
++----------+--------+-----------+-----------+-------------------+
+| faker    | 1.6.6  | 1.6.5     | ~> 1.4    | development, test |
+| hashie   | 3.4.6  | 1.2.0     | = 1.2.0   | default           |
+| headless | 2.3.1  | 2.2.3     |           |                   |
++----------+--------+-----------+-----------+-------------------+
 ```
 
 ### Convert to Markdown
