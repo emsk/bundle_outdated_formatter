@@ -1,5 +1,6 @@
 require 'thor'
 require 'bundle_outdated_formatter/error'
+require 'bundle_outdated_formatter/formatter/terminal_formatter'
 require 'bundle_outdated_formatter/formatter/markdown_formatter'
 require 'bundle_outdated_formatter/formatter/json_formatter'
 require 'bundle_outdated_formatter/formatter/yaml_formatter'
@@ -12,6 +13,7 @@ module BundleOutdatedFormatter
   # Command-line interface of {BundleOutdatedFormatter}
   class CLI < Thor
     FORMATTERS = {
+      'terminal' => TerminalFormatter,
       'markdown' => MarkdownFormatter,
       'json'     => JSONFormatter,
       'yaml'     => YAMLFormatter,
@@ -24,7 +26,7 @@ module BundleOutdatedFormatter
     default_command :output
 
     desc 'output', 'Format output of `bundle outdated`'
-    option :format, type: :string, aliases: '-f', default: 'markdown', desc: 'Format. (markdown, json, yaml, csv, tsv, xml, html)'
+    option :format, type: :string, aliases: '-f', default: 'markdown', desc: 'Format. (terminal, markdown, json, yaml, csv, tsv, xml, html)'
     option :pretty, type: :boolean, aliases: '-p', desc: '`true` if pretty output.'
 
     def output
