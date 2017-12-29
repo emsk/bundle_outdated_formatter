@@ -26,7 +26,7 @@ module BundleOutdatedFormatter
     default_command :output
 
     desc 'output', 'Format output of `bundle outdated`'
-    option :format, type: :string, aliases: '-f', default: 'markdown', desc: 'Format. (terminal, markdown, json, yaml, csv, tsv, xml, html)'
+    option :format, type: :string, aliases: '-f', default: 'terminal', desc: 'Format. (terminal, markdown, json, yaml, csv, tsv, xml, html)'
     option :pretty, type: :boolean, aliases: '-p', desc: '`true` if pretty output.'
 
     def output
