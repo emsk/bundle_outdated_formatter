@@ -1,3 +1,5 @@
+ENV['THOR_COLUMNS'] = '160'
+
 require 'simplecov'
 require 'coveralls'
 
