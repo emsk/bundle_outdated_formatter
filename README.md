@@ -2,7 +2,8 @@
 
 [![Gem Version](https://badge.fury.io/rb/bundle_outdated_formatter.svg)](https://badge.fury.io/rb/bundle_outdated_formatter)
 [![Build Status](https://travis-ci.org/emsk/bundle_outdated_formatter.svg?branch=master)](https://travis-ci.org/emsk/bundle_outdated_formatter)
-[![Coverage Status](https://coveralls.io/repos/github/emsk/bundle_outdated_formatter/badge.svg?branch=master)](https://coveralls.io/github/emsk/bundle_outdated_formatter)
+[![Build status](https://ci.appveyor.com/api/projects/status/w2qfj0a4iicqhmhq?svg=true)](https://ci.appveyor.com/project/emsk/bundle-outdated-formatter)
+[![Coverage Status](https://coveralls.io/repos/github/emsk/bundle_outdated_formatter/badge.svg?branch=master)](https://coveralls.io/github/emsk/bundle_outdated_formatter)<br>
 [![Code Climate](https://codeclimate.com/github/emsk/bundle_outdated_formatter/badges/gpa.svg)](https://codeclimate.com/github/emsk/bundle_outdated_formatter)
 [![Dependency Status](https://gemnasium.com/badges/github.com/emsk/bundle_outdated_formatter.svg)](https://gemnasium.com/github.com/emsk/bundle_outdated_formatter)
 [![Inline docs](http://inch-ci.org/github/emsk/bundle_outdated_formatter.svg?branch=master)](http://inch-ci.org/github/emsk/bundle_outdated_formatter)
