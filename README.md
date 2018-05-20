@@ -55,9 +55,9 @@ Fetching dependency metadata from https://rubygems.org/..
 Resolving dependencies...
 
 Outdated gems included in the bundle:
-* faker (newest 1.6.6, installed 1.6.5, requested ~> 1.4) in groups "development, test"
-* hashie (newest 3.4.6, installed 1.2.0, requested = 1.2.0) in groups "default"
-* headless (newest 2.3.1, installed 2.2.3)
+  * faker (newest 1.6.6, installed 1.6.5, requested ~> 1.4) in groups "development, test"
+  * hashie (newest 3.4.6, installed 1.2.0, requested = 1.2.0) in groups "default"
+  * headless (newest 2.3.1, installed 2.2.3)
 ```
 
 ### Convert to Terminal
