@@ -1,18 +1,16 @@
-require 'terminal-table'
+require 'tty-table'
 require 'bundle_outdated_formatter/formatter'
 
 module BundleOutdatedFormatter
   # Formatter for Terminal
   class TerminalFormatter < Formatter
     def convert
-      table = Terminal::Table.new do |t|
-        t << COLUMNS
-        t << :separator
+      table = TTY::Table.new(header: COLUMNS) do |t|
         @outdated_gems.each do |gem|
           t << gem.values
         end
       end
-      table.render.chomp
+      table.render(:unicode, padding: [0, 1]).chomp
     end
   end
 end
