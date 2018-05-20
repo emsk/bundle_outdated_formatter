@@ -1,6 +1,7 @@
 RSpec.describe BundleOutdatedFormatter::MarkdownFormatter do
   let(:pretty) { false }
-  let(:formatter) { described_class.new(pretty: pretty) }
+  let(:style) { 'unicode' }
+  let(:formatter) { described_class.new(pretty: pretty, style: style) }
 
   let(:outdated_gems) do
     [
@@ -45,12 +46,23 @@ RSpec.describe BundleOutdatedFormatter::MarkdownFormatter do
 
     subject { formatter.convert }
 
-    context 'when @pretty is false' do
+    context 'when @pretty is false and @style is unicode' do
       it { is_expected.to eq text_markdown }
     end
 
-    context 'when @pretty is true' do
+    context 'when @pretty is true and @style is unicode' do
       let(:pretty) { true }
+      it { is_expected.to eq text_markdown }
+    end
+
+    context 'when @pretty is false and @style is ascii' do
+      let(:style) { 'ascii' }
+      it { is_expected.to eq text_markdown }
+    end
+
+    context 'when @pretty is true and @style is ascii' do
+      let(:pretty) { true }
+      let(:style) { 'ascii' }
       it { is_expected.to eq text_markdown }
     end
   end

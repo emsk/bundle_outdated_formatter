@@ -1,6 +1,7 @@
 RSpec.describe BundleOutdatedFormatter::TerminalFormatter do
   let(:pretty) { false }
-  let(:formatter) { described_class.new(pretty: pretty) }
+  let(:style) { 'unicode' }
+  let(:formatter) { described_class.new(pretty: pretty, style: style) }
 
   let(:outdated_gems) do
     [
@@ -28,7 +29,7 @@ RSpec.describe BundleOutdatedFormatter::TerminalFormatter do
     ]
   end
 
-  let(:text_terminal) do
+  let(:text_terminal_unicode) do
     <<-EOS.chomp
 ┌──────────┬────────┬───────────┬───────────┬───────────────────┐
 │ gem      │ newest │ installed │ requested │ groups            │
@@ -40,6 +41,18 @@ RSpec.describe BundleOutdatedFormatter::TerminalFormatter do
     EOS
   end
 
+  let(:text_terminal_ascii) do
+    <<-EOS.chomp
++----------+--------+-----------+-----------+-------------------+
+| gem      | newest | installed | requested | groups            |
++----------+--------+-----------+-----------+-------------------+
+| faker    | 1.6.6  | 1.6.5     | ~> 1.4    | development, test |
+| hashie   | 3.4.6  | 1.2.0     | = 1.2.0   | default           |
+| headless | 2.3.1  | 2.2.3     |           |                   |
++----------+--------+-----------+-----------+-------------------+
+    EOS
+  end
+
   describe '#convert' do
     before do
       formatter.instance_variable_set(:@outdated_gems, outdated_gems)
@@ -47,13 +60,24 @@ RSpec.describe BundleOutdatedFormatter::TerminalFormatter do
 
     subject { formatter.convert }
 
-    context 'when @pretty is false' do
-      it { is_expected.to eq text_terminal }
+    context 'when @pretty is false and @style is unicode' do
+      it { is_expected.to eq text_terminal_unicode }
     end
 
-    context 'when @pretty is true' do
+    context 'when @pretty is true and @style is unicode' do
       let(:pretty) { true }
-      it { is_expected.to eq text_terminal }
+      it { is_expected.to eq text_terminal_unicode }
+    end
+
+    context 'when @pretty is false and @style is ascii' do
+      let(:style) { 'ascii' }
+      it { is_expected.to eq text_terminal_ascii }
+    end
+
+    context 'when @pretty is true and @style is ascii' do
+      let(:pretty) { true }
+      let(:style) { 'ascii' }
+      it { is_expected.to eq text_terminal_ascii }
     end
   end
 end

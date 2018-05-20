@@ -13,6 +13,7 @@ module BundleOutdatedFormatter
 
     def initialize(options)
       @pretty = options[:pretty]
+      @style = options[:style]
       @outdated_gems = []
     end
 

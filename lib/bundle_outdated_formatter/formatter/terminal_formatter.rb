@@ -10,7 +10,7 @@ module BundleOutdatedFormatter
           t << gem.values
         end
       end
-      table.render(:unicode, padding: [0, 1]).chomp
+      table.render(@style.to_sym, padding: [0, 1]).chomp
     end
   end
 end
