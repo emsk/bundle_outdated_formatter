@@ -9,6 +9,7 @@ module BundleOutdatedFormatter
 
       @xml = REXML::Document.new(nil, raw: :all)
       @root = REXML::Element.new('gems')
+      @root.add_text('')
       @xml.add_element(@root)
     end
 

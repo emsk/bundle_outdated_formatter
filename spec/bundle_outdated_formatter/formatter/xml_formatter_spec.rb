@@ -64,6 +64,8 @@ RSpec.describe BundleOutdatedFormatter::XMLFormatter do
     EOS
   end
 
+  let(:text_xml_empty) { '<?xml version="1.0" encoding="UTF-8"?><gems></gems>' }
+
   describe '#convert' do
     before do
       formatter.instance_variable_set(:@outdated_gems, outdated_gems)
@@ -89,6 +91,11 @@ RSpec.describe BundleOutdatedFormatter::XMLFormatter do
       let(:pretty) { true }
       let(:style) { 'ascii' }
       it { is_expected.to eq text_xml_pretty }
+    end
+
+    context 'when no outdated gems' do
+      let(:outdated_gems) { [] }
+      it { is_expected.to eq text_xml_empty }
     end
   end
 end
