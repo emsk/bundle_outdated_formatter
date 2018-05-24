@@ -216,7 +216,7 @@ Pretty output:
     <td>faker</td>
     <td>1.6.6</td>
     <td>1.6.5</td>
-    <td>~> 1.4</td>
+    <td>~&gt; 1.4</td>
     <td>development, test</td>
   </tr>
   <tr>
