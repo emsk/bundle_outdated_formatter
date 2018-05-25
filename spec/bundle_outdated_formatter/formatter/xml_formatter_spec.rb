@@ -25,13 +25,20 @@ RSpec.describe BundleOutdatedFormatter::XMLFormatter do
         'installed' => '2.2.3',
         'requested' => '',
         'groups'    => ''
+      },
+      {
+        'gem'       => 'rbnacl',
+        'newest'    => '5.0.0',
+        'installed' => '4.0.2',
+        'requested' => '>= 3.2, < 5.0',
+        'groups'    => ''
       }
     ]
   end
 
   let(:text_xml) do
     <<-EOS.chomp
-<?xml version="1.0" encoding="UTF-8"?><gems><outdated><gem>faker</gem><newest>1.6.6</newest><installed>1.6.5</installed><requested>~> 1.4</requested><groups>development, test</groups></outdated><outdated><gem>hashie</gem><newest>3.4.6</newest><installed>1.2.0</installed><requested>= 1.2.0</requested><groups>default</groups></outdated><outdated><gem>headless</gem><newest>2.3.1</newest><installed>2.2.3</installed><requested></requested><groups></groups></outdated></gems>
+<?xml version="1.0" encoding="UTF-8"?><gems><outdated><gem>faker</gem><newest>1.6.6</newest><installed>1.6.5</installed><requested>~&gt; 1.4</requested><groups>development, test</groups></outdated><outdated><gem>hashie</gem><newest>3.4.6</newest><installed>1.2.0</installed><requested>= 1.2.0</requested><groups>default</groups></outdated><outdated><gem>headless</gem><newest>2.3.1</newest><installed>2.2.3</installed><requested></requested><groups></groups></outdated><outdated><gem>rbnacl</gem><newest>5.0.0</newest><installed>4.0.2</installed><requested>&gt;= 3.2, &lt; 5.0</requested><groups></groups></outdated></gems>
     EOS
   end
 
@@ -43,7 +50,7 @@ RSpec.describe BundleOutdatedFormatter::XMLFormatter do
     <gem>faker</gem>
     <newest>1.6.6</newest>
     <installed>1.6.5</installed>
-    <requested>~> 1.4</requested>
+    <requested>~&gt; 1.4</requested>
     <groups>development, test</groups>
   </outdated>
   <outdated>
@@ -58,6 +65,13 @@ RSpec.describe BundleOutdatedFormatter::XMLFormatter do
     <newest>2.3.1</newest>
     <installed>2.2.3</installed>
     <requested></requested>
+    <groups></groups>
+  </outdated>
+  <outdated>
+    <gem>rbnacl</gem>
+    <newest>5.0.0</newest>
+    <installed>4.0.2</installed>
+    <requested>&gt;= 3.2, &lt; 5.0</requested>
     <groups></groups>
   </outdated>
 </gems>
