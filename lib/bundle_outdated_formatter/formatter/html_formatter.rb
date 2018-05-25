@@ -1,6 +1,5 @@
 require 'rexml/document'
 require 'bundle_outdated_formatter/formatter'
-require 'cgi'
 
 module BundleOutdatedFormatter
   # Formatter for HTML
@@ -39,7 +38,7 @@ module BundleOutdatedFormatter
       elements = @root.add_element(REXML::Element.new('tr'))
 
       COLUMNS.each do |column|
-        escaped_text = CGI.escapeHTML(gem[column])
+        escaped_text = REXML::Text.new(gem[column], false, nil, false)
         elements.add_element('td').add_text(escaped_text)
       end
     end
