@@ -42,6 +42,7 @@ $ bundle outdated | bof
 | :----- | :---- | :---------- | :------ |
 | `--format` | `-f` | Format. `terminal`, `markdown`, `json`, `yaml`, `csv`, `tsv`, `xml`, or `html`. | `terminal` |
 | `--pretty` | `-p` | `true` if pretty output.<br>This option is available in `json`, `xml`, or `html` formats. | `false` |
+| `--style` | `-s` | Terminal table style. `unicode` or `ascii`.<br>This option is available in `terminal` format. | `unicode` |
 
 ## Examples
 
@@ -60,6 +61,20 @@ Outdated gems included in the bundle:
 ```
 
 ### Convert to Terminal
+
+Unicode style:
+
+```
+┌──────────┬────────┬───────────┬───────────┬───────────────────┐
+│ gem      │ newest │ installed │ requested │ groups            │
+├──────────┼────────┼───────────┼───────────┼───────────────────┤
+│ faker    │ 1.6.6  │ 1.6.5     │ ~> 1.4    │ development, test │
+│ hashie   │ 3.4.6  │ 1.2.0     │ = 1.2.0   │ default           │
+│ headless │ 2.3.1  │ 2.2.3     │           │                   │
+└──────────┴────────┴───────────┴───────────┴───────────────────┘
+```
+
+ASCII style:
 
 ```
 +----------+--------+-----------+-----------+-------------------+
@@ -161,19 +176,19 @@ Pretty output:
 Normal output:
 
 ```
-<?xml version='1.0' encoding='UTF-8'?><gems><outdated><gem>faker</gem><newest>1.6.6</newest><installed>1.6.5</installed><requested>~> 1.4</requested><groups>development, test</groups></outdated><outdated><gem>hashie</gem><newest>3.4.6</newest><installed>1.2.0</installed><requested>= 1.2.0</requested><groups>default</groups></outdated><outdated><gem>headless</gem><newest>2.3.1</newest><installed>2.2.3</installed><requested></requested><groups></groups></outdated></gems>
+<?xml version="1.0" encoding="UTF-8"?><gems><outdated><gem>faker</gem><newest>1.6.6</newest><installed>1.6.5</installed><requested>~&gt; 1.4</requested><groups>development, test</groups></outdated><outdated><gem>hashie</gem><newest>3.4.6</newest><installed>1.2.0</installed><requested>= 1.2.0</requested><groups>default</groups></outdated><outdated><gem>headless</gem><newest>2.3.1</newest><installed>2.2.3</installed><requested></requested><groups></groups></outdated></gems>
 ```
 
 Pretty output:
 
 ```
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="UTF-8"?>
 <gems>
   <outdated>
     <gem>faker</gem>
     <newest>1.6.6</newest>
     <installed>1.6.5</installed>
-    <requested>~> 1.4</requested>
+    <requested>~&gt; 1.4</requested>
     <groups>development, test</groups>
   </outdated>
   <outdated>
@@ -198,7 +213,7 @@ Pretty output:
 Normal output:
 
 ```
-<table><tr><th>gem</th><th>newest</th><th>installed</th><th>requested</th><th>groups</th></tr><tr><td>faker</td><td>1.6.6</td><td>1.6.5</td><td>~> 1.4</td><td>development, test</td></tr><tr><td>hashie</td><td>3.4.6</td><td>1.2.0</td><td>= 1.2.0</td><td>default</td></tr><tr><td>headless</td><td>2.3.1</td><td>2.2.3</td><td></td><td></td></tr></table>
+<table><tr><th>gem</th><th>newest</th><th>installed</th><th>requested</th><th>groups</th></tr><tr><td>faker</td><td>1.6.6</td><td>1.6.5</td><td>~&gt; 1.4</td><td>development, test</td></tr><tr><td>hashie</td><td>3.4.6</td><td>1.2.0</td><td>= 1.2.0</td><td>default</td></tr><tr><td>headless</td><td>2.3.1</td><td>2.2.3</td><td></td><td></td></tr></table>
 ```
 
 Pretty output:
@@ -216,7 +231,7 @@ Pretty output:
     <td>faker</td>
     <td>1.6.6</td>
     <td>1.6.5</td>
-    <td>~> 1.4</td>
+    <td>~&gt; 1.4</td>
     <td>development, test</td>
   </tr>
   <tr>

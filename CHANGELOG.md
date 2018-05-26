@@ -1,5 +1,19 @@
 # Change Log
 
+## 0.5.0 (2018-05-26)
+
+### Features
+
+* Support Terminal (Unicode table) format
+* Change default style of Terminal format from ASCII table to Unicode table
+* Add `--style` option for `output` command
+* Change single quotes in XML declaration to double quotes
+* Avoid self-closing tags
+
+### Bug Fixes
+
+* Fix `Illegal character` exception (#1)
+
 ## 0.4.0 (2017-12-29)
 
 ### Features
