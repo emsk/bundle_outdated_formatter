@@ -236,6 +236,10 @@ Pretty output:
 </table>
 ```
 
+## Related
+
+* [bundle-outdated-formatter](https://github.com/emsk/bundle-outdated-formatter) - A Node.js implementation of the bundle_outdated_formatter
+
 ## Supported Ruby Versions
 
 * Ruby 2.0.0
