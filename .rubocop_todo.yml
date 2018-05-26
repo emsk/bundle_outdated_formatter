@@ -15,12 +15,6 @@ Gemspec/RequiredRubyVersion:
 
 # Offense count: 1
 # Cop supports --auto-correct.
-Style/ExpandPathArguments:
-  Exclude:
-    - 'bundle_outdated_formatter.gemspec'
-
-# Offense count: 1
-# Cop supports --auto-correct.
 Style/IfUnlessModifier:
   Exclude:
     - 'Gemfile'
