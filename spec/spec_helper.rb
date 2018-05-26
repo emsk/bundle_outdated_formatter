@@ -1,15 +1,13 @@
 ENV['THOR_COLUMNS'] = '160'
 
 require 'simplecov'
-require 'coveralls'
-
-SimpleCov.formatters = [
-  SimpleCov::Formatter::HTMLFormatter,
-  Coveralls::SimpleCov::Formatter
-]
-
 SimpleCov.start do
   add_filter '/spec/'
+end
+
+if ENV['CI'] == 'true'
+  require 'codecov'
+  SimpleCov.formatter = SimpleCov::Formatter::Codecov
 end
 
 require 'bundler/setup'
