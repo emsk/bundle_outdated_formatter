@@ -51,7 +51,7 @@ module BundleOutdatedFormatter
     private
 
     def allow_format?
-      FORMATTERS.keys.include?(options[:format])
+      FORMATTERS.key?(options[:format])
     end
 
     def allow_style?
