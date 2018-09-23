@@ -1,6 +1,7 @@
 RSpec.describe BundleOutdatedFormatter::CLI do
   let(:stdin) do
     <<-EOS
+Warning: the running version of Bundler (1.16.1) is older than the version that created the lockfile (1.16.2). We suggest you upgrade to the latest version of Bundler by running `gem install bundler`.
 Fetching gem metadata from https://rubygems.org/..........
 Fetching version metadata from https://rubygems.org/...
 Fetching dependency metadata from https://rubygems.org/..
