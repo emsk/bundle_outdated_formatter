@@ -263,6 +263,7 @@ Pretty output:
 * Ruby 2.3
 * Ruby 2.4
 * Ruby 2.5
+* Ruby 2.6
 
 ## Contributing
 
