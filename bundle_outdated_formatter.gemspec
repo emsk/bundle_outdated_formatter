@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = '>= 2.0.0'
 
-  spec.add_runtime_dependency 'psych', '~> 2.2'
+  spec.add_runtime_dependency 'psych', '>= 2.2'
   spec.add_runtime_dependency 'thor', '~> 0.20'
   spec.add_runtime_dependency 'tty-table', '~> 0.10'
   spec.add_development_dependency 'bundler', '>= 1.16'
