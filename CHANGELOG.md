@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.5.1 (2019-04-16)
+
+### Bug Fixes
+
+* Fix some dependency errors (#2)
+
 ## 0.5.0 (2018-05-26)
 
 ### Features
