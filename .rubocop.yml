@@ -6,6 +6,9 @@ AllCops:
 Bundler/DuplicatedGem:
   Enabled: false
 
+Layout/AlignHash:
+  EnforcedHashRocketStyle: table
+
 Layout/IndentHeredoc:
   Enabled: false
 

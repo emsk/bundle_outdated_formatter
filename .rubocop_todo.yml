@@ -13,25 +13,6 @@ Gemspec/RequiredRubyVersion:
   Exclude:
     - 'bundle_outdated_formatter.gemspec'
 
-# Offense count: 151
-# Cop supports --auto-correct.
-# Configuration parameters: AllowMultipleStyles, EnforcedHashRocketStyle, EnforcedColonStyle, EnforcedLastArgumentHashStyle.
-# SupportedHashRocketStyles: key, separator, table
-# SupportedColonStyles: key, separator, table
-# SupportedLastArgumentHashStyles: always_inspect, always_ignore, ignore_implicit, ignore_explicit
-Layout/AlignHash:
-  Exclude:
-    - 'lib/bundle_outdated_formatter/cli.rb'
-    - 'spec/bundle_outdated_formatter/formatter/csv_formatter_spec.rb'
-    - 'spec/bundle_outdated_formatter/formatter/html_formatter_spec.rb'
-    - 'spec/bundle_outdated_formatter/formatter/json_formatter_spec.rb'
-    - 'spec/bundle_outdated_formatter/formatter/markdown_formatter_spec.rb'
-    - 'spec/bundle_outdated_formatter/formatter/terminal_formatter_spec.rb'
-    - 'spec/bundle_outdated_formatter/formatter/tsv_formatter_spec.rb'
-    - 'spec/bundle_outdated_formatter/formatter/xml_formatter_spec.rb'
-    - 'spec/bundle_outdated_formatter/formatter/yaml_formatter_spec.rb'
-    - 'spec/bundle_outdated_formatter/formatter_spec.rb'
-
 # Offense count: 31
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle.
