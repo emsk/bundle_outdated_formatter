@@ -30,6 +30,9 @@ Metrics/LineLength:
 Naming/HeredocDelimiterNaming:
   Enabled: false
 
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
 Style/IfUnlessModifier:
   Exclude:
     - 'Gemfile'

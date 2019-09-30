@@ -13,13 +13,6 @@ Gemspec/RequiredRubyVersion:
   Exclude:
     - 'bundle_outdated_formatter.gemspec'
 
-# Offense count: 31
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: always, never
-Style/FrozenStringLiteralComment:
-  Enabled: false
-
 # Offense count: 5
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle.
