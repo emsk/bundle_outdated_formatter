@@ -3,11 +3,11 @@ require 'rexml/document'
 module BundleOutdatedFormatter
   # Formatter for all formats
   class Formatter
-    GEM_REGEXP       = /\A\* (?<gem>.+) \(/
-    NEWEST_REGEXP    = /newest (?<newest>[\d\.]+)/
-    INSTALLED_REGEXP = /installed (?<installed>[\d\.]+)/
-    REQUESTED_REGEXP = /requested (?<requested>.+)\)/
-    GROUPS_REGEXP    = /in groups "(?<groups>.+)"/
+    GEM_REGEXP       = /\A\* (?<gem>.+) \(/.freeze
+    NEWEST_REGEXP    = /newest (?<newest>[\d\.]+)/.freeze
+    INSTALLED_REGEXP = /installed (?<installed>[\d\.]+)/.freeze
+    REQUESTED_REGEXP = /requested (?<requested>.+)\)/.freeze
+    GROUPS_REGEXP    = /in groups "(?<groups>.+)"/.freeze
 
     def initialize(options)
       @pretty = options[:pretty]
