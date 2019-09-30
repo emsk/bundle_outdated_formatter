@@ -29,7 +29,7 @@ module BundleOutdatedFormatter
     def add_header_row
       elements = @root.add_element(REXML::Element.new('tr'))
 
-      COLUMNS.each do |column|
+      @columns.each do |column|
         elements.add_element('th').add_text(column)
       end
     end
@@ -37,7 +37,7 @@ module BundleOutdatedFormatter
     def add_data_row(gem)
       elements = @root.add_element(REXML::Element.new('tr'))
 
-      COLUMNS.each do |column|
+      @columns.each do |column|
         escaped_text = REXML::Text.new(gem[column], false, nil, false)
         elements.add_element('td').add_text(escaped_text)
       end

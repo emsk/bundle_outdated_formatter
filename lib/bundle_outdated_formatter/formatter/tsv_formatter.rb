@@ -6,7 +6,7 @@ module BundleOutdatedFormatter
   class TSVFormatter < Formatter
     def convert
       text = CSV.generate(force_quotes: true, col_sep: "\t") do |tsv|
-        tsv << COLUMNS
+        tsv << @columns
         @outdated_gems.each do |gem|
           tsv << gem.values
         end

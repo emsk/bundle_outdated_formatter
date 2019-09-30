@@ -9,11 +9,10 @@ module BundleOutdatedFormatter
     REQUESTED_REGEXP = /requested (?<requested>.+)\)/
     GROUPS_REGEXP    = /in groups "(?<groups>.+)"/
 
-    COLUMNS = %w[gem newest installed requested groups].freeze
-
     def initialize(options)
       @pretty = options[:pretty]
       @style = options[:style]
+      @columns = options[:column]
       @outdated_gems = []
     end
 
@@ -33,27 +32,23 @@ module BundleOutdatedFormatter
       matched = match_gem(line)
       return unless match_gem?(matched)
 
-      {
-        'gem'       => gem_text(matched[:gem], :gem),
-        'newest'    => gem_text(matched[:newest], :newest),
-        'installed' => gem_text(matched[:installed], :installed),
-        'requested' => gem_text(matched[:requested], :requested),
-        'groups'    => gem_text(matched[:groups], :groups)
-      }
+      gems = {}
+      @columns.each do |column|
+        gems[column] = gem_text(matched[column.to_sym], column.to_sym)
+      end
+      gems
     end
 
     def match_gem(line)
-      {
-        gem:       GEM_REGEXP.match(line),
-        newest:    NEWEST_REGEXP.match(line),
-        installed: INSTALLED_REGEXP.match(line),
-        requested: REQUESTED_REGEXP.match(line),
-        groups:    GROUPS_REGEXP.match(line)
-      }
+      gems = {}
+      @columns.each do |column|
+        gems[column.to_sym] = self.class.const_get("#{column.upcase}_REGEXP").match(line)
+      end
+      gems
     end
 
     def match_gem?(matched)
-      COLUMNS.any? do |column|
+      @columns.any? do |column|
         !matched[column.to_sym].nil?
       end
     end

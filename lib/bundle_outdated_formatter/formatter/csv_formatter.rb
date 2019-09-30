@@ -6,7 +6,7 @@ module BundleOutdatedFormatter
   class CSVFormatter < Formatter
     def convert
       text = CSV.generate(force_quotes: true) do |csv|
-        csv << COLUMNS
+        csv << @columns
         @outdated_gems.each do |gem|
           csv << gem.values
         end

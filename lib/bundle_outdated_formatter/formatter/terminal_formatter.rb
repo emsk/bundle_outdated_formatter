@@ -5,7 +5,7 @@ module BundleOutdatedFormatter
   # Formatter for Terminal
   class TerminalFormatter < Formatter
     def convert
-      table = TTY::Table.new(header: COLUMNS) do |t|
+      table = TTY::Table.new(header: @columns) do |t|
         @outdated_gems.each do |gem|
           t << gem.values
         end

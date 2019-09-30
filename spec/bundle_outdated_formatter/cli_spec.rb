@@ -308,6 +308,22 @@ Commands:
     it { is_expected.to raise_error(BundleOutdatedFormatter::UnknownStyleError, error_message) }
   end
 
+  shared_examples_for 'unknown column' do
+    before do
+      stub_const('STDIN', StringIO.new(stdin))
+    end
+
+    it { is_expected.to raise_error(BundleOutdatedFormatter::UnknownColumnError, error_message) }
+  end
+
+  shared_examples_for 'required column' do
+    before do
+      stub_const('STDIN', StringIO.new(stdin))
+    end
+
+    it { is_expected.to output("No value provided for option '--column'\n").to_stderr }
+  end
+
   shared_examples_for 'a `help` command' do
     before do
       expect(File).to receive(:basename).with($PROGRAM_NAME).and_return(command).at_least(:once)
@@ -763,16 +779,436 @@ Commands:
       it_behaves_like 'html format', pretty: true
     end
 
-    context 'given `output` --format aaa' do
+    context 'given `--column newest requested gem`' do
+      let(:stdout_terminal_unicode) do
+        <<-EOS
+┌────────┬───────────┬──────────┐
+│ newest │ requested │ gem      │
+├────────┼───────────┼──────────┤
+│ 1.6.6  │ ~> 1.4    │ faker    │
+│ 3.4.6  │ = 1.2.0   │ hashie   │
+│ 2.3.1  │           │ headless │
+└────────┴───────────┴──────────┘
+        EOS
+      end
+
+      let(:stdout_terminal_ascii) do
+        <<-EOS
++--------+-----------+----------+
+| newest | requested | gem      |
++--------+-----------+----------+
+| 1.6.6  | ~> 1.4    | faker    |
+| 3.4.6  | = 1.2.0   | hashie   |
+| 2.3.1  |           | headless |
++--------+-----------+----------+
+        EOS
+      end
+
+      let(:stdout_markdown) do
+        <<-EOS
+| newest | requested | gem |
+| --- | --- | --- |
+| 1.6.6 | ~> 1.4 | faker |
+| 3.4.6 | = 1.2.0 | hashie |
+| 2.3.1 | | headless |
+        EOS
+      end
+
+      let(:stdout_json) do
+        <<-EOS
+[{"newest":"1.6.6","requested":"~> 1.4","gem":"faker"},{"newest":"3.4.6","requested":"= 1.2.0","gem":"hashie"},{"newest":"2.3.1","requested":"","gem":"headless"}]
+        EOS
+      end
+
+      let(:stdout_json_pretty) do
+        <<-EOS
+[
+  {
+    "newest": "1.6.6",
+    "requested": "~> 1.4",
+    "gem": "faker"
+  },
+  {
+    "newest": "3.4.6",
+    "requested": "= 1.2.0",
+    "gem": "hashie"
+  },
+  {
+    "newest": "2.3.1",
+    "requested": "",
+    "gem": "headless"
+  }
+]
+        EOS
+      end
+
+      let(:stdout_yaml) do
+        <<-EOS
+---
+- newest: 1.6.6
+  requested: "~> 1.4"
+  gem: faker
+- newest: 3.4.6
+  requested: "= 1.2.0"
+  gem: hashie
+- newest: 2.3.1
+  requested: ''
+  gem: headless
+        EOS
+      end
+
+      let(:stdout_csv) do
+        <<-EOS
+"newest","requested","gem"
+"1.6.6","~> 1.4","faker"
+"3.4.6","= 1.2.0","hashie"
+"2.3.1","","headless"
+        EOS
+      end
+
+      let(:stdout_tsv) do
+        <<-EOS
+"newest"	"requested"	"gem"
+"1.6.6"	"~> 1.4"	"faker"
+"3.4.6"	"= 1.2.0"	"hashie"
+"2.3.1"	""	"headless"
+        EOS
+      end
+
+      let(:stdout_xml) do
+        <<-EOS
+<?xml version="1.0" encoding="UTF-8"?><gems><outdated><newest>1.6.6</newest><requested>~&gt; 1.4</requested><gem>faker</gem></outdated><outdated><newest>3.4.6</newest><requested>= 1.2.0</requested><gem>hashie</gem></outdated><outdated><newest>2.3.1</newest><requested></requested><gem>headless</gem></outdated></gems>
+        EOS
+      end
+
+      let(:stdout_xml_pretty) do
+        <<-EOS
+<?xml version="1.0" encoding="UTF-8"?>
+<gems>
+  <outdated>
+    <newest>1.6.6</newest>
+    <requested>~&gt; 1.4</requested>
+    <gem>faker</gem>
+  </outdated>
+  <outdated>
+    <newest>3.4.6</newest>
+    <requested>= 1.2.0</requested>
+    <gem>hashie</gem>
+  </outdated>
+  <outdated>
+    <newest>2.3.1</newest>
+    <requested></requested>
+    <gem>headless</gem>
+  </outdated>
+</gems>
+        EOS
+      end
+
+      let(:stdout_html) do
+        <<-EOS
+<table><tr><th>newest</th><th>requested</th><th>gem</th></tr><tr><td>1.6.6</td><td>~&gt; 1.4</td><td>faker</td></tr><tr><td>3.4.6</td><td>= 1.2.0</td><td>hashie</td></tr><tr><td>2.3.1</td><td></td><td>headless</td></tr></table>
+        EOS
+      end
+
+      let(:stdout_html_pretty) do
+        <<-EOS
+<table>
+  <tr>
+    <th>newest</th>
+    <th>requested</th>
+    <th>gem</th>
+  </tr>
+  <tr>
+    <td>1.6.6</td>
+    <td>~&gt; 1.4</td>
+    <td>faker</td>
+  </tr>
+  <tr>
+    <td>3.4.6</td>
+    <td>= 1.2.0</td>
+    <td>hashie</td>
+  </tr>
+  <tr>
+    <td>2.3.1</td>
+    <td></td>
+    <td>headless</td>
+  </tr>
+</table>
+        EOS
+      end
+
+      context 'given `output`' do
+        let(:thor_args) { %w[output --column newest requested gem] }
+        it_behaves_like 'terminal format'
+      end
+
+      context 'given ``' do
+        let(:thor_args) { %w[--column newest requested gem] }
+        it_behaves_like 'terminal format'
+      end
+
+      context 'given `output --format terminal`' do
+        let(:thor_args) { %w[output --column newest requested gem --format terminal] }
+        it_behaves_like 'terminal format'
+      end
+
+      context 'given `output --format terminal --pretty`' do
+        let(:thor_args) { %w[output --column newest requested gem --format terminal --pretty] }
+        it_behaves_like 'terminal format'
+      end
+
+      context 'given `output --format terminal --style unicode`' do
+        let(:thor_args) { %w[output --column newest requested gem --format terminal --style unicode] }
+        it_behaves_like 'terminal format'
+      end
+
+      context 'given `output --format terminal --style ascii`' do
+        let(:thor_args) { %w[output --column newest requested gem --format terminal --style ascii] }
+        it_behaves_like 'terminal format', style: :ascii
+      end
+
+      context 'given `output --format terminal --pretty --style unicode`' do
+        let(:thor_args) { %w[output --column newest requested gem --format terminal --pretty --style unicode] }
+        it_behaves_like 'terminal format'
+      end
+
+      context 'given `output --format terminal --pretty --style ascii`' do
+        let(:thor_args) { %w[output --column newest requested gem --format terminal --pretty --style ascii] }
+        it_behaves_like 'terminal format', style: :ascii
+      end
+
+      context 'given `output --format markdown`' do
+        let(:thor_args) { %w[output --column newest requested gem --format markdown] }
+        it_behaves_like 'markdown format'
+      end
+
+      context 'given `output --format markdown --pretty`' do
+        let(:thor_args) { %w[output --column newest requested gem --format markdown --pretty] }
+        it_behaves_like 'markdown format'
+      end
+
+      context 'given `output --format markdown --style unicode`' do
+        let(:thor_args) { %w[output --column newest requested gem --format markdown --style unicode] }
+        it_behaves_like 'markdown format'
+      end
+
+      context 'given `output --format markdown --style ascii`' do
+        let(:thor_args) { %w[output --column newest requested gem --format markdown --style ascii] }
+        it_behaves_like 'markdown format'
+      end
+
+      context 'given `output --format markdown --pretty --style unicode`' do
+        let(:thor_args) { %w[output --column newest requested gem --format markdown --pretty --style unicode] }
+        it_behaves_like 'markdown format'
+      end
+
+      context 'given `output --format markdown --pretty --style ascii`' do
+        let(:thor_args) { %w[output --column newest requested gem --format markdown --pretty --style ascii] }
+        it_behaves_like 'markdown format'
+      end
+
+      context 'given `output --format json`' do
+        let(:thor_args) { %w[output --column newest requested gem --format json] }
+        it_behaves_like 'json format'
+      end
+
+      context 'given `output --format json --pretty`' do
+        let(:thor_args) { %w[output --column newest requested gem --format json --pretty] }
+        it_behaves_like 'json format', pretty: true
+      end
+
+      context 'given `output --format json --style unicode`' do
+        let(:thor_args) { %w[output --column newest requested gem --format json --style unicode] }
+        it_behaves_like 'json format'
+      end
+
+      context 'given `output --format json --style ascii`' do
+        let(:thor_args) { %w[output --column newest requested gem --format json --style ascii] }
+        it_behaves_like 'json format'
+      end
+
+      context 'given `output --format json --pretty --style unicode`' do
+        let(:thor_args) { %w[output --column newest requested gem --format json --pretty --style unicode] }
+        it_behaves_like 'json format', pretty: true
+      end
+
+      context 'given `output --format json --pretty --style ascii`' do
+        let(:thor_args) { %w[output --column newest requested gem --format json --pretty --style ascii] }
+        it_behaves_like 'json format', pretty: true
+      end
+
+      context 'given `output --format yaml`' do
+        let(:thor_args) { %w[output --column newest requested gem --format yaml] }
+        it_behaves_like 'yaml format'
+      end
+
+      context 'given `output --format yaml --pretty`' do
+        let(:thor_args) { %w[output --column newest requested gem --format yaml --pretty] }
+        it_behaves_like 'yaml format'
+      end
+
+      context 'given `output --format yaml --style unicode`' do
+        let(:thor_args) { %w[output --column newest requested gem --format yaml --style unicode] }
+        it_behaves_like 'yaml format'
+      end
+
+      context 'given `output --format yaml --style ascii`' do
+        let(:thor_args) { %w[output --column newest requested gem --format yaml --style ascii] }
+        it_behaves_like 'yaml format'
+      end
+
+      context 'given `output --format yaml --pretty --style unicode`' do
+        let(:thor_args) { %w[output --column newest requested gem --format yaml --pretty --style unicode] }
+        it_behaves_like 'yaml format'
+      end
+
+      context 'given `output --format yaml --pretty --style ascii`' do
+        let(:thor_args) { %w[output --column newest requested gem --format yaml --pretty --style ascii] }
+        it_behaves_like 'yaml format'
+      end
+
+      context 'given `output --format csv`' do
+        let(:thor_args) { %w[output --column newest requested gem --format csv] }
+        it_behaves_like 'csv format'
+      end
+
+      context 'given `output --format csv --pretty`' do
+        let(:thor_args) { %w[output --column newest requested gem --format csv --pretty] }
+        it_behaves_like 'csv format'
+      end
+
+      context 'given `output --format csv --style unicode`' do
+        let(:thor_args) { %w[output --column newest requested gem --format csv --style unicode] }
+        it_behaves_like 'csv format'
+      end
+
+      context 'given `output --format csv --style ascii`' do
+        let(:thor_args) { %w[output --column newest requested gem --format csv --style ascii] }
+        it_behaves_like 'csv format'
+      end
+
+      context 'given `output --format csv --pretty --style unicode`' do
+        let(:thor_args) { %w[output --column newest requested gem --format csv --pretty --style unicode] }
+        it_behaves_like 'csv format'
+      end
+
+      context 'given `output --format csv --pretty --style ascii`' do
+        let(:thor_args) { %w[output --column newest requested gem --format csv --pretty --style ascii] }
+        it_behaves_like 'csv format'
+      end
+
+      context 'given `output --format tsv`' do
+        let(:thor_args) { %w[output --column newest requested gem --format tsv] }
+        it_behaves_like 'tsv format'
+      end
+
+      context 'given `output --format tsv --pretty`' do
+        let(:thor_args) { %w[output --column newest requested gem --format tsv --pretty] }
+        it_behaves_like 'tsv format'
+      end
+
+      context 'given `output --format tsv --style unicode`' do
+        let(:thor_args) { %w[output --column newest requested gem --format tsv --style unicode] }
+        it_behaves_like 'tsv format'
+      end
+
+      context 'given `output --format tsv --style ascii`' do
+        let(:thor_args) { %w[output --column newest requested gem --format tsv --style ascii] }
+        it_behaves_like 'tsv format'
+      end
+
+      context 'given `output --format tsv --pretty --style unicode`' do
+        let(:thor_args) { %w[output --column newest requested gem --format tsv --pretty --style unicode] }
+        it_behaves_like 'tsv format'
+      end
+
+      context 'given `output --format tsv --pretty --style ascii`' do
+        let(:thor_args) { %w[output --column newest requested gem --format tsv --pretty --style ascii] }
+        it_behaves_like 'tsv format'
+      end
+
+      context 'given `output --format xml`' do
+        let(:thor_args) { %w[output --column newest requested gem --format xml] }
+        it_behaves_like 'xml format'
+      end
+
+      context 'given `output --format xml --pretty`' do
+        let(:thor_args) { %w[output --column newest requested gem --format xml --pretty] }
+        it_behaves_like 'xml format', pretty: true
+      end
+
+      context 'given `output --format xml --style unicode`' do
+        let(:thor_args) { %w[output --column newest requested gem --format xml --style unicode] }
+        it_behaves_like 'xml format'
+      end
+
+      context 'given `output --format xml --style ascii`' do
+        let(:thor_args) { %w[output --column newest requested gem --format xml --style ascii] }
+        it_behaves_like 'xml format'
+      end
+
+      context 'given `output --format xml --pretty --style unicode`' do
+        let(:thor_args) { %w[output --column newest requested gem --format xml --pretty --style unicode] }
+        it_behaves_like 'xml format', pretty: true
+      end
+
+      context 'given `output --format xml --pretty --style ascii`' do
+        let(:thor_args) { %w[output --column newest requested gem --format xml --pretty --style ascii] }
+        it_behaves_like 'xml format', pretty: true
+      end
+
+      context 'given `output --format html`' do
+        let(:thor_args) { %w[output --column newest requested gem --format html] }
+        it_behaves_like 'html format'
+      end
+
+      context 'given `output --format html --pretty`' do
+        let(:thor_args) { %w[output --column newest requested gem --format html --pretty] }
+        it_behaves_like 'html format', pretty: true
+      end
+
+      context 'given `output --format html --style unicode`' do
+        let(:thor_args) { %w[output --column newest requested gem --format html --style unicode] }
+        it_behaves_like 'html format'
+      end
+
+      context 'given `output --format html --style ascii`' do
+        let(:thor_args) { %w[output --column newest requested gem --format html --style ascii] }
+        it_behaves_like 'html format'
+      end
+
+      context 'given `output --format html --pretty --style unicode`' do
+        let(:thor_args) { %w[output --column newest requested gem --format html --pretty --style unicode] }
+        it_behaves_like 'html format', pretty: true
+      end
+
+      context 'given `output --format html --pretty --style ascii`' do
+        let(:thor_args) { %w[output --column newest requested gem --format html --pretty --style ascii] }
+        it_behaves_like 'html format', pretty: true
+      end
+    end
+
+    context 'given `output --format aaa`' do
       let(:thor_args) { %w[output --format aaa] }
       let(:error_message) { 'aaa' }
       it_behaves_like 'unknown format'
     end
 
-    context 'given `output` --style aaa' do
+    context 'given `output --style aaa`' do
       let(:thor_args) { %w[output --style aaa] }
       let(:error_message) { 'aaa' }
       it_behaves_like 'unknown style'
+    end
+
+    context 'given `output --column gem aaa newest`' do
+      let(:thor_args) { %w[output --column gem aaa newest] }
+      let(:error_message) { '["gem", "aaa", "newest"]' }
+      it_behaves_like 'unknown column'
+    end
+
+    context 'given `output --column`' do
+      let(:thor_args) { %w[output --column] }
+      it_behaves_like 'required column'
     end
 
     context 'given `version`' do
@@ -836,6 +1272,8 @@ Options:
   -p, [--pretty], [--no-pretty]  # `true` if pretty output.
   -s, [--style=STYLE]            # Terminal table style. (unicode, ascii)
                                  # Default: unicode
+  -c, [--column=one two three]   # Output columns. (columns are sorted in specified order)
+                                 # Default: ["gem", "newest", "installed", "requested", "groups"]
 
 Format output of `bundle outdated`
         EOS

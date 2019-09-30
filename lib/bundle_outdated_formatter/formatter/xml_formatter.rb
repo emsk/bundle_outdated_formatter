@@ -30,7 +30,7 @@ module BundleOutdatedFormatter
     def add_outdated(gem)
       elements = @root.add_element(REXML::Element.new('outdated'))
 
-      COLUMNS.each do |column|
+      @columns.each do |column|
         escaped_text = REXML::Text.new(gem[column], false, nil, false)
         elements.add_element(column).add_text(escaped_text)
       end

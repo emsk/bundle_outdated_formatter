@@ -23,6 +23,7 @@ module BundleOutdatedFormatter
       'html'     => HTMLFormatter
     }.freeze
     STYLES = %w[unicode ascii].freeze
+    COLUMNS = %w[gem newest installed requested groups].freeze
 
     default_command :output
 
@@ -30,10 +31,12 @@ module BundleOutdatedFormatter
     option :format, type: :string, aliases: '-f', default: 'terminal', desc: 'Format. (terminal, markdown, json, yaml, csv, tsv, xml, html)'
     option :pretty, type: :boolean, aliases: '-p', desc: '`true` if pretty output.'
     option :style, type: :string, aliases: '-s', default: 'unicode', desc: 'Terminal table style. (unicode, ascii)'
+    option :column, type: :array, aliases: '-c', default: %w[gem newest installed requested groups], desc: 'Output columns. (columns are sorted in specified order)'
 
     def output
       raise BundleOutdatedFormatter::UnknownFormatError, options[:format] unless allow_format?
       raise BundleOutdatedFormatter::UnknownStyleError, options[:style] unless allow_style?
+      raise BundleOutdatedFormatter::UnknownColumnError, options[:column] unless allow_column?
       return if STDIN.tty?
 
       formatter = create_formatter
@@ -56,6 +59,12 @@ module BundleOutdatedFormatter
 
     def allow_style?
       STYLES.include?(options[:style])
+    end
+
+    def allow_column?
+      options[:column].all? do |column|
+        COLUMNS.include?(column)
+      end
     end
 
     def create_formatter
