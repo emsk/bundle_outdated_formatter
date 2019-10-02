@@ -43,12 +43,23 @@ RSpec.describe BundleOutdatedFormatter::CSVFormatter do
         EOS
       end
 
+      let(:text_csv_without_outdated) do
+        <<-EOS.chomp
+"gem","newest","installed","requested","groups"
+        EOS
+      end
+
       before do
         formatter.instance_variable_set(:@outdated_gems, outdated_gems)
       end
 
       context 'when @pretty is false and @style is unicode' do
         it { is_expected.to eq text_csv }
+
+        context 'without outdated' do
+          let(:outdated_gems) { [] }
+          it { is_expected.to eq text_csv_without_outdated }
+        end
       end
 
       context 'when @pretty is true and @style is unicode' do

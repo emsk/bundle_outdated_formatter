@@ -40,6 +40,12 @@ RSpec.describe BundleOutdatedFormatter::JSONFormatter do
         EOS
       end
 
+      let(:text_json_without_outdated) do
+        <<-EOS.chomp
+[]
+        EOS
+      end
+
       let(:text_json_pretty) do
         <<-EOS.chomp
 [
@@ -68,17 +74,35 @@ RSpec.describe BundleOutdatedFormatter::JSONFormatter do
         EOS
       end
 
+      let(:text_json_pretty_without_outdated) do
+        <<-EOS.chomp
+[
+
+]
+        EOS
+      end
+
       before do
         formatter.instance_variable_set(:@outdated_gems, outdated_gems)
       end
 
       context 'when @pretty is false and @style is unicode' do
         it { is_expected.to eq text_json }
+
+        context 'without outdated' do
+          let(:outdated_gems) { [] }
+          it { is_expected.to eq text_json_without_outdated }
+        end
       end
 
       context 'when @pretty is true and @style is unicode' do
         let(:pretty) { true }
         it { is_expected.to eq text_json_pretty }
+
+        context 'without outdated' do
+          let(:outdated_gems) { [] }
+          it { is_expected.to eq text_json_pretty_without_outdated }
+        end
       end
 
       context 'when @pretty is false and @style is ascii' do

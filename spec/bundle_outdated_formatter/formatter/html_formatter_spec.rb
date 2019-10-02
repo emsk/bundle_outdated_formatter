@@ -47,6 +47,12 @@ RSpec.describe BundleOutdatedFormatter::HTMLFormatter do
         EOS
       end
 
+      let(:text_html_without_outdated) do
+        <<-EOS.chomp
+<table><tr><th>gem</th><th>newest</th><th>installed</th><th>requested</th><th>groups</th></tr></table>
+        EOS
+      end
+
       let(:text_html_pretty) do
         <<-EOS.chomp
 <table>
@@ -89,17 +95,41 @@ RSpec.describe BundleOutdatedFormatter::HTMLFormatter do
         EOS
       end
 
+      let(:text_html_pretty_without_outdated) do
+        <<-EOS.chomp
+<table>
+  <tr>
+    <th>gem</th>
+    <th>newest</th>
+    <th>installed</th>
+    <th>requested</th>
+    <th>groups</th>
+  </tr>
+</table>
+        EOS
+      end
+
       before do
         formatter.instance_variable_set(:@outdated_gems, outdated_gems)
       end
 
       context 'when @pretty is false and @style is unicode' do
         it { is_expected.to eq text_html }
+
+        context 'without outdated' do
+          let(:outdated_gems) { [] }
+          it { is_expected.to eq text_html_without_outdated }
+        end
       end
 
       context 'when @pretty is true and @style is unicode' do
         let(:pretty) { true }
         it { is_expected.to eq text_html_pretty }
+
+        context 'without outdated' do
+          let(:outdated_gems) { [] }
+          it { is_expected.to eq text_html_pretty_without_outdated }
+        end
       end
 
       context 'when @pretty is false and @style is ascii' do

@@ -4,8 +4,6 @@ RSpec.describe BundleOutdatedFormatter::XMLFormatter do
   let(:column) { %w[gem newest installed requested groups] }
   let(:formatter) { described_class.new(pretty: pretty, style: style, column: column) }
 
-  let(:text_xml_empty) { '<?xml version="1.0" encoding="UTF-8"?><gems></gems>' }
-
   describe '#convert' do
     subject { formatter.convert }
 
@@ -49,6 +47,12 @@ RSpec.describe BundleOutdatedFormatter::XMLFormatter do
         EOS
       end
 
+      let(:text_xml_without_outdated) do
+        <<-EOS.chomp
+<?xml version="1.0" encoding="UTF-8"?><gems></gems>
+        EOS
+      end
+
       let(:text_xml_pretty) do
         <<-EOS.chomp
 <?xml version="1.0" encoding="UTF-8"?>
@@ -85,17 +89,34 @@ RSpec.describe BundleOutdatedFormatter::XMLFormatter do
         EOS
       end
 
+      let(:text_xml_pretty_without_outdated) do
+        <<-EOS.chomp
+<?xml version="1.0" encoding="UTF-8"?>
+<gems></gems>
+        EOS
+      end
+
       before do
         formatter.instance_variable_set(:@outdated_gems, outdated_gems)
       end
 
       context 'when @pretty is false and @style is unicode' do
         it { is_expected.to eq text_xml }
+
+        context 'without outdated' do
+          let(:outdated_gems) { [] }
+          it { is_expected.to eq text_xml_without_outdated }
+        end
       end
 
       context 'when @pretty is true and @style is unicode' do
         let(:pretty) { true }
         it { is_expected.to eq text_xml_pretty }
+
+        context 'without outdated' do
+          let(:outdated_gems) { [] }
+          it { is_expected.to eq text_xml_pretty_without_outdated }
+        end
       end
 
       context 'when @pretty is false and @style is ascii' do
@@ -107,11 +128,6 @@ RSpec.describe BundleOutdatedFormatter::XMLFormatter do
         let(:pretty) { true }
         let(:style) { 'ascii' }
         it { is_expected.to eq text_xml_pretty }
-      end
-
-      context 'when no outdated gems' do
-        let(:outdated_gems) { [] }
-        it { is_expected.to eq text_xml_empty }
       end
     end
 
@@ -198,11 +214,6 @@ RSpec.describe BundleOutdatedFormatter::XMLFormatter do
         let(:pretty) { true }
         let(:style) { 'ascii' }
         it { is_expected.to eq text_xml_pretty }
-      end
-
-      context 'when no outdated gems' do
-        let(:outdated_gems) { [] }
-        it { is_expected.to eq text_xml_empty }
       end
     end
   end

@@ -14,6 +14,16 @@ Outdated gems included in the bundle:
     EOS
   end
 
+  let(:stdin_without_outdated) do
+    <<-EOS
+Fetching gem metadata from https://rubygems.org/..........
+Fetching gem metadata from https://rubygems.org/.
+Resolving dependencies...
+
+Bundle up to date!
+    EOS
+  end
+
   let(:stdout_terminal_unicode) do
     <<-EOS
 ┌──────────┬────────┬───────────┬───────────┬───────────────────┐
@@ -23,6 +33,14 @@ Outdated gems included in the bundle:
 │ hashie   │ 3.4.6  │ 1.2.0     │ = 1.2.0   │ default           │
 │ headless │ 2.3.1  │ 2.2.3     │           │                   │
 └──────────┴────────┴───────────┴───────────┴───────────────────┘
+    EOS
+  end
+
+  let(:stdout_terminal_unicode_without_outdated) do
+    <<-EOS
+┌─────┬────────┬───────────┬───────────┬────────┐
+│ gem │ newest │ installed │ requested │ groups │
+└─────┴────────┴───────────┴───────────┴────────┘
     EOS
   end
 
@@ -38,6 +56,14 @@ Outdated gems included in the bundle:
     EOS
   end
 
+  let(:stdout_terminal_ascii_without_outdated) do
+    <<-EOS
++-----+--------+-----------+-----------+--------+
+| gem | newest | installed | requested | groups |
++-----+--------+-----------+-----------+--------+
+    EOS
+  end
+
   let(:stdout_markdown) do
     <<-EOS
 | gem | newest | installed | requested | groups |
@@ -48,9 +74,22 @@ Outdated gems included in the bundle:
     EOS
   end
 
+  let(:stdout_markdown_without_outdated) do
+    <<-EOS
+| gem | newest | installed | requested | groups |
+| --- | --- | --- | --- | --- |
+    EOS
+  end
+
   let(:stdout_json) do
     <<-EOS
 [{"gem":"faker","newest":"1.6.6","installed":"1.6.5","requested":"~> 1.4","groups":"development, test"},{"gem":"hashie","newest":"3.4.6","installed":"1.2.0","requested":"= 1.2.0","groups":"default"},{"gem":"headless","newest":"2.3.1","installed":"2.2.3","requested":"","groups":""}]
+    EOS
+  end
+
+  let(:stdout_json_without_outdated) do
+    <<-EOS
+[]
     EOS
   end
 
@@ -82,6 +121,14 @@ Outdated gems included in the bundle:
     EOS
   end
 
+  let(:stdout_json_pretty_without_outdated) do
+    <<-EOS
+[
+
+]
+    EOS
+  end
+
   let(:stdout_yaml) do
     <<-EOS
 ---
@@ -103,12 +150,24 @@ Outdated gems included in the bundle:
     EOS
   end
 
+  let(:stdout_yaml_without_outdated) do
+    <<-EOS
+--- []
+    EOS
+  end
+
   let(:stdout_csv) do
     <<-EOS
 "gem","newest","installed","requested","groups"
 "faker","1.6.6","1.6.5","~> 1.4","development, test"
 "hashie","3.4.6","1.2.0","= 1.2.0","default"
 "headless","2.3.1","2.2.3","",""
+    EOS
+  end
+
+  let(:stdout_csv_without_outdated) do
+    <<-EOS
+"gem","newest","installed","requested","groups"
     EOS
   end
 
@@ -121,9 +180,21 @@ Outdated gems included in the bundle:
     EOS
   end
 
+  let(:stdout_tsv_without_outdated) do
+    <<-EOS
+"gem"	"newest"	"installed"	"requested"	"groups"
+    EOS
+  end
+
   let(:stdout_xml) do
     <<-EOS
 <?xml version="1.0" encoding="UTF-8"?><gems><outdated><gem>faker</gem><newest>1.6.6</newest><installed>1.6.5</installed><requested>~&gt; 1.4</requested><groups>development, test</groups></outdated><outdated><gem>hashie</gem><newest>3.4.6</newest><installed>1.2.0</installed><requested>= 1.2.0</requested><groups>default</groups></outdated><outdated><gem>headless</gem><newest>2.3.1</newest><installed>2.2.3</installed><requested></requested><groups></groups></outdated></gems>
+    EOS
+  end
+
+  let(:stdout_xml_without_outdated) do
+    <<-EOS
+<?xml version="1.0" encoding="UTF-8"?><gems></gems>
     EOS
   end
 
@@ -156,9 +227,22 @@ Outdated gems included in the bundle:
     EOS
   end
 
+  let(:stdout_xml_pretty_without_outdated) do
+    <<-EOS
+<?xml version="1.0" encoding="UTF-8"?>
+<gems></gems>
+    EOS
+  end
+
   let(:stdout_html) do
     <<-EOS
 <table><tr><th>gem</th><th>newest</th><th>installed</th><th>requested</th><th>groups</th></tr><tr><td>faker</td><td>1.6.6</td><td>1.6.5</td><td>~&gt; 1.4</td><td>development, test</td></tr><tr><td>hashie</td><td>3.4.6</td><td>1.2.0</td><td>= 1.2.0</td><td>default</td></tr><tr><td>headless</td><td>2.3.1</td><td>2.2.3</td><td></td><td></td></tr></table>
+    EOS
+  end
+
+  let(:stdout_html_without_outdated) do
+    <<-EOS
+<table><tr><th>gem</th><th>newest</th><th>installed</th><th>requested</th><th>groups</th></tr></table>
     EOS
   end
 
@@ -197,6 +281,20 @@ Outdated gems included in the bundle:
     EOS
   end
 
+  let(:stdout_html_pretty_without_outdated) do
+    <<-EOS
+<table>
+  <tr>
+    <th>gem</th>
+    <th>newest</th>
+    <th>installed</th>
+    <th>requested</th>
+    <th>groups</th>
+  </tr>
+</table>
+    EOS
+  end
+
   let(:help) do
     <<-EOS
 Commands:
@@ -212,15 +310,10 @@ Commands:
       stub_const('STDIN', StringIO.new(stdin))
     end
 
-    if options
-      case options[:style]
-      when :unicode
-        it { is_expected.to output(stdout_terminal_unicode).to_stdout }
-      when :ascii
-        it { is_expected.to output(stdout_terminal_ascii).to_stdout }
-      else
-        it { is_expected.to output(stdout_terminal_unicode).to_stdout }
-      end
+    if options && options[:style] == :ascii
+      it { is_expected.to output(stdout_terminal_ascii).to_stdout }
+    else
+      it { is_expected.to output(stdout_terminal_unicode).to_stdout }
     end
   end
 
@@ -351,6 +444,12 @@ Commands:
       let(:thor_args) { %w[output --format terminal] }
       it_behaves_like 'terminal format'
 
+      context 'without outdated' do
+        let(:stdin) { stdin_without_outdated }
+        let(:stdout_terminal_unicode) { stdout_terminal_unicode_without_outdated }
+        it_behaves_like 'terminal format'
+      end
+
       context 'without STDIN' do
         it { is_expected.not_to output.to_stdout }
       end
@@ -384,6 +483,12 @@ Commands:
     context 'given `output --format terminal --style ascii`' do
       let(:thor_args) { %w[output --format terminal --style ascii] }
       it_behaves_like 'terminal format', style: :ascii
+
+      context 'without outdated' do
+        let(:stdin) { stdin_without_outdated }
+        let(:stdout_terminal_ascii) { stdout_terminal_ascii_without_outdated }
+        it_behaves_like 'terminal format', style: :ascii
+      end
     end
 
     context 'given `output -f terminal -s ascii`' do
@@ -404,6 +509,12 @@ Commands:
     context 'given `output --format markdown`' do
       let(:thor_args) { %w[output --format markdown] }
       it_behaves_like 'markdown format'
+
+      context 'without outdated' do
+        let(:stdin) { stdin_without_outdated }
+        let(:stdout_markdown) { stdout_markdown_without_outdated }
+        it_behaves_like 'markdown format'
+      end
 
       context 'without STDIN' do
         it { is_expected.not_to output.to_stdout }
@@ -459,6 +570,12 @@ Commands:
       let(:thor_args) { %w[output --format json] }
       it_behaves_like 'json format'
 
+      context 'without outdated' do
+        let(:stdin) { stdin_without_outdated }
+        let(:stdout_json) { stdout_json_without_outdated }
+        it_behaves_like 'json format'
+      end
+
       context 'without STDIN' do
         it { is_expected.not_to output.to_stdout }
       end
@@ -472,6 +589,12 @@ Commands:
     context 'given `output --format json --pretty`' do
       let(:thor_args) { %w[output --format json --pretty] }
       it_behaves_like 'json format', pretty: true
+
+      context 'without outdated' do
+        let(:stdin) { stdin_without_outdated }
+        let(:stdout_json_pretty) { stdout_json_pretty_without_outdated }
+        it_behaves_like 'json format', pretty: true
+      end
     end
 
     context 'given `output -f json -p`' do
@@ -512,6 +635,12 @@ Commands:
     context 'given `output --format yaml`' do
       let(:thor_args) { %w[output --format yaml] }
       it_behaves_like 'yaml format'
+
+      context 'without outdated' do
+        let(:stdin) { stdin_without_outdated }
+        let(:stdout_yaml) { stdout_yaml_without_outdated }
+        it_behaves_like 'yaml format'
+      end
 
       context 'without STDIN' do
         it { is_expected.not_to output.to_stdout }
@@ -567,6 +696,12 @@ Commands:
       let(:thor_args) { %w[output --format csv] }
       it_behaves_like 'csv format'
 
+      context 'without outdated' do
+        let(:stdin) { stdin_without_outdated }
+        let(:stdout_csv) { stdout_csv_without_outdated }
+        it_behaves_like 'csv format'
+      end
+
       context 'without STDIN' do
         it { is_expected.not_to output.to_stdout }
       end
@@ -620,6 +755,12 @@ Commands:
     context 'given `output --format tsv`' do
       let(:thor_args) { %w[output --format tsv] }
       it_behaves_like 'tsv format'
+
+      context 'without outdated' do
+        let(:stdin) { stdin_without_outdated }
+        let(:stdout_tsv) { stdout_tsv_without_outdated }
+        it_behaves_like 'tsv format'
+      end
 
       context 'without STDIN' do
         it { is_expected.not_to output.to_stdout }
@@ -675,6 +816,12 @@ Commands:
       let(:thor_args) { %w[output --format xml] }
       it_behaves_like 'xml format'
 
+      context 'without outdated' do
+        let(:stdin) { stdin_without_outdated }
+        let(:stdout_xml) { stdout_xml_without_outdated }
+        it_behaves_like 'xml format'
+      end
+
       context 'without STDIN' do
         it { is_expected.not_to output.to_stdout }
       end
@@ -688,6 +835,12 @@ Commands:
     context 'given `output --format xml --pretty`' do
       let(:thor_args) { %w[output --format xml --pretty] }
       it_behaves_like 'xml format', pretty: true
+
+      context 'without outdated' do
+        let(:stdin) { stdin_without_outdated }
+        let(:stdout_xml_pretty) { stdout_xml_pretty_without_outdated }
+        it_behaves_like 'xml format', pretty: true
+      end
     end
 
     context 'given `output -f xml -p`' do
@@ -729,6 +882,12 @@ Commands:
       let(:thor_args) { %w[output --format html] }
       it_behaves_like 'html format'
 
+      context 'without outdated' do
+        let(:stdin) { stdin_without_outdated }
+        let(:stdout_html) { stdout_html_without_outdated }
+        it_behaves_like 'html format'
+      end
+
       context 'without STDIN' do
         it { is_expected.not_to output.to_stdout }
       end
@@ -742,6 +901,12 @@ Commands:
     context 'given `output --format html --pretty`' do
       let(:thor_args) { %w[output --format html --pretty] }
       it_behaves_like 'html format', pretty: true
+
+      context 'without outdated' do
+        let(:stdin) { stdin_without_outdated }
+        let(:stdout_html_pretty) { stdout_html_pretty_without_outdated }
+        it_behaves_like 'html format', pretty: true
+      end
     end
 
     context 'given `output -f html -p`' do
