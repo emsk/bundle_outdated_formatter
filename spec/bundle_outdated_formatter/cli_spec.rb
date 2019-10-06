@@ -423,8 +423,8 @@ Commands:
     end
 
     it do
-      expect(File).to receive(:basename).with($PROGRAM_NAME).at_least(:once)
       subject
+      expect(File).to have_received(:basename).with($PROGRAM_NAME).at_least(:once)
     end
 
     it { expect { subject }.to output(help).to_stdout }
