@@ -12,7 +12,3 @@
 Gemspec/RequiredRubyVersion:
   Exclude:
     - 'bundle_outdated_formatter.gemspec'
-
-# Offense count: 148
-RSpec/NestedGroups:
-  Max: 5

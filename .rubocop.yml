@@ -40,3 +40,6 @@ Style/IfUnlessModifier:
 
 RSpec/FilePath:
   Enabled: false
+
+RSpec/NestedGroups:
+  Enabled: false
