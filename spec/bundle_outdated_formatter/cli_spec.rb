@@ -419,7 +419,12 @@ Commands:
 
   shared_examples_for 'a `help` command' do
     before do
-      expect(File).to receive(:basename).with($PROGRAM_NAME).and_return(command).at_least(:once)
+      allow(File).to receive(:basename).with($PROGRAM_NAME).and_return(command)
+    end
+
+    it do
+      expect(File).to receive(:basename).with($PROGRAM_NAME).at_least(:once)
+      subject
     end
 
     it { expect { subject }.to output(help).to_stdout }
