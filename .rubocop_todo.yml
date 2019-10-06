@@ -13,19 +13,6 @@ Gemspec/RequiredRubyVersion:
   Exclude:
     - 'bundle_outdated_formatter.gemspec'
 
-# Offense count: 8
-# Configuration parameters: CustomTransform, IgnoreMethods.
-RSpec/FilePath:
-  Exclude:
-    - 'spec/bundle_outdated_formatter/formatter/csv_formatter_spec.rb'
-    - 'spec/bundle_outdated_formatter/formatter/html_formatter_spec.rb'
-    - 'spec/bundle_outdated_formatter/formatter/json_formatter_spec.rb'
-    - 'spec/bundle_outdated_formatter/formatter/markdown_formatter_spec.rb'
-    - 'spec/bundle_outdated_formatter/formatter/terminal_formatter_spec.rb'
-    - 'spec/bundle_outdated_formatter/formatter/tsv_formatter_spec.rb'
-    - 'spec/bundle_outdated_formatter/formatter/xml_formatter_spec.rb'
-    - 'spec/bundle_outdated_formatter/formatter/yaml_formatter_spec.rb'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 RSpec/LeadingSubject:
