@@ -13,6 +13,7 @@ end
 
 if Gem::Version.create(RUBY_VERSION) < Gem::Version.create('2.2.0')
   gem 'parallel', '< 1.17.0'
+  gem 'rubocop-rspec', '< 1.5.2'
 end
 
 if Gem::Version.create(RUBY_VERSION) >= Gem::Version.create('2.1.0') && Gem::Version.create(RUBY_VERSION) < Gem::Version.create('2.2.0')
