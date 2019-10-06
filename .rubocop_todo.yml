@@ -13,13 +13,6 @@ Gemspec/RequiredRubyVersion:
   Exclude:
     - 'bundle_outdated_formatter.gemspec'
 
-# Offense count: 151
-# Configuration parameters: Prefixes.
-# Prefixes: when, with, without
-RSpec/ContextWording:
-  Exclude:
-    - 'spec/bundle_outdated_formatter/cli_spec.rb'
-
 # Offense count: 1
 # Configuration parameters: CustomIncludeMethods.
 RSpec/EmptyExampleGroup:

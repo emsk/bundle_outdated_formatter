@@ -430,17 +430,17 @@ Commands:
 
     subject { described_class.start(thor_args) }
 
-    context 'given `output`' do
+    context 'with `output`' do
       let(:thor_args) { %w[output] }
       it_behaves_like 'terminal format'
     end
 
-    context 'given ``' do
+    context 'with ``' do
       let(:thor_args) { %w[] }
       it_behaves_like 'terminal format'
     end
 
-    context 'given `output --format terminal`' do
+    context 'with `output --format terminal`' do
       let(:thor_args) { %w[output --format terminal] }
       it_behaves_like 'terminal format'
 
@@ -455,32 +455,32 @@ Commands:
       end
     end
 
-    context 'given `output -f terminal`' do
+    context 'with `output -f terminal`' do
       let(:thor_args) { %w[output -f terminal] }
       it_behaves_like 'terminal format'
     end
 
-    context 'given `output --format terminal --pretty`' do
+    context 'with `output --format terminal --pretty`' do
       let(:thor_args) { %w[output --format terminal --pretty] }
       it_behaves_like 'terminal format'
     end
 
-    context 'given `output -f terminal -p`' do
+    context 'with `output -f terminal -p`' do
       let(:thor_args) { %w[output -f terminal -p] }
       it_behaves_like 'terminal format'
     end
 
-    context 'given `output --format terminal --style unicode`' do
+    context 'with `output --format terminal --style unicode`' do
       let(:thor_args) { %w[output --format terminal --style unicode] }
       it_behaves_like 'terminal format'
     end
 
-    context 'given `output -f terminal -s unicode`' do
+    context 'with `output -f terminal -s unicode`' do
       let(:thor_args) { %w[output -f terminal -s unicode] }
       it_behaves_like 'terminal format'
     end
 
-    context 'given `output --format terminal --style ascii`' do
+    context 'with `output --format terminal --style ascii`' do
       let(:thor_args) { %w[output --format terminal --style ascii] }
       it_behaves_like 'terminal format', style: :ascii
 
@@ -491,22 +491,22 @@ Commands:
       end
     end
 
-    context 'given `output -f terminal -s ascii`' do
+    context 'with `output -f terminal -s ascii`' do
       let(:thor_args) { %w[output -f terminal -s ascii] }
       it_behaves_like 'terminal format', style: :ascii
     end
 
-    context 'given `output --format terminal --pretty --style unicode`' do
+    context 'with `output --format terminal --pretty --style unicode`' do
       let(:thor_args) { %w[output --format terminal --pretty --style unicode] }
       it_behaves_like 'terminal format'
     end
 
-    context 'given `output --format terminal --pretty --style ascii`' do
+    context 'with `output --format terminal --pretty --style ascii`' do
       let(:thor_args) { %w[output --format terminal --pretty --style ascii] }
       it_behaves_like 'terminal format', style: :ascii
     end
 
-    context 'given `output --format markdown`' do
+    context 'with `output --format markdown`' do
       let(:thor_args) { %w[output --format markdown] }
       it_behaves_like 'markdown format'
 
@@ -521,52 +521,52 @@ Commands:
       end
     end
 
-    context 'given `output -f markdown`' do
+    context 'with `output -f markdown`' do
       let(:thor_args) { %w[output -f markdown] }
       it_behaves_like 'markdown format'
     end
 
-    context 'given `output --format markdown --pretty`' do
+    context 'with `output --format markdown --pretty`' do
       let(:thor_args) { %w[output --format markdown --pretty] }
       it_behaves_like 'markdown format'
     end
 
-    context 'given `output -f markdown -p`' do
+    context 'with `output -f markdown -p`' do
       let(:thor_args) { %w[output -f markdown -p] }
       it_behaves_like 'markdown format'
     end
 
-    context 'given `output --format markdown --style unicode`' do
+    context 'with `output --format markdown --style unicode`' do
       let(:thor_args) { %w[output --format markdown --style unicode] }
       it_behaves_like 'markdown format'
     end
 
-    context 'given `output -f markdown -s unicode`' do
+    context 'with `output -f markdown -s unicode`' do
       let(:thor_args) { %w[output -f markdown -s unicode] }
       it_behaves_like 'markdown format'
     end
 
-    context 'given `output --format markdown --style ascii`' do
+    context 'with `output --format markdown --style ascii`' do
       let(:thor_args) { %w[output --format markdown --style ascii] }
       it_behaves_like 'markdown format'
     end
 
-    context 'given `output -f markdown -s ascii`' do
+    context 'with `output -f markdown -s ascii`' do
       let(:thor_args) { %w[output -f markdown -s ascii] }
       it_behaves_like 'markdown format'
     end
 
-    context 'given `output --format markdown --pretty --style unicode`' do
+    context 'with `output --format markdown --pretty --style unicode`' do
       let(:thor_args) { %w[output --format markdown --pretty --style unicode] }
       it_behaves_like 'markdown format'
     end
 
-    context 'given `output --format markdown --pretty --style ascii`' do
+    context 'with `output --format markdown --pretty --style ascii`' do
       let(:thor_args) { %w[output --format markdown --pretty --style ascii] }
       it_behaves_like 'markdown format'
     end
 
-    context 'given `output --format json`' do
+    context 'with `output --format json`' do
       let(:thor_args) { %w[output --format json] }
       it_behaves_like 'json format'
 
@@ -581,12 +581,12 @@ Commands:
       end
     end
 
-    context 'given `output -f json`' do
+    context 'with `output -f json`' do
       let(:thor_args) { %w[output -f json] }
       it_behaves_like 'json format'
     end
 
-    context 'given `output --format json --pretty`' do
+    context 'with `output --format json --pretty`' do
       let(:thor_args) { %w[output --format json --pretty] }
       it_behaves_like 'json format', pretty: true
 
@@ -597,42 +597,42 @@ Commands:
       end
     end
 
-    context 'given `output -f json -p`' do
+    context 'with `output -f json -p`' do
       let(:thor_args) { %w[output -f json -p] }
       it_behaves_like 'json format', pretty: true
     end
 
-    context 'given `output --format json --style unicode`' do
+    context 'with `output --format json --style unicode`' do
       let(:thor_args) { %w[output --format json --style unicode] }
       it_behaves_like 'json format'
     end
 
-    context 'given `output -f json -s unicode`' do
+    context 'with `output -f json -s unicode`' do
       let(:thor_args) { %w[output -f json -s unicode] }
       it_behaves_like 'json format'
     end
 
-    context 'given `output --format json --style ascii`' do
+    context 'with `output --format json --style ascii`' do
       let(:thor_args) { %w[output --format json --style ascii] }
       it_behaves_like 'json format'
     end
 
-    context 'given `output -f json -s ascii`' do
+    context 'with `output -f json -s ascii`' do
       let(:thor_args) { %w[output -f json -s ascii] }
       it_behaves_like 'json format'
     end
 
-    context 'given `output --format json --pretty --style unicode`' do
+    context 'with `output --format json --pretty --style unicode`' do
       let(:thor_args) { %w[output --format json --pretty --style unicode] }
       it_behaves_like 'json format', pretty: true
     end
 
-    context 'given `output --format json --pretty --style ascii`' do
+    context 'with `output --format json --pretty --style ascii`' do
       let(:thor_args) { %w[output --format json --pretty --style ascii] }
       it_behaves_like 'json format', pretty: true
     end
 
-    context 'given `output --format yaml`' do
+    context 'with `output --format yaml`' do
       let(:thor_args) { %w[output --format yaml] }
       it_behaves_like 'yaml format'
 
@@ -647,52 +647,52 @@ Commands:
       end
     end
 
-    context 'given `output -f yaml`' do
+    context 'with `output -f yaml`' do
       let(:thor_args) { %w[output -f yaml] }
       it_behaves_like 'yaml format'
     end
 
-    context 'given `output --format yaml --pretty`' do
+    context 'with `output --format yaml --pretty`' do
       let(:thor_args) { %w[output --format yaml --pretty] }
       it_behaves_like 'yaml format'
     end
 
-    context 'given `output -f yaml -p`' do
+    context 'with `output -f yaml -p`' do
       let(:thor_args) { %w[output -f yaml -p] }
       it_behaves_like 'yaml format'
     end
 
-    context 'given `output --format yaml --style unicode`' do
+    context 'with `output --format yaml --style unicode`' do
       let(:thor_args) { %w[output --format yaml --style unicode] }
       it_behaves_like 'yaml format'
     end
 
-    context 'given `output -f yaml -s unicode`' do
+    context 'with `output -f yaml -s unicode`' do
       let(:thor_args) { %w[output -f yaml -s unicode] }
       it_behaves_like 'yaml format'
     end
 
-    context 'given `output --format yaml --style ascii`' do
+    context 'with `output --format yaml --style ascii`' do
       let(:thor_args) { %w[output --format yaml --style ascii] }
       it_behaves_like 'yaml format'
     end
 
-    context 'given `output -f yaml -s ascii`' do
+    context 'with `output -f yaml -s ascii`' do
       let(:thor_args) { %w[output -f yaml -s ascii] }
       it_behaves_like 'yaml format'
     end
 
-    context 'given `output --format yaml --pretty --style unicode`' do
+    context 'with `output --format yaml --pretty --style unicode`' do
       let(:thor_args) { %w[output --format yaml --pretty --style unicode] }
       it_behaves_like 'yaml format'
     end
 
-    context 'given `output --format yaml --pretty --style ascii`' do
+    context 'with `output --format yaml --pretty --style ascii`' do
       let(:thor_args) { %w[output --format yaml --pretty --style ascii] }
       it_behaves_like 'yaml format'
     end
 
-    context 'given `output --format csv`' do
+    context 'with `output --format csv`' do
       let(:thor_args) { %w[output --format csv] }
       it_behaves_like 'csv format'
 
@@ -707,52 +707,52 @@ Commands:
       end
     end
 
-    context 'given `output -f csv`' do
+    context 'with `output -f csv`' do
       let(:thor_args) { %w[output -f csv] }
       it_behaves_like 'csv format'
     end
 
-    context 'given `output --format csv --pretty`' do
+    context 'with `output --format csv --pretty`' do
       let(:thor_args) { %w[output --format csv --pretty] }
       it_behaves_like 'csv format'
     end
 
-    context 'given `output -f csv -p`' do
+    context 'with `output -f csv -p`' do
       let(:thor_args) { %w[output -f csv -p] }
       it_behaves_like 'csv format'
     end
 
-    context 'given `output --format csv --style unicode`' do
+    context 'with `output --format csv --style unicode`' do
       let(:thor_args) { %w[output --format csv --style unicode] }
       it_behaves_like 'csv format'
     end
 
-    context 'given `output -f csv -s unicode`' do
+    context 'with `output -f csv -s unicode`' do
       let(:thor_args) { %w[output -f csv -s unicode] }
       it_behaves_like 'csv format'
     end
 
-    context 'given `output --format csv --style ascii`' do
+    context 'with `output --format csv --style ascii`' do
       let(:thor_args) { %w[output --format csv --style ascii] }
       it_behaves_like 'csv format'
     end
 
-    context 'given `output -f csv -s ascii`' do
+    context 'with `output -f csv -s ascii`' do
       let(:thor_args) { %w[output -f csv -s ascii] }
       it_behaves_like 'csv format'
     end
 
-    context 'given `output --format csv --pretty --style unicode`' do
+    context 'with `output --format csv --pretty --style unicode`' do
       let(:thor_args) { %w[output --format csv --pretty --style unicode] }
       it_behaves_like 'csv format'
     end
 
-    context 'given `output --format csv --pretty --style ascii`' do
+    context 'with `output --format csv --pretty --style ascii`' do
       let(:thor_args) { %w[output --format csv --pretty --style ascii] }
       it_behaves_like 'csv format'
     end
 
-    context 'given `output --format tsv`' do
+    context 'with `output --format tsv`' do
       let(:thor_args) { %w[output --format tsv] }
       it_behaves_like 'tsv format'
 
@@ -767,52 +767,52 @@ Commands:
       end
     end
 
-    context 'given `output -f tsv`' do
+    context 'with `output -f tsv`' do
       let(:thor_args) { %w[output -f tsv] }
       it_behaves_like 'tsv format'
     end
 
-    context 'given `output --format tsv --pretty`' do
+    context 'with `output --format tsv --pretty`' do
       let(:thor_args) { %w[output --format tsv --pretty] }
       it_behaves_like 'tsv format'
     end
 
-    context 'given `output -f tsv -p`' do
+    context 'with `output -f tsv -p`' do
       let(:thor_args) { %w[output -f tsv -p] }
       it_behaves_like 'tsv format'
     end
 
-    context 'given `output --format tsv --style unicode`' do
+    context 'with `output --format tsv --style unicode`' do
       let(:thor_args) { %w[output --format tsv --style unicode] }
       it_behaves_like 'tsv format'
     end
 
-    context 'given `output -f tsv -s unicode`' do
+    context 'with `output -f tsv -s unicode`' do
       let(:thor_args) { %w[output -f tsv -s unicode] }
       it_behaves_like 'tsv format'
     end
 
-    context 'given `output --format tsv --style ascii`' do
+    context 'with `output --format tsv --style ascii`' do
       let(:thor_args) { %w[output --format tsv --style ascii] }
       it_behaves_like 'tsv format'
     end
 
-    context 'given `output -f tsv -s ascii`' do
+    context 'with `output -f tsv -s ascii`' do
       let(:thor_args) { %w[output -f tsv -s ascii] }
       it_behaves_like 'tsv format'
     end
 
-    context 'given `output --format tsv --pretty --style unicode`' do
+    context 'with `output --format tsv --pretty --style unicode`' do
       let(:thor_args) { %w[output --format tsv --pretty --style unicode] }
       it_behaves_like 'tsv format'
     end
 
-    context 'given `output --format tsv --pretty --style ascii`' do
+    context 'with `output --format tsv --pretty --style ascii`' do
       let(:thor_args) { %w[output --format tsv --pretty --style ascii] }
       it_behaves_like 'tsv format'
     end
 
-    context 'given `output --format xml`' do
+    context 'with `output --format xml`' do
       let(:thor_args) { %w[output --format xml] }
       it_behaves_like 'xml format'
 
@@ -827,12 +827,12 @@ Commands:
       end
     end
 
-    context 'given `output -f xml`' do
+    context 'with `output -f xml`' do
       let(:thor_args) { %w[output -f xml] }
       it_behaves_like 'xml format'
     end
 
-    context 'given `output --format xml --pretty`' do
+    context 'with `output --format xml --pretty`' do
       let(:thor_args) { %w[output --format xml --pretty] }
       it_behaves_like 'xml format', pretty: true
 
@@ -843,42 +843,42 @@ Commands:
       end
     end
 
-    context 'given `output -f xml -p`' do
+    context 'with `output -f xml -p`' do
       let(:thor_args) { %w[output -f xml -p] }
       it_behaves_like 'xml format', pretty: true
     end
 
-    context 'given `output --format xml --style unicode`' do
+    context 'with `output --format xml --style unicode`' do
       let(:thor_args) { %w[output --format xml --style unicode] }
       it_behaves_like 'xml format'
     end
 
-    context 'given `output -f xml -s unicode`' do
+    context 'with `output -f xml -s unicode`' do
       let(:thor_args) { %w[output -f xml -s unicode] }
       it_behaves_like 'xml format'
     end
 
-    context 'given `output --format xml --style ascii`' do
+    context 'with `output --format xml --style ascii`' do
       let(:thor_args) { %w[output --format xml --style ascii] }
       it_behaves_like 'xml format'
     end
 
-    context 'given `output -f xml -s ascii`' do
+    context 'with `output -f xml -s ascii`' do
       let(:thor_args) { %w[output -f xml -s ascii] }
       it_behaves_like 'xml format'
     end
 
-    context 'given `output --format xml --pretty --style unicode`' do
+    context 'with `output --format xml --pretty --style unicode`' do
       let(:thor_args) { %w[output --format xml --pretty --style unicode] }
       it_behaves_like 'xml format', pretty: true
     end
 
-    context 'given `output --format xml --pretty --style ascii`' do
+    context 'with `output --format xml --pretty --style ascii`' do
       let(:thor_args) { %w[output --format xml --pretty --style ascii] }
       it_behaves_like 'xml format', pretty: true
     end
 
-    context 'given `output --format html`' do
+    context 'with `output --format html`' do
       let(:thor_args) { %w[output --format html] }
       it_behaves_like 'html format'
 
@@ -893,12 +893,12 @@ Commands:
       end
     end
 
-    context 'given `output -f html`' do
+    context 'with `output -f html`' do
       let(:thor_args) { %w[output -f html] }
       it_behaves_like 'html format'
     end
 
-    context 'given `output --format html --pretty`' do
+    context 'with `output --format html --pretty`' do
       let(:thor_args) { %w[output --format html --pretty] }
       it_behaves_like 'html format', pretty: true
 
@@ -909,42 +909,42 @@ Commands:
       end
     end
 
-    context 'given `output -f html -p`' do
+    context 'with `output -f html -p`' do
       let(:thor_args) { %w[output -f html -p] }
       it_behaves_like 'html format', pretty: true
     end
 
-    context 'given `output --format html --style unicode`' do
+    context 'with `output --format html --style unicode`' do
       let(:thor_args) { %w[output --format html --style unicode] }
       it_behaves_like 'html format'
     end
 
-    context 'given `output -f html -s unicode`' do
+    context 'with `output -f html -s unicode`' do
       let(:thor_args) { %w[output -f html -s unicode] }
       it_behaves_like 'html format'
     end
 
-    context 'given `output --format html --style ascii`' do
+    context 'with `output --format html --style ascii`' do
       let(:thor_args) { %w[output --format html --style ascii] }
       it_behaves_like 'html format'
     end
 
-    context 'given `output -f html -s ascii`' do
+    context 'with `output -f html -s ascii`' do
       let(:thor_args) { %w[output -f html -s ascii] }
       it_behaves_like 'html format'
     end
 
-    context 'given `output --format html --pretty --style unicode`' do
+    context 'with `output --format html --pretty --style unicode`' do
       let(:thor_args) { %w[output --format html --pretty --style unicode] }
       it_behaves_like 'html format', pretty: true
     end
 
-    context 'given `output --format html --pretty --style ascii`' do
+    context 'with `output --format html --pretty --style ascii`' do
       let(:thor_args) { %w[output --format html --pretty --style ascii] }
       it_behaves_like 'html format', pretty: true
     end
 
-    context 'given `--column newest requested gem`' do
+    context 'with `--column newest requested gem`' do
       let(:stdout_terminal_unicode) do
         <<-EOS
 ┌────────┬───────────┬──────────┐
@@ -1102,329 +1102,329 @@ Commands:
         EOS
       end
 
-      context 'given `output`' do
+      context 'with `output`' do
         let(:thor_args) { %w[output --column newest requested gem] }
         it_behaves_like 'terminal format'
       end
 
-      context 'given ``' do
+      context 'with ``' do
         let(:thor_args) { %w[--column newest requested gem] }
         it_behaves_like 'terminal format'
       end
 
-      context 'given `output --format terminal`' do
+      context 'with `output --format terminal`' do
         let(:thor_args) { %w[output --column newest requested gem --format terminal] }
         it_behaves_like 'terminal format'
       end
 
-      context 'given `output --format terminal --pretty`' do
+      context 'with `output --format terminal --pretty`' do
         let(:thor_args) { %w[output --column newest requested gem --format terminal --pretty] }
         it_behaves_like 'terminal format'
       end
 
-      context 'given `output --format terminal --style unicode`' do
+      context 'with `output --format terminal --style unicode`' do
         let(:thor_args) { %w[output --column newest requested gem --format terminal --style unicode] }
         it_behaves_like 'terminal format'
       end
 
-      context 'given `output --format terminal --style ascii`' do
+      context 'with `output --format terminal --style ascii`' do
         let(:thor_args) { %w[output --column newest requested gem --format terminal --style ascii] }
         it_behaves_like 'terminal format', style: :ascii
       end
 
-      context 'given `output --format terminal --pretty --style unicode`' do
+      context 'with `output --format terminal --pretty --style unicode`' do
         let(:thor_args) { %w[output --column newest requested gem --format terminal --pretty --style unicode] }
         it_behaves_like 'terminal format'
       end
 
-      context 'given `output --format terminal --pretty --style ascii`' do
+      context 'with `output --format terminal --pretty --style ascii`' do
         let(:thor_args) { %w[output --column newest requested gem --format terminal --pretty --style ascii] }
         it_behaves_like 'terminal format', style: :ascii
       end
 
-      context 'given `output --format markdown`' do
+      context 'with `output --format markdown`' do
         let(:thor_args) { %w[output --column newest requested gem --format markdown] }
         it_behaves_like 'markdown format'
       end
 
-      context 'given `output --format markdown --pretty`' do
+      context 'with `output --format markdown --pretty`' do
         let(:thor_args) { %w[output --column newest requested gem --format markdown --pretty] }
         it_behaves_like 'markdown format'
       end
 
-      context 'given `output --format markdown --style unicode`' do
+      context 'with `output --format markdown --style unicode`' do
         let(:thor_args) { %w[output --column newest requested gem --format markdown --style unicode] }
         it_behaves_like 'markdown format'
       end
 
-      context 'given `output --format markdown --style ascii`' do
+      context 'with `output --format markdown --style ascii`' do
         let(:thor_args) { %w[output --column newest requested gem --format markdown --style ascii] }
         it_behaves_like 'markdown format'
       end
 
-      context 'given `output --format markdown --pretty --style unicode`' do
+      context 'with `output --format markdown --pretty --style unicode`' do
         let(:thor_args) { %w[output --column newest requested gem --format markdown --pretty --style unicode] }
         it_behaves_like 'markdown format'
       end
 
-      context 'given `output --format markdown --pretty --style ascii`' do
+      context 'with `output --format markdown --pretty --style ascii`' do
         let(:thor_args) { %w[output --column newest requested gem --format markdown --pretty --style ascii] }
         it_behaves_like 'markdown format'
       end
 
-      context 'given `output --format json`' do
+      context 'with `output --format json`' do
         let(:thor_args) { %w[output --column newest requested gem --format json] }
         it_behaves_like 'json format'
       end
 
-      context 'given `output --format json --pretty`' do
+      context 'with `output --format json --pretty`' do
         let(:thor_args) { %w[output --column newest requested gem --format json --pretty] }
         it_behaves_like 'json format', pretty: true
       end
 
-      context 'given `output --format json --style unicode`' do
+      context 'with `output --format json --style unicode`' do
         let(:thor_args) { %w[output --column newest requested gem --format json --style unicode] }
         it_behaves_like 'json format'
       end
 
-      context 'given `output --format json --style ascii`' do
+      context 'with `output --format json --style ascii`' do
         let(:thor_args) { %w[output --column newest requested gem --format json --style ascii] }
         it_behaves_like 'json format'
       end
 
-      context 'given `output --format json --pretty --style unicode`' do
+      context 'with `output --format json --pretty --style unicode`' do
         let(:thor_args) { %w[output --column newest requested gem --format json --pretty --style unicode] }
         it_behaves_like 'json format', pretty: true
       end
 
-      context 'given `output --format json --pretty --style ascii`' do
+      context 'with `output --format json --pretty --style ascii`' do
         let(:thor_args) { %w[output --column newest requested gem --format json --pretty --style ascii] }
         it_behaves_like 'json format', pretty: true
       end
 
-      context 'given `output --format yaml`' do
+      context 'with `output --format yaml`' do
         let(:thor_args) { %w[output --column newest requested gem --format yaml] }
         it_behaves_like 'yaml format'
       end
 
-      context 'given `output --format yaml --pretty`' do
+      context 'with `output --format yaml --pretty`' do
         let(:thor_args) { %w[output --column newest requested gem --format yaml --pretty] }
         it_behaves_like 'yaml format'
       end
 
-      context 'given `output --format yaml --style unicode`' do
+      context 'with `output --format yaml --style unicode`' do
         let(:thor_args) { %w[output --column newest requested gem --format yaml --style unicode] }
         it_behaves_like 'yaml format'
       end
 
-      context 'given `output --format yaml --style ascii`' do
+      context 'with `output --format yaml --style ascii`' do
         let(:thor_args) { %w[output --column newest requested gem --format yaml --style ascii] }
         it_behaves_like 'yaml format'
       end
 
-      context 'given `output --format yaml --pretty --style unicode`' do
+      context 'with `output --format yaml --pretty --style unicode`' do
         let(:thor_args) { %w[output --column newest requested gem --format yaml --pretty --style unicode] }
         it_behaves_like 'yaml format'
       end
 
-      context 'given `output --format yaml --pretty --style ascii`' do
+      context 'with `output --format yaml --pretty --style ascii`' do
         let(:thor_args) { %w[output --column newest requested gem --format yaml --pretty --style ascii] }
         it_behaves_like 'yaml format'
       end
 
-      context 'given `output --format csv`' do
+      context 'with `output --format csv`' do
         let(:thor_args) { %w[output --column newest requested gem --format csv] }
         it_behaves_like 'csv format'
       end
 
-      context 'given `output --format csv --pretty`' do
+      context 'with `output --format csv --pretty`' do
         let(:thor_args) { %w[output --column newest requested gem --format csv --pretty] }
         it_behaves_like 'csv format'
       end
 
-      context 'given `output --format csv --style unicode`' do
+      context 'with `output --format csv --style unicode`' do
         let(:thor_args) { %w[output --column newest requested gem --format csv --style unicode] }
         it_behaves_like 'csv format'
       end
 
-      context 'given `output --format csv --style ascii`' do
+      context 'with `output --format csv --style ascii`' do
         let(:thor_args) { %w[output --column newest requested gem --format csv --style ascii] }
         it_behaves_like 'csv format'
       end
 
-      context 'given `output --format csv --pretty --style unicode`' do
+      context 'with `output --format csv --pretty --style unicode`' do
         let(:thor_args) { %w[output --column newest requested gem --format csv --pretty --style unicode] }
         it_behaves_like 'csv format'
       end
 
-      context 'given `output --format csv --pretty --style ascii`' do
+      context 'with `output --format csv --pretty --style ascii`' do
         let(:thor_args) { %w[output --column newest requested gem --format csv --pretty --style ascii] }
         it_behaves_like 'csv format'
       end
 
-      context 'given `output --format tsv`' do
+      context 'with `output --format tsv`' do
         let(:thor_args) { %w[output --column newest requested gem --format tsv] }
         it_behaves_like 'tsv format'
       end
 
-      context 'given `output --format tsv --pretty`' do
+      context 'with `output --format tsv --pretty`' do
         let(:thor_args) { %w[output --column newest requested gem --format tsv --pretty] }
         it_behaves_like 'tsv format'
       end
 
-      context 'given `output --format tsv --style unicode`' do
+      context 'with `output --format tsv --style unicode`' do
         let(:thor_args) { %w[output --column newest requested gem --format tsv --style unicode] }
         it_behaves_like 'tsv format'
       end
 
-      context 'given `output --format tsv --style ascii`' do
+      context 'with `output --format tsv --style ascii`' do
         let(:thor_args) { %w[output --column newest requested gem --format tsv --style ascii] }
         it_behaves_like 'tsv format'
       end
 
-      context 'given `output --format tsv --pretty --style unicode`' do
+      context 'with `output --format tsv --pretty --style unicode`' do
         let(:thor_args) { %w[output --column newest requested gem --format tsv --pretty --style unicode] }
         it_behaves_like 'tsv format'
       end
 
-      context 'given `output --format tsv --pretty --style ascii`' do
+      context 'with `output --format tsv --pretty --style ascii`' do
         let(:thor_args) { %w[output --column newest requested gem --format tsv --pretty --style ascii] }
         it_behaves_like 'tsv format'
       end
 
-      context 'given `output --format xml`' do
+      context 'with `output --format xml`' do
         let(:thor_args) { %w[output --column newest requested gem --format xml] }
         it_behaves_like 'xml format'
       end
 
-      context 'given `output --format xml --pretty`' do
+      context 'with `output --format xml --pretty`' do
         let(:thor_args) { %w[output --column newest requested gem --format xml --pretty] }
         it_behaves_like 'xml format', pretty: true
       end
 
-      context 'given `output --format xml --style unicode`' do
+      context 'with `output --format xml --style unicode`' do
         let(:thor_args) { %w[output --column newest requested gem --format xml --style unicode] }
         it_behaves_like 'xml format'
       end
 
-      context 'given `output --format xml --style ascii`' do
+      context 'with `output --format xml --style ascii`' do
         let(:thor_args) { %w[output --column newest requested gem --format xml --style ascii] }
         it_behaves_like 'xml format'
       end
 
-      context 'given `output --format xml --pretty --style unicode`' do
+      context 'with `output --format xml --pretty --style unicode`' do
         let(:thor_args) { %w[output --column newest requested gem --format xml --pretty --style unicode] }
         it_behaves_like 'xml format', pretty: true
       end
 
-      context 'given `output --format xml --pretty --style ascii`' do
+      context 'with `output --format xml --pretty --style ascii`' do
         let(:thor_args) { %w[output --column newest requested gem --format xml --pretty --style ascii] }
         it_behaves_like 'xml format', pretty: true
       end
 
-      context 'given `output --format html`' do
+      context 'with `output --format html`' do
         let(:thor_args) { %w[output --column newest requested gem --format html] }
         it_behaves_like 'html format'
       end
 
-      context 'given `output --format html --pretty`' do
+      context 'with `output --format html --pretty`' do
         let(:thor_args) { %w[output --column newest requested gem --format html --pretty] }
         it_behaves_like 'html format', pretty: true
       end
 
-      context 'given `output --format html --style unicode`' do
+      context 'with `output --format html --style unicode`' do
         let(:thor_args) { %w[output --column newest requested gem --format html --style unicode] }
         it_behaves_like 'html format'
       end
 
-      context 'given `output --format html --style ascii`' do
+      context 'with `output --format html --style ascii`' do
         let(:thor_args) { %w[output --column newest requested gem --format html --style ascii] }
         it_behaves_like 'html format'
       end
 
-      context 'given `output --format html --pretty --style unicode`' do
+      context 'with `output --format html --pretty --style unicode`' do
         let(:thor_args) { %w[output --column newest requested gem --format html --pretty --style unicode] }
         it_behaves_like 'html format', pretty: true
       end
 
-      context 'given `output --format html --pretty --style ascii`' do
+      context 'with `output --format html --pretty --style ascii`' do
         let(:thor_args) { %w[output --column newest requested gem --format html --pretty --style ascii] }
         it_behaves_like 'html format', pretty: true
       end
     end
 
-    context 'given `output --format aaa`' do
+    context 'with `output --format aaa`' do
       let(:thor_args) { %w[output --format aaa] }
       let(:error_message) { 'aaa' }
       it_behaves_like 'unknown format'
     end
 
-    context 'given `output --style aaa`' do
+    context 'with `output --style aaa`' do
       let(:thor_args) { %w[output --style aaa] }
       let(:error_message) { 'aaa' }
       it_behaves_like 'unknown style'
     end
 
-    context 'given `output --column gem aaa newest`' do
+    context 'with `output --column gem aaa newest`' do
       let(:thor_args) { %w[output --column gem aaa newest] }
       let(:error_message) { '["gem", "aaa", "newest"]' }
       it_behaves_like 'unknown column'
     end
 
-    context 'given `output --column`' do
+    context 'with `output --column`' do
       let(:thor_args) { %w[output --column] }
       it_behaves_like 'required column'
     end
 
-    context 'given `version`' do
+    context 'with `version`' do
       let(:command) { 'bundle_outdated_formatter' }
       let(:thor_args) { %w[version] }
       it { expect { subject }.to output("#{command} #{BundleOutdatedFormatter::VERSION}\n").to_stdout }
     end
 
-    context 'given `--version`' do
+    context 'with `--version`' do
       let(:command) { 'bundle_outdated_formatter' }
       let(:thor_args) { %w[--version] }
       it { expect { subject }.to output("#{command} #{BundleOutdatedFormatter::VERSION}\n").to_stdout }
     end
 
-    context 'given `-v`' do
+    context 'with `-v`' do
       let(:command) { 'bundle_outdated_formatter' }
       let(:thor_args) { %w[-v] }
       it { expect { subject }.to output("#{command} #{BundleOutdatedFormatter::VERSION}\n").to_stdout }
     end
 
-    context 'given `help`' do
+    context 'with `help`' do
       let(:thor_args) { %w[help] }
       it_behaves_like 'a `help` command'
     end
 
-    context 'given `--help`' do
+    context 'with `--help`' do
       let(:thor_args) { %w[--help] }
       it_behaves_like 'a `help` command'
     end
 
-    context 'given `-h`' do
+    context 'with `-h`' do
       let(:thor_args) { %w[-h] }
       it_behaves_like 'a `help` command'
     end
 
-    context 'given `h`' do
+    context 'with `h`' do
       let(:thor_args) { %w[h] }
       it_behaves_like 'a `help` command'
     end
 
-    context 'given `he`' do
+    context 'with `he`' do
       let(:thor_args) { %w[he] }
       it_behaves_like 'a `help` command'
     end
 
-    context 'given `hel`' do
+    context 'with `hel`' do
       let(:thor_args) { %w[hel] }
       it_behaves_like 'a `help` command'
     end
 
-    context 'given `help output`' do
+    context 'with `help output`' do
       let(:thor_args) { %w[help output] }
       let(:help) do
         <<-EOS
@@ -1446,7 +1446,7 @@ Format output of `bundle outdated`
       it_behaves_like 'a `help` command'
     end
 
-    context 'given `help version`' do
+    context 'with `help version`' do
       let(:thor_args) { %w[help version] }
       let(:help) do
         <<-EOS
@@ -1459,7 +1459,7 @@ Print the version
       it_behaves_like 'a `help` command'
     end
 
-    context 'given `help help`' do
+    context 'with `help help`' do
       let(:thor_args) { %w[help help] }
       let(:help) do
         <<-EOS
@@ -1472,12 +1472,12 @@ Describe available commands or one specific command
       it_behaves_like 'a `help` command'
     end
 
-    context 'given `abc`' do
+    context 'with `abc`' do
       let(:thor_args) { %w[abc] }
       it { expect { subject }.to output(%(Could not find command "abc".\n)).to_stderr }
     end
 
-    context 'given `helpp`' do
+    context 'with `helpp`' do
       let(:thor_args) { %w[helpp] }
       it { expect { subject }.to output(%(Could not find command "helpp".\n)).to_stderr }
     end
