@@ -21,6 +21,7 @@ Outdated gems included in the bundle:
   describe '.new' do
     describe '@outdated_gems' do
       subject { formatter.instance_variable_get(:@outdated_gems) }
+
       it { is_expected.to eq [] }
     end
   end
