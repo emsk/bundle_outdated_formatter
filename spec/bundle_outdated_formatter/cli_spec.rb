@@ -431,9 +431,9 @@ Commands:
   end
 
   describe '.start' do
-    let(:command) { 'bof' }
-
     subject { described_class.start(thor_args) }
+
+    let(:command) { 'bof' }
 
     context 'with `output`' do
       let(:thor_args) { %w[output] }

@@ -14,12 +14,6 @@ Gemspec/RequiredRubyVersion:
     - 'bundle_outdated_formatter.gemspec'
 
 # Offense count: 1
-# Cop supports --auto-correct.
-RSpec/LeadingSubject:
-  Exclude:
-    - 'spec/bundle_outdated_formatter/cli_spec.rb'
-
-# Offense count: 1
 # Configuration parameters: .
 # SupportedStyles: have_received, receive
 RSpec/MessageSpies:
