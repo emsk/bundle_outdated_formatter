@@ -91,28 +91,33 @@ RSpec.describe BundleOutdatedFormatter::JSONFormatter do
 
         context 'without outdated' do
           let(:outdated_gems) { [] }
+
           it { is_expected.to eq text_json_without_outdated }
         end
       end
 
       context 'when @pretty is true and @style is unicode' do
         let(:pretty) { true }
+
         it { is_expected.to eq text_json_pretty }
 
         context 'without outdated' do
           let(:outdated_gems) { [] }
+
           it { is_expected.to eq text_json_pretty_without_outdated }
         end
       end
 
       context 'when @pretty is false and @style is ascii' do
         let(:style) { 'ascii' }
+
         it { is_expected.to eq text_json }
       end
 
       context 'when @pretty is true and @style is ascii' do
         let(:pretty) { true }
         let(:style) { 'ascii' }
+
         it { is_expected.to eq text_json_pretty }
       end
     end
@@ -177,17 +182,20 @@ RSpec.describe BundleOutdatedFormatter::JSONFormatter do
 
       context 'when @pretty is true and @style is unicode' do
         let(:pretty) { true }
+
         it { is_expected.to eq text_json_pretty }
       end
 
       context 'when @pretty is false and @style is ascii' do
         let(:style) { 'ascii' }
+
         it { is_expected.to eq text_json }
       end
 
       context 'when @pretty is true and @style is ascii' do
         let(:pretty) { true }
         let(:style) { 'ascii' }
+
         it { is_expected.to eq text_json_pretty }
       end
     end

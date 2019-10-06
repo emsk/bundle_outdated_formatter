@@ -70,23 +70,27 @@ RSpec.describe BundleOutdatedFormatter::YAMLFormatter do
 
         context 'without outdated' do
           let(:outdated_gems) { [] }
+
           it { is_expected.to eq text_yaml_without_outdated }
         end
       end
 
       context 'when @pretty is true and @style is unicode' do
         let(:pretty) { true }
+
         it { is_expected.to eq text_yaml }
       end
 
       context 'when @pretty is false and @style is ascii' do
         let(:style) { 'ascii' }
+
         it { is_expected.to eq text_yaml }
       end
 
       context 'when @pretty is true and @style is ascii' do
         let(:pretty) { true }
         let(:style) { 'ascii' }
+
         it { is_expected.to eq text_yaml }
       end
     end
@@ -127,6 +131,7 @@ RSpec.describe BundleOutdatedFormatter::YAMLFormatter do
   gem: headless
         EOS
       end
+
       before do
         formatter.instance_variable_set(:@outdated_gems, outdated_gems)
       end
@@ -137,17 +142,20 @@ RSpec.describe BundleOutdatedFormatter::YAMLFormatter do
 
       context 'when @pretty is true and @style is unicode' do
         let(:pretty) { true }
+
         it { is_expected.to eq text_yaml }
       end
 
       context 'when @pretty is false and @style is ascii' do
         let(:style) { 'ascii' }
+
         it { is_expected.to eq text_yaml }
       end
 
       context 'when @pretty is true and @style is ascii' do
         let(:pretty) { true }
         let(:style) { 'ascii' }
+
         it { is_expected.to eq text_yaml }
       end
     end

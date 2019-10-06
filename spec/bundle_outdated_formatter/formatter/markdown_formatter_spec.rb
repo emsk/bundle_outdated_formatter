@@ -60,23 +60,27 @@ RSpec.describe BundleOutdatedFormatter::MarkdownFormatter do
 
         context 'without outdated' do
           let(:outdated_gems) { [] }
+
           it { is_expected.to eq text_markdown_without_outdated }
         end
       end
 
       context 'when @pretty is true and @style is unicode' do
         let(:pretty) { true }
+
         it { is_expected.to eq text_markdown }
       end
 
       context 'when @pretty is false and @style is ascii' do
         let(:style) { 'ascii' }
+
         it { is_expected.to eq text_markdown }
       end
 
       context 'when @pretty is true and @style is ascii' do
         let(:pretty) { true }
         let(:style) { 'ascii' }
+
         it { is_expected.to eq text_markdown }
       end
     end
@@ -123,17 +127,20 @@ RSpec.describe BundleOutdatedFormatter::MarkdownFormatter do
 
       context 'when @pretty is true and @style is unicode' do
         let(:pretty) { true }
+
         it { is_expected.to eq text_markdown }
       end
 
       context 'when @pretty is false and @style is ascii' do
         let(:style) { 'ascii' }
+
         it { is_expected.to eq text_markdown }
       end
 
       context 'when @pretty is true and @style is ascii' do
         let(:pretty) { true }
         let(:style) { 'ascii' }
+
         it { is_expected.to eq text_markdown }
       end
     end

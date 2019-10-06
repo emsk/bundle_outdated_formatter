@@ -83,21 +83,25 @@ RSpec.describe BundleOutdatedFormatter::TerminalFormatter do
 
         context 'without outdated' do
           let(:outdated_gems) { [] }
+
           it { is_expected.to eq text_terminal_unicode_without_outdated }
         end
       end
 
       context 'when @pretty is true and @style is unicode' do
         let(:pretty) { true }
+
         it { is_expected.to eq text_terminal_unicode }
       end
 
       context 'when @pretty is false and @style is ascii' do
         let(:style) { 'ascii' }
+
         it { is_expected.to eq text_terminal_ascii }
 
         context 'without outdated' do
           let(:outdated_gems) { [] }
+
           it { is_expected.to eq text_terminal_ascii_without_outdated }
         end
       end
@@ -105,6 +109,7 @@ RSpec.describe BundleOutdatedFormatter::TerminalFormatter do
       context 'when @pretty is true and @style is ascii' do
         let(:pretty) { true }
         let(:style) { 'ascii' }
+
         it { is_expected.to eq text_terminal_ascii }
       end
     end
@@ -165,17 +170,20 @@ RSpec.describe BundleOutdatedFormatter::TerminalFormatter do
 
       context 'when @pretty is true and @style is unicode' do
         let(:pretty) { true }
+
         it { is_expected.to eq text_terminal_unicode }
       end
 
       context 'when @pretty is false and @style is ascii' do
         let(:style) { 'ascii' }
+
         it { is_expected.to eq text_terminal_ascii }
       end
 
       context 'when @pretty is true and @style is ascii' do
         let(:pretty) { true }
         let(:style) { 'ascii' }
+
         it { is_expected.to eq text_terminal_ascii }
       end
     end

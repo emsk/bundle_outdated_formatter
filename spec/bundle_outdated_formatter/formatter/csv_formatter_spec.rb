@@ -58,23 +58,27 @@ RSpec.describe BundleOutdatedFormatter::CSVFormatter do
 
         context 'without outdated' do
           let(:outdated_gems) { [] }
+
           it { is_expected.to eq text_csv_without_outdated }
         end
       end
 
       context 'when @pretty is true and @style is unicode' do
         let(:pretty) { true }
+
         it { is_expected.to eq text_csv }
       end
 
       context 'when @pretty is false and @style is ascii' do
         let(:style) { 'ascii' }
+
         it { is_expected.to eq text_csv }
       end
 
       context 'when @pretty is true and @style is ascii' do
         let(:pretty) { true }
         let(:style) { 'ascii' }
+
         it { is_expected.to eq text_csv }
       end
     end
@@ -120,17 +124,20 @@ RSpec.describe BundleOutdatedFormatter::CSVFormatter do
 
       context 'when @pretty is true and @style is unicode' do
         let(:pretty) { true }
+
         it { is_expected.to eq text_csv }
       end
 
       context 'when @pretty is false and @style is ascii' do
         let(:style) { 'ascii' }
+
         it { is_expected.to eq text_csv }
       end
 
       context 'when @pretty is true and @style is ascii' do
         let(:pretty) { true }
         let(:style) { 'ascii' }
+
         it { is_expected.to eq text_csv }
       end
     end
