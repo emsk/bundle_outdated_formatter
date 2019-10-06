@@ -13,12 +13,6 @@ Gemspec/RequiredRubyVersion:
   Exclude:
     - 'bundle_outdated_formatter.gemspec'
 
-# Offense count: 13
-# Configuration parameters: IgnoreSharedExamples.
-RSpec/NamedSubject:
-  Exclude:
-    - 'spec/bundle_outdated_formatter/cli_spec.rb'
-
 # Offense count: 148
 RSpec/NestedGroups:
   Max: 5
