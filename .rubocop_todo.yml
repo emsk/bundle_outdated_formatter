@@ -13,12 +13,6 @@ Gemspec/RequiredRubyVersion:
   Exclude:
     - 'bundle_outdated_formatter.gemspec'
 
-# Offense count: 1
-# Configuration parameters: CustomIncludeMethods.
-RSpec/EmptyExampleGroup:
-  Exclude:
-    - 'spec/bundle_outdated_formatter/error_spec.rb'
-
 # Offense count: 223
 # Cop supports --auto-correct.
 RSpec/EmptyLineAfterFinalLet:
