@@ -5,11 +5,11 @@ gemspec
 
 if Gem::Version.create(RUBY_VERSION) < Gem::Version.create('2.3.0')
   gem 'psych', '< 3.0.0'
-  gem 'rubocop-rspec', '< 1.33.0'
 end
 
 if Gem::Version.create(RUBY_VERSION) >= Gem::Version.create('2.2.0') && Gem::Version.create(RUBY_VERSION) < Gem::Version.create('2.3.0')
   gem 'rubocop', '< 0.69.0'
+  gem 'rubocop-rspec', '< 1.33.0'
 end
 
 if Gem::Version.create(RUBY_VERSION) < Gem::Version.create('2.2.0')
