@@ -310,10 +310,15 @@ Commands:
       stub_const('STDIN', StringIO.new(stdin))
     end
 
-    if options && options[:style] == :ascii
-      it { expect { command }.to output(stdout_terminal_ascii).to_stdout }
-    else
-      it { expect { command }.to output(stdout_terminal_unicode).to_stdout }
+    if options
+      case options[:style]
+      when :unicode
+        it { expect { command }.to output(stdout_terminal_unicode).to_stdout }
+      when :ascii
+        it { expect { command }.to output(stdout_terminal_ascii).to_stdout }
+      else
+        it { expect { command }.to output(stdout_terminal_unicode).to_stdout }
+      end
     end
   end
 
