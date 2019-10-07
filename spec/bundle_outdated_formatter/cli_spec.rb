@@ -311,9 +311,9 @@ Commands:
     end
 
     if options && options[:style] == :ascii
-      it { is_expected.to output(stdout_terminal_ascii).to_stdout }
+      it { expect { command }.to output(stdout_terminal_ascii).to_stdout }
     else
-      it { is_expected.to output(stdout_terminal_unicode).to_stdout }
+      it { expect { command }.to output(stdout_terminal_unicode).to_stdout }
     end
   end
 
@@ -322,7 +322,7 @@ Commands:
       stub_const('STDIN', StringIO.new(stdin))
     end
 
-    it { is_expected.to output(stdout_markdown).to_stdout }
+    it { expect { command }.to output(stdout_markdown).to_stdout }
   end
 
   shared_examples_for 'json format' do |options|
@@ -331,9 +331,9 @@ Commands:
     end
 
     if options && options[:pretty]
-      it { is_expected.to output(stdout_json_pretty).to_stdout }
+      it { expect { command }.to output(stdout_json_pretty).to_stdout }
     else
-      it { is_expected.to output(stdout_json).to_stdout }
+      it { expect { command }.to output(stdout_json).to_stdout }
     end
   end
 
@@ -342,7 +342,7 @@ Commands:
       stub_const('STDIN', StringIO.new(stdin))
     end
 
-    it { is_expected.to output(stdout_yaml).to_stdout }
+    it { expect { command }.to output(stdout_yaml).to_stdout }
   end
 
   shared_examples_for 'csv format' do
@@ -350,7 +350,7 @@ Commands:
       stub_const('STDIN', StringIO.new(stdin))
     end
 
-    it { is_expected.to output(stdout_csv).to_stdout }
+    it { expect { command }.to output(stdout_csv).to_stdout }
   end
 
   shared_examples_for 'tsv format' do
@@ -358,7 +358,7 @@ Commands:
       stub_const('STDIN', StringIO.new(stdin))
     end
 
-    it { is_expected.to output(stdout_tsv).to_stdout }
+    it { expect { command }.to output(stdout_tsv).to_stdout }
   end
 
   shared_examples_for 'xml format' do |options|
@@ -367,9 +367,9 @@ Commands:
     end
 
     if options && options[:pretty]
-      it { is_expected.to output(stdout_xml_pretty).to_stdout }
+      it { expect { command }.to output(stdout_xml_pretty).to_stdout }
     else
-      it { is_expected.to output(stdout_xml).to_stdout }
+      it { expect { command }.to output(stdout_xml).to_stdout }
     end
   end
 
@@ -379,9 +379,9 @@ Commands:
     end
 
     if options && options[:pretty]
-      it { is_expected.to output(stdout_html_pretty).to_stdout }
+      it { expect { command }.to output(stdout_html_pretty).to_stdout }
     else
-      it { is_expected.to output(stdout_html).to_stdout }
+      it { expect { command }.to output(stdout_html).to_stdout }
     end
   end
 
@@ -390,7 +390,7 @@ Commands:
       stub_const('STDIN', StringIO.new(stdin))
     end
 
-    it { is_expected.to raise_error(BundleOutdatedFormatter::UnknownFormatError, error_message) }
+    it { expect { command }.to raise_error(BundleOutdatedFormatter::UnknownFormatError, error_message) }
   end
 
   shared_examples_for 'unknown style' do
@@ -398,7 +398,7 @@ Commands:
       stub_const('STDIN', StringIO.new(stdin))
     end
 
-    it { is_expected.to raise_error(BundleOutdatedFormatter::UnknownStyleError, error_message) }
+    it { expect { command }.to raise_error(BundleOutdatedFormatter::UnknownStyleError, error_message) }
   end
 
   shared_examples_for 'unknown column' do
@@ -406,7 +406,7 @@ Commands:
       stub_const('STDIN', StringIO.new(stdin))
     end
 
-    it { is_expected.to raise_error(BundleOutdatedFormatter::UnknownColumnError, error_message) }
+    it { expect { command }.to raise_error(BundleOutdatedFormatter::UnknownColumnError, error_message) }
   end
 
   shared_examples_for 'required column' do
@@ -414,7 +414,7 @@ Commands:
       stub_const('STDIN', StringIO.new(stdin))
     end
 
-    it { is_expected.to output("No value provided for option '--column'\n").to_stderr }
+    it { expect { command }.to output("No value provided for option '--column'\n").to_stderr }
   end
 
   shared_examples_for 'a `help` command' do
@@ -423,15 +423,15 @@ Commands:
     end
 
     it do
-      described_class.start(thor_args)
+      command
       expect(File).to have_received(:basename).with($PROGRAM_NAME).at_least(:once)
     end
 
-    it { is_expected.to output(help).to_stdout }
+    it { expect { command }.to output(help).to_stdout }
   end
 
   describe '.start' do
-    subject { -> { described_class.start(thor_args) } }
+    subject(:command) { described_class.start(thor_args) }
 
     let(:command_name) { 'bof' }
     let(:gem_name) { 'bundle_outdated_formatter' }
@@ -461,7 +461,7 @@ Commands:
       end
 
       context 'without STDIN' do
-        it { is_expected.not_to output.to_stdout }
+        it { expect { command }.not_to output.to_stdout }
       end
     end
 
@@ -539,7 +539,7 @@ Commands:
       end
 
       context 'without STDIN' do
-        it { is_expected.not_to output.to_stdout }
+        it { expect { command }.not_to output.to_stdout }
       end
     end
 
@@ -610,7 +610,7 @@ Commands:
       end
 
       context 'without STDIN' do
-        it { is_expected.not_to output.to_stdout }
+        it { expect { command }.not_to output.to_stdout }
       end
     end
 
@@ -688,7 +688,7 @@ Commands:
       end
 
       context 'without STDIN' do
-        it { is_expected.not_to output.to_stdout }
+        it { expect { command }.not_to output.to_stdout }
       end
     end
 
@@ -759,7 +759,7 @@ Commands:
       end
 
       context 'without STDIN' do
-        it { is_expected.not_to output.to_stdout }
+        it { expect { command }.not_to output.to_stdout }
       end
     end
 
@@ -830,7 +830,7 @@ Commands:
       end
 
       context 'without STDIN' do
-        it { is_expected.not_to output.to_stdout }
+        it { expect { command }.not_to output.to_stdout }
       end
     end
 
@@ -901,7 +901,7 @@ Commands:
       end
 
       context 'without STDIN' do
-        it { is_expected.not_to output.to_stdout }
+        it { expect { command }.not_to output.to_stdout }
       end
     end
 
@@ -979,7 +979,7 @@ Commands:
       end
 
       context 'without STDIN' do
-        it { is_expected.not_to output.to_stdout }
+        it { expect { command }.not_to output.to_stdout }
       end
     end
 
@@ -1533,19 +1533,19 @@ Commands:
     context 'with `version`' do
       let(:thor_args) { %w[version] }
 
-      it { is_expected.to output("#{gem_name} #{BundleOutdatedFormatter::VERSION}\n").to_stdout }
+      it { expect { command }.to output("#{gem_name} #{BundleOutdatedFormatter::VERSION}\n").to_stdout }
     end
 
     context 'with `--version`' do
       let(:thor_args) { %w[--version] }
 
-      it { is_expected.to output("#{gem_name} #{BundleOutdatedFormatter::VERSION}\n").to_stdout }
+      it { expect { command }.to output("#{gem_name} #{BundleOutdatedFormatter::VERSION}\n").to_stdout }
     end
 
     context 'with `-v`' do
       let(:thor_args) { %w[-v] }
 
-      it { is_expected.to output("#{gem_name} #{BundleOutdatedFormatter::VERSION}\n").to_stdout }
+      it { expect { command }.to output("#{gem_name} #{BundleOutdatedFormatter::VERSION}\n").to_stdout }
     end
 
     context 'with `help`' do
@@ -1638,13 +1638,13 @@ Describe available commands or one specific command
     context 'with `abc`' do
       let(:thor_args) { %w[abc] }
 
-      it { is_expected.to output(%(Could not find command "abc".\n)).to_stderr }
+      it { expect { command }.to output(%(Could not find command "abc".\n)).to_stderr }
     end
 
     context 'with `helpp`' do
       let(:thor_args) { %w[helpp] }
 
-      it { is_expected.to output(%(Could not find command "helpp".\n)).to_stderr }
+      it { expect { command }.to output(%(Could not find command "helpp".\n)).to_stderr }
     end
   end
 end
