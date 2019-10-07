@@ -32,9 +32,4 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rubocop', '~> 0.75'
   spec.add_development_dependency 'rubocop-rspec', '~> 1.36'
   spec.add_development_dependency 'simplecov', '~> 0.17'
-
-  spec.add_development_dependency 'parser', '2.6.4.1'
-  spec.add_development_dependency 'rspec-expectations', '3.8.4'
-  spec.add_development_dependency 'rspec-mocks', '3.8.1'
-  spec.add_development_dependency 'rspec-support', '3.8.2'
 end
