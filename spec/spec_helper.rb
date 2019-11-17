@@ -13,6 +13,8 @@ end
 require 'bundler/setup'
 require 'bundle_outdated_formatter'
 
+puts "default_external: #{Encoding.default_external}, default_internal: #{Encoding.default_internal}"
+
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
   config.example_status_persistence_file_path = '.rspec_status'
