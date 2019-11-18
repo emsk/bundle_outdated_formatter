@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+Encoding.default_external = Encoding::UTF_8
+
 require 'bundle_outdated_formatter'
 
 BundleOutdatedFormatter::CLI.start

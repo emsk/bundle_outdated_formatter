@@ -34,8 +34,6 @@ module BundleOutdatedFormatter
     option :column, type: :array, aliases: '-c', default: %w[gem newest installed requested groups], desc: 'Output columns. (columns are sorted in specified order)'
 
     def output
-      Encoding.default_external = Encoding::UTF_8
-
       raise BundleOutdatedFormatter::UnknownFormatError, options[:format] unless allow_format?
       raise BundleOutdatedFormatter::UnknownStyleError, options[:style] unless allow_style?
       raise BundleOutdatedFormatter::UnknownColumnError, options[:column] unless allow_column?
