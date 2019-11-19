@@ -1,6 +1,7 @@
 version: 1.0.{build}-{branch}
 
 environment:
+  RUBYOPT: -Eutf-8
   matrix:
     - RUBY_VERSION: 200
     - RUBY_VERSION: 200-x64
