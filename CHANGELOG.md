@@ -1,5 +1,20 @@
 # Change Log
 
+## 0.6.0 (2019-11-24)
+
+### Features
+
+* Add `--column` option for `output` command (#3)
+
+### Bug Fixes
+
+* Fix error of Terminal format with empty outdated gems
+* Fix tests against Terminal (Unicode table) format
+
+## Miscellaneous
+
+* Suppress output in tests
+
 ## 0.5.1 (2019-04-16)
 
 ### Bug Fixes

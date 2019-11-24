@@ -43,6 +43,7 @@ $ bundle outdated | bof
 | `--format` | `-f` | Format. `terminal`, `markdown`, `json`, `yaml`, `csv`, `tsv`, `xml`, or `html`. | `terminal` |
 | `--pretty` | `-p` | `true` if pretty output.<br>This option is available in `json`, `xml`, or `html` formats. | `false` |
 | `--style` | `-s` | Terminal table style. `unicode` or `ascii`.<br>This option is available in `terminal` format. | `unicode` |
+| `--column` | `-c` | Output columns. The columns are sorted in specified order. | `gem newest installed requested groups` |
 
 ## Examples
 
