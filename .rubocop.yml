@@ -7,10 +7,13 @@ AllCops:
 Bundler/DuplicatedGem:
   Enabled: false
 
-Layout/AlignHash:
+Layout/HashAlignment:
   EnforcedHashRocketStyle: table
 
-Layout/IndentHeredoc:
+Layout/HeredocIndentation:
+  Enabled: false
+
+Layout/LineLength:
   Enabled: false
 
 Layout/TrailingWhitespace:
@@ -24,9 +27,6 @@ Metrics/BlockLength:
   Exclude:
     - 'spec/**/*.rb'
     - '*.gemspec'
-
-Metrics/LineLength:
-  Enabled: false
 
 Naming/HeredocDelimiterNaming:
   Enabled: false
