@@ -1644,7 +1644,11 @@ Describe available commands or one specific command
     context 'with `helpp`' do
       let(:thor_args) { %w[helpp] }
 
-      it { expect { command }.to output(%(Could not find command "helpp".\n)).to_stderr }
+      if Gem::Version.create(RUBY_VERSION) >= Gem::Version.create('2.7.0')
+        it { expect { command }.to output(%(Could not find command "helpp".\nDid you mean?  "help"\n)).to_stderr }
+      else
+        it { expect { command }.to output(%(Could not find command "helpp".\n)).to_stderr }
+      end
     end
   end
 end
