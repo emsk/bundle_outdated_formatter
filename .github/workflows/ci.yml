@@ -2,6 +2,9 @@ name: ci
 
 on: [push, pull_request]
 
+env:
+  RUBYOPT: -Eutf-8
+
 jobs:
   build:
     runs-on: ${{ matrix.os }}
