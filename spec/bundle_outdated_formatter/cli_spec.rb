@@ -461,6 +461,10 @@ Commands:
       end
 
       context 'without STDIN' do
+        before do
+          allow(STDIN).to receive(:tty?).and_return(true)
+        end
+
         it { expect { command }.not_to output.to_stdout }
       end
     end
@@ -539,6 +543,10 @@ Commands:
       end
 
       context 'without STDIN' do
+        before do
+          allow(STDIN).to receive(:tty?).and_return(true)
+        end
+
         it { expect { command }.not_to output.to_stdout }
       end
     end
@@ -610,6 +618,10 @@ Commands:
       end
 
       context 'without STDIN' do
+        before do
+          allow(STDIN).to receive(:tty?).and_return(true)
+        end
+
         it { expect { command }.not_to output.to_stdout }
       end
     end
@@ -688,6 +700,10 @@ Commands:
       end
 
       context 'without STDIN' do
+        before do
+          allow(STDIN).to receive(:tty?).and_return(true)
+        end
+
         it { expect { command }.not_to output.to_stdout }
       end
     end
@@ -759,6 +775,10 @@ Commands:
       end
 
       context 'without STDIN' do
+        before do
+          allow(STDIN).to receive(:tty?).and_return(true)
+        end
+
         it { expect { command }.not_to output.to_stdout }
       end
     end
@@ -830,6 +850,10 @@ Commands:
       end
 
       context 'without STDIN' do
+        before do
+          allow(STDIN).to receive(:tty?).and_return(true)
+        end
+
         it { expect { command }.not_to output.to_stdout }
       end
     end
@@ -901,6 +925,10 @@ Commands:
       end
 
       context 'without STDIN' do
+        before do
+          allow(STDIN).to receive(:tty?).and_return(true)
+        end
+
         it { expect { command }.not_to output.to_stdout }
       end
     end
@@ -979,6 +1007,10 @@ Commands:
       end
 
       context 'without STDIN' do
+        before do
+          allow(STDIN).to receive(:tty?).and_return(true)
+        end
+
         it { expect { command }.not_to output.to_stdout }
       end
     end
