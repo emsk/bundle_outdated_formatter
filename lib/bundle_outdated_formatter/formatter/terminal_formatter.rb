@@ -5,7 +5,7 @@ module BundleOutdatedFormatter
   # Formatter for Terminal
   class TerminalFormatter < Formatter
     def convert
-      table.render(@style.to_sym, padding: [0, 1]).chomp
+      table.render(@style.to_sym, padding: [0, 1])
     end
 
     private
