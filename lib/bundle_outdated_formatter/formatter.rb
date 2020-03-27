@@ -7,7 +7,7 @@ module BundleOutdatedFormatter
     NEWEST_REGEXP    = /newest (?<newest>[\d\.]+)/.freeze
     INSTALLED_REGEXP = /installed (?<installed>[\d\.]+)/.freeze
     REQUESTED_REGEXP = /requested (?<requested>.+)\)/.freeze
-    GROUPS_REGEXP    = /in groups "(?<groups>.+)"/.freeze
+    GROUPS_REGEXP    = /in groups? "(?<groups>.+)"/.freeze
 
     def initialize(options)
       @pretty = options[:pretty]
