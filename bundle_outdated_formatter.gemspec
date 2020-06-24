@@ -24,7 +24,7 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'psych', '>= 2.2'
   spec.add_runtime_dependency 'rexml', '~> 3.2'
-  spec.add_runtime_dependency 'thor', '~> 0.20'
+  spec.add_runtime_dependency 'thor', '>= 0.20'
   spec.add_runtime_dependency 'tty-table', '~> 0.10'
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'codecov'

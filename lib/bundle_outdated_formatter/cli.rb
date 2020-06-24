@@ -25,6 +25,10 @@ module BundleOutdatedFormatter
     STYLES = %w[unicode ascii].freeze
     COLUMNS = %w[gem newest installed requested groups].freeze
 
+    def self.exit_on_failure?
+      false
+    end
+
     default_command :output
 
     desc 'output', 'Format output of `bundle outdated`'
