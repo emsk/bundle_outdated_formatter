@@ -13,6 +13,13 @@ end
 require 'bundler/setup'
 require 'bundle_outdated_formatter'
 
+require 'stringio'
+class StringIO
+  def ioctl(*)
+    0
+  end
+end
+
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
   config.example_status_persistence_file_path = '.rspec_status'
