@@ -1676,7 +1676,7 @@ Describe available commands or one specific command
     context 'with `helpp`' do
       let(:thor_args) { %w[helpp] }
 
-      if Gem.loaded_specs['thor'].version >= Gem::Version.create('1.0.0') && Gem.loaded_specs['did_you_mean'].version >= Gem::Version.create('1.1.0')
+      if Gem.loaded_specs['thor'].version >= Gem::Version.create('1.0.0') && !Gem.loaded_specs['did_you_mean'].nil? && Gem.loaded_specs['did_you_mean'].version >= Gem::Version.create('1.1.0')
         it { expect { command }.to output(%(Could not find command "helpp".\nDid you mean?  "help"\n)).to_stderr }
       else
         it { expect { command }.to output(%(Could not find command "helpp".\n)).to_stderr }
