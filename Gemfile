@@ -10,6 +10,7 @@ end
 if Gem::Version.create(RUBY_VERSION) >= Gem::Version.create('2.3.0') && Gem::Version.create(RUBY_VERSION) < Gem::Version.create('2.4.0')
   if RUBY_PLATFORM !~ /mingw/
     gem 'rubocop', '< 0.82.0'
+    gem 'rubocop-rspec', '< 1.39.0'
   end
 end
 
