@@ -4,6 +4,10 @@ source 'https://rubygems.org'
 gemspec
 
 if Gem::Version.create(RUBY_VERSION) < Gem::Version.create('2.4.0')
+  if RUBY_PLATFORM !~ /mingw/
+    gem 'rubocop', '< 0.82.0'
+  end
+
   gem 'simplecov', '< 0.18.0'
 end
 

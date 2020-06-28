@@ -3,6 +3,7 @@ require: rubocop-rspec
 
 AllCops:
   DisplayCopNames: true
+  NewCops: enable
 
 Bundler/DuplicatedGem:
   Enabled: false
