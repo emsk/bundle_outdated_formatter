@@ -4,8 +4,8 @@ module BundleOutdatedFormatter
   # Formatter for all formats
   class Formatter
     GEM_REGEXP       = /\A\* (?<gem>.+) \(/.freeze
-    NEWEST_REGEXP    = /newest (?<newest>[\d\.]+)/.freeze
-    INSTALLED_REGEXP = /installed (?<installed>[\d\.]+)/.freeze
+    NEWEST_REGEXP    = /newest (?<newest>[\d.]+)/.freeze
+    INSTALLED_REGEXP = /installed (?<installed>[\d.]+)/.freeze
     REQUESTED_REGEXP = /requested (?<requested>.+)\)/.freeze
     GROUPS_REGEXP    = /in groups? "(?<groups>.+)"/.freeze
 

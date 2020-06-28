@@ -12,9 +12,3 @@
 Gemspec/RequiredRubyVersion:
   Exclude:
     - 'bundle_outdated_formatter.gemspec'
-
-# Offense count: 2
-# Cop supports --auto-correct.
-Style/RedundantRegexpEscape:
-  Exclude:
-    - 'lib/bundle_outdated_formatter/formatter.rb'
