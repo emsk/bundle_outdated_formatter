@@ -32,7 +32,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec', '~> 3.9'
   if RUBY_PLATFORM !~ /mingw/
     spec.add_development_dependency 'rubocop', '~> 0.86'
-    spec.add_development_dependency 'rubocop-rspec', '~> 1.36'
+    spec.add_development_dependency 'rubocop-rspec', '~> 1.40'
   end
   spec.add_development_dependency 'simplecov'
 end
