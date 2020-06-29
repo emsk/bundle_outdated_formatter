@@ -11,7 +11,7 @@
 * Fix error of Terminal format with empty outdated gems
 * Fix tests against Terminal (Unicode table) format
 
-## Miscellaneous
+### Miscellaneous
 
 * Suppress output in tests
 
