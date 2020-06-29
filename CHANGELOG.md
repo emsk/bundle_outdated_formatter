@@ -1,5 +1,16 @@
 # Change Log
 
+## 0.7.0 (2020-06-29)
+
+### Features
+
+* Support Bundler >= 2.1.0.pre.1 (#4)
+
+### Miscellaneous
+
+* Relax dependency version requirements
+* Add workflows for GitHub Actions
+
 ## 0.6.0 (2019-11-24)
 
 ### Features
