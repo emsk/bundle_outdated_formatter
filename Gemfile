@@ -15,6 +15,7 @@ if Gem::Version.create(RUBY_VERSION) >= Gem::Version.create('2.3.0') && Gem::Ver
 end
 
 if Gem::Version.create(RUBY_VERSION) < Gem::Version.create('2.3.0')
+  gem 'codecov', '< 0.1.21'
   gem 'psych', '< 3.0.0'
 end
 
