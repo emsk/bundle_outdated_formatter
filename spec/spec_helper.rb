@@ -5,11 +5,6 @@ SimpleCov.start do
   add_filter '/spec/'
 end
 
-if ENV['CI'] == 'true' && Gem::Version.create(RUBY_VERSION) >= Gem::Version.create('2.3.0')
-  require 'codecov'
-  SimpleCov.formatter = SimpleCov::Formatter::Codecov
-end
-
 require 'bundler/setup'
 require 'bundle_outdated_formatter'
 

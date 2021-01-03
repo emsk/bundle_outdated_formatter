@@ -7,10 +7,6 @@ if Gem::Version.create(RUBY_VERSION) < Gem::Version.create('2.4.0')
   gem 'simplecov', '< 0.18.0'
 end
 
-if Gem::Version.create(RUBY_VERSION) >= Gem::Version.create('2.3.0')
-  gem 'codecov'
-end
-
 if Gem::Version.create(RUBY_VERSION) >= Gem::Version.create('2.3.0') && Gem::Version.create(RUBY_VERSION) < Gem::Version.create('2.4.0')
   if RUBY_PLATFORM !~ /mingw/
     gem 'rubocop', '< 0.82.0'
