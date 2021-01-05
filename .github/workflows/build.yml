@@ -9,7 +9,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        ruby: [2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 3.0, ruby-head]
+        ruby: [2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 3.0, ruby-head, jruby-9.1, jruby-9.2, jruby-head]
     steps:
     - uses: actions/checkout@v2
     - uses: ruby/setup-ruby@v1
