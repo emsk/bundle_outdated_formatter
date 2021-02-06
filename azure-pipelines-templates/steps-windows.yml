@@ -1,0 +1,13 @@
+steps:
+- task: UseRubyVersion@0
+  inputs:
+    versionSpec: $(rubyVersion)
+- script: |
+    gem install bundler --no-document
+  displayName: 'Install bundler'
+- script: |
+    bundle install --retry=3 --jobs=4
+  displayName: 'Install gems'
+- script: |
+    bundle exec rake
+  displayName: 'Run test'
