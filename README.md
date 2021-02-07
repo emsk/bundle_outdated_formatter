@@ -4,6 +4,7 @@
 [![Build Status](https://github.com/emsk/bundle_outdated_formatter/workflows/build/badge.svg)](https://github.com/emsk/bundle_outdated_formatter/actions?query=workflow%3Abuild)
 [![Build Status](https://travis-ci.org/emsk/bundle_outdated_formatter.svg?branch=main)](https://travis-ci.org/emsk/bundle_outdated_formatter)
 [![Build status](https://ci.appveyor.com/api/projects/status/w2qfj0a4iicqhmhq?svg=true)](https://ci.appveyor.com/project/emsk/bundle-outdated-formatter)
+[![Build Status](https://dev.azure.com/emsk/bundle_outdated_formatter/_apis/build/status/emsk.bundle_outdated_formatter?branchName=main)](https://dev.azure.com/emsk/bundle_outdated_formatter/_build/latest?definitionId=3&branchName=main)
 [![Codecov](https://codecov.io/gh/emsk/bundle_outdated_formatter/branch/main/graph/badge.svg)](https://codecov.io/gh/emsk/bundle_outdated_formatter)
 [![Code Climate](https://codeclimate.com/github/emsk/bundle_outdated_formatter/badges/gpa.svg)](https://codeclimate.com/github/emsk/bundle_outdated_formatter)
 [![Inline docs](http://inch-ci.org/github/emsk/bundle_outdated_formatter.svg?branch=main)](http://inch-ci.org/github/emsk/bundle_outdated_formatter)
