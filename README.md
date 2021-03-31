@@ -1,7 +1,7 @@
 # BundleOutdatedFormatter
 
 [![Gem Version](https://badge.fury.io/rb/bundle_outdated_formatter.svg)](https://badge.fury.io/rb/bundle_outdated_formatter)
-[![Build Status](https://github.com/emsk/bundle_outdated_formatter/workflows/build/badge.svg)](https://github.com/emsk/bundle_outdated_formatter/actions?query=workflow%3Abuild)
+[![Build Status](https://github.com/emsk/bundle_outdated_formatter/actions/workflows/build.yml/badge.svg)](https://github.com/emsk/bundle_outdated_formatter/actions/workflows/build.yml)
 [![Build Status](https://travis-ci.org/emsk/bundle_outdated_formatter.svg?branch=main)](https://travis-ci.org/emsk/bundle_outdated_formatter)
 [![Build status](https://ci.appveyor.com/api/projects/status/w2qfj0a4iicqhmhq?svg=true)](https://ci.appveyor.com/project/emsk/bundle-outdated-formatter)
 [![Build Status](https://dev.azure.com/emsk/bundle_outdated_formatter/_apis/build/status/emsk.bundle_outdated_formatter?branchName=main)](https://dev.azure.com/emsk/bundle_outdated_formatter/_build/latest?definitionId=3&branchName=main)
