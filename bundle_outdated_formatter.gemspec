@@ -28,7 +28,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'tty-table', '~> 0.10'
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'rake'
-  spec.add_development_dependency 'rspec', '~> 3.9'
+  spec.add_development_dependency 'rspec'
   if RUBY_PLATFORM !~ /mingw/
     spec.add_development_dependency 'rubocop', '~> 0.86'
     spec.add_development_dependency 'rubocop-rspec', '~> 1.40'
