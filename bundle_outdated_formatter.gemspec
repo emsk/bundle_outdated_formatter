@@ -30,8 +30,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rake'
   spec.add_development_dependency 'rspec'
   if RUBY_PLATFORM !~ /mingw/
-    spec.add_development_dependency 'rubocop', '~> 0.86'
-    spec.add_development_dependency 'rubocop-rspec', '~> 1.40'
+    spec.add_development_dependency 'rubocop'
+    spec.add_development_dependency 'rubocop-rspec'
   end
   spec.add_development_dependency 'simplecov'
 end
