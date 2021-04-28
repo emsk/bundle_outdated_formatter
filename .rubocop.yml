@@ -4,6 +4,7 @@ require: rubocop-rspec
 AllCops:
   DisplayCopNames: true
   NewCops: enable
+  SuggestExtensions: false
 
 Bundler/DuplicatedGem:
   Enabled: false
