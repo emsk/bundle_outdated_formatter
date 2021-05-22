@@ -21,13 +21,13 @@ jobs:
       ruby24:
         rubyVersion: '2.4.10'
       ruby25:
-        rubyVersion: '2.5.8'
+        rubyVersion: '2.5.9'
       ruby26:
-        rubyVersion: '2.6.6'
+        rubyVersion: '2.6.7'
       ruby27:
-        rubyVersion: '2.7.2'
+        rubyVersion: '2.7.3'
       ruby30:
-        rubyVersion: '3.0.0'
+        rubyVersion: '3.0.1'
   pool:
     vmImage: 'ubuntu-16.04'
   variables:
@@ -56,13 +56,13 @@ jobs:
       ruby24:
         rubyVersion: '2.4.10'
       ruby25:
-        rubyVersion: '2.5.8'
+        rubyVersion: '2.5.9'
       ruby26:
-        rubyVersion: '2.6.6'
+        rubyVersion: '2.6.7'
       ruby27:
-        rubyVersion: '2.7.2'
+        rubyVersion: '2.7.3'
       ruby30:
-        rubyVersion: '3.0.0'
+        rubyVersion: '3.0.1'
   pool:
     vmImage: 'ubuntu-18.04'
   variables:
@@ -91,13 +91,13 @@ jobs:
       ruby24:
         rubyVersion: '2.4.10'
       ruby25:
-        rubyVersion: '2.5.8'
+        rubyVersion: '2.5.9'
       ruby26:
-        rubyVersion: '2.6.6'
+        rubyVersion: '2.6.7'
       ruby27:
-        rubyVersion: '2.7.2'
+        rubyVersion: '2.7.3'
       ruby30:
-        rubyVersion: '3.0.0'
+        rubyVersion: '3.0.1'
   pool:
     vmImage: 'ubuntu-20.04'
   variables:
@@ -133,13 +133,13 @@ jobs:
       ruby24:
         rubyVersion: '2.4.10'
       ruby25:
-        rubyVersion: '2.5.8'
+        rubyVersion: '2.5.9'
       ruby26:
-        rubyVersion: '2.6.6'
+        rubyVersion: '2.6.7'
       ruby27:
-        rubyVersion: '2.7.2'
+        rubyVersion: '2.7.3'
       ruby30:
-        rubyVersion: '3.0.0'
+        rubyVersion: '3.0.1'
   pool:
     vmImage: 'macOS-10.14'
   variables:
@@ -164,13 +164,13 @@ jobs:
       ruby24:
         rubyVersion: '2.4.10'
       ruby25:
-        rubyVersion: '2.5.8'
+        rubyVersion: '2.5.9'
       ruby26:
-        rubyVersion: '2.6.6'
+        rubyVersion: '2.6.7'
       ruby27:
-        rubyVersion: '2.7.2'
+        rubyVersion: '2.7.3'
       ruby30:
-        rubyVersion: '3.0.0'
+        rubyVersion: '3.0.1'
   pool:
     vmImage: 'macOS-10.15'
   variables:
