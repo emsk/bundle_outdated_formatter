@@ -14,6 +14,18 @@ Outdated gems included in the bundle:
     EOS
   end
 
+  let(:stdin_with_table_format) do
+    <<-EOS
+Fetching gem metadata from https://rubygems.org/..........
+Resolving dependencies....
+
+Gem      Current  Latest   Requested  Groups
+faker    1.6.5    1.6.6    ~> 1.4     development, test
+hashie   1.2.0    3.4.6    = 1.2.0    default
+headless 2.2.3    2.3.1
+    EOS
+  end
+
   let(:stdin_without_outdated) do
     <<-EOS
 Fetching gem metadata from https://rubygems.org/..........
@@ -453,6 +465,12 @@ Commands:
 
       it_behaves_like 'terminal format'
 
+      context 'with table format' do
+        let(:stdin) { stdin_with_table_format }
+
+        it_behaves_like 'terminal format'
+      end
+
       context 'without outdated' do
         let(:stdin) { stdin_without_outdated }
         let(:stdout_terminal_unicode) { stdout_terminal_unicode_without_outdated }
@@ -504,6 +522,12 @@ Commands:
 
       it_behaves_like 'terminal format', style: :ascii
 
+      context 'with table format' do
+        let(:stdin) { stdin_with_table_format }
+
+        it_behaves_like 'terminal format', style: :ascii
+      end
+
       context 'without outdated' do
         let(:stdin) { stdin_without_outdated }
         let(:stdout_terminal_ascii) { stdout_terminal_ascii_without_outdated }
@@ -534,6 +558,12 @@ Commands:
       let(:thor_args) { %w[output --format markdown] }
 
       it_behaves_like 'markdown format'
+
+      context 'with table format' do
+        let(:stdin) { stdin_with_table_format }
+
+        it_behaves_like 'markdown format'
+      end
 
       context 'without outdated' do
         let(:stdin) { stdin_without_outdated }
@@ -610,6 +640,12 @@ Commands:
 
       it_behaves_like 'json format'
 
+      context 'with table format' do
+        let(:stdin) { stdin_with_table_format }
+
+        it_behaves_like 'json format'
+      end
+
       context 'without outdated' do
         let(:stdin) { stdin_without_outdated }
         let(:stdout_json) { stdout_json_without_outdated }
@@ -636,6 +672,12 @@ Commands:
       let(:thor_args) { %w[output --format json --pretty] }
 
       it_behaves_like 'json format', pretty: true
+
+      context 'with table format' do
+        let(:stdin) { stdin_with_table_format }
+
+        it_behaves_like 'json format', pretty: true
+      end
 
       context 'without outdated' do
         let(:stdin) { stdin_without_outdated }
@@ -691,6 +733,12 @@ Commands:
       let(:thor_args) { %w[output --format yaml] }
 
       it_behaves_like 'yaml format'
+
+      context 'with table format' do
+        let(:stdin) { stdin_with_table_format }
+
+        it_behaves_like 'yaml format'
+      end
 
       context 'without outdated' do
         let(:stdin) { stdin_without_outdated }
@@ -767,6 +815,12 @@ Commands:
 
       it_behaves_like 'csv format'
 
+      context 'with table format' do
+        let(:stdin) { stdin_with_table_format }
+
+        it_behaves_like 'csv format'
+      end
+
       context 'without outdated' do
         let(:stdin) { stdin_without_outdated }
         let(:stdout_csv) { stdout_csv_without_outdated }
@@ -841,6 +895,12 @@ Commands:
       let(:thor_args) { %w[output --format tsv] }
 
       it_behaves_like 'tsv format'
+
+      context 'with table format' do
+        let(:stdin) { stdin_with_table_format }
+
+        it_behaves_like 'tsv format'
+      end
 
       context 'without outdated' do
         let(:stdin) { stdin_without_outdated }
@@ -917,6 +977,12 @@ Commands:
 
       it_behaves_like 'xml format'
 
+      context 'with table format' do
+        let(:stdin) { stdin_with_table_format }
+
+        it_behaves_like 'xml format'
+      end
+
       context 'without outdated' do
         let(:stdin) { stdin_without_outdated }
         let(:stdout_xml) { stdout_xml_without_outdated }
@@ -943,6 +1009,12 @@ Commands:
       let(:thor_args) { %w[output --format xml --pretty] }
 
       it_behaves_like 'xml format', pretty: true
+
+      context 'with table format' do
+        let(:stdin) { stdin_with_table_format }
+
+        it_behaves_like 'xml format', pretty: true
+      end
 
       context 'without outdated' do
         let(:stdin) { stdin_without_outdated }
@@ -999,6 +1071,12 @@ Commands:
 
       it_behaves_like 'html format'
 
+      context 'with table format' do
+        let(:stdin) { stdin_with_table_format }
+
+        it_behaves_like 'html format'
+      end
+
       context 'without outdated' do
         let(:stdin) { stdin_without_outdated }
         let(:stdout_html) { stdout_html_without_outdated }
@@ -1025,6 +1103,12 @@ Commands:
       let(:thor_args) { %w[output --format html --pretty] }
 
       it_behaves_like 'html format', pretty: true
+
+      context 'with table format' do
+        let(:stdin) { stdin_with_table_format }
+
+        it_behaves_like 'html format', pretty: true
+      end
 
       context 'without outdated' do
         let(:stdin) { stdin_without_outdated }
